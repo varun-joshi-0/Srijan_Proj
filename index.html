@@ -7,7 +7,6 @@
 />
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
-</head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apna Roti Bank</title>
@@ -24,7 +23,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-t
   --slate: #64748B;
   --bone: #FDF8F2;
   --white: #FFFFFF;
-  --success: #16A34A;
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -64,6 +62,11 @@ nav {
   align-items:center;
   padding:16px 0;
 }
+
+.nav-item{
+    position:relative;
+}
+
 .logo{justify-self:start;margin-left:-50px;}
 .nav-links{justify-self:center;display:flex;gap:40px;}
 .nav-cta{justify-self:end;}
@@ -79,28 +82,6 @@ nav {
   height: 60px;
   width: auto;
   object-fit: contain;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.logo-text strong {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--dark);
-  letter-spacing: -0.02em;
-}
-
-.logo-text small {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange);
 }
 
 .nav-links { display: flex; gap: 30px; }
@@ -646,12 +627,46 @@ section { padding: 96px 0; }
     transition:transform .8s ease;
 }
 
+.swiper-button-next,
+.swiper-button-prev{
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    background:#F97316;
+
+    color:white;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    font-size:20px;
+    font-weight:bold;
+}
 
 @media(max-width:768px){
- .gallery-carousel{height:340px;}
- .main{width:90%;height:300px;}
- .prev,.next{display:none;}
+
+    .swiper-button-prev{
+        left:5px;
+    }
+
+    .swiper-button-next{
+        right:5px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev{
+
+        width:40px;
+        height:40px;
+    }
 }
+
+
 
 /* ---- CTA ---- */
 .cta-section {
@@ -748,6 +763,159 @@ footer a {
   .nav-links { display: none; }
   .gallery-grid { grid-template-columns: 1fr; }
 }
+
+/*------------------------------- Dropdown --------------------------------*/
+
+.dropdown{
+
+    position:absolute;
+
+    top:calc(100% + 12px);
+
+    left:0;
+
+    width:100vw;
+
+    top:calc(100% + 1px);
+
+    min-height:320px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:12px 0;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    border:1px solid rgba(0,0,0,.06);
+
+    flex-direction:column;
+
+    z-index:1000;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+    opacity .25s ease,
+    transform .25s ease,
+    visibility .25s ease;
+}
+
+.nav-item:hover .dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+.dropdown a{
+
+    padding:12px 18px;
+
+    text-decoration:none;
+
+    color:var(--ink);
+
+    font-size:.9rem;
+
+    font-weight:500;
+
+    display:block;
+
+    transition:
+    background .2s ease,
+    color .2s ease,
+    padding-left .2s ease;
+
+}
+
+.dropdown a:hover{
+
+    background:#FFF7ED;
+
+    color:var(--orange);
+
+    padding-left:24px;
+
+}
+
+/*------Arrow---------*/
+
+.arrow{
+
+    display:inline-block;
+
+    transition:
+    transform .25s ease;
+
+}
+
+.nav-item:hover .arrow{
+
+    transform:rotate(180deg);
+
+}
+
+/*-------Menu--------*/
+
+.mega-menu{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+    padding:24px;
+}
+
+.mega-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.mega-left a{
+
+    padding:12px 16px;
+
+    border-radius:12px;
+
+    transition:.25s;
+
+}
+
+.mega-left a:hover{
+
+    background:#FFF7ED;
+
+}
+
+.mega-right h3{
+
+    color:var(--dark);
+
+    margin-bottom:12px;
+}
+
+.mega-right p{
+
+    color:var(--slate);
+
+    line-height:1.7;
+}
+
 </style>
 </head>
 <body>
@@ -758,13 +926,64 @@ footer a {
     <a href="#" class="logo">
       <img src="https://i.postimg.cc/mDDHTn1n/logo.png" alt="Apna Roti Bank Logo" class="logo-img">
     </a>
+
     <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#about">About</a>
-      <a href="#impact">Impact</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </div>
+
+    <div class="nav-item">
+
+      <a href="#">
+        Initiatives
+        <span class="arrow">▾</span>
+      </a>
+
+      <div class="dropdown">
+
+      <div class="mega-menu">
+
+          <div class="mega-left">
+
+              <a href="#">🍱 Food Distribution</a>
+
+              <a href="#">❤️ ₹1 Per Day Campaign</a>
+
+              <a href="#">🤝 Community Support</a>
+
+              <a href="#">🎉 Special Drives</a>
+
+          </div>
+
+          <div class="mega-right">
+
+              <h3>Our Initiatives</h3>
+
+              <p>
+                  Every initiative is designed to fight hunger,
+                  strengthen communities, and bring people
+                  together through compassion.
+              </p>
+
+          </div>
+
+      </div>
+
+</div>
+
+</div>
+
+  <div class="nav-item">
+    <a href="#">About ▾</a>
+  </div>
+
+  <div class="nav-item">
+    <a href="#">Get Involved ▾</a>
+  </div>
+
+  <div class="nav-item">
+    <a href="#">Our Work ▾</a>
+  </div>
+
+</div>
+
     <a href="donate.html" class="nav-cta">Donate Now</a>
   </div>
 </nav>
@@ -857,33 +1076,6 @@ footer a {
   </div>
 </div>
 
-<!-- DONATION -->
-<section id="donate">
-  <div class="container">
-    <div class="section-head centered">
-      <span class="section-label">Give Today</span>
-      <h2 class="section-title">Your donation creates real impact</h2>
-      <p class="section-sub">Every rupee goes directly to the people who need it most.</p>
-    </div>
-    <div class="donation-grid">
-      <div class="donation-card">
-        <h3>₹100</h3>
-        <p>Provides a wholesome meal to a family in need.</p>
-        <a href="donate.html" class="donation-link">Donate ₹100</a>
-      </div>
-      <div class="donation-card featured">
-        <h3>₹500</h3>
-        <p>Supports a full food distribution drive in your area.</p>
-        <a href="donate.html" class="donation-link">Donate ₹500</a>
-      </div>
-      <div class="donation-card">
-        <h3>₹1000+</h3>
-        <p>Strengthens our long-term community support programs.</p>
-        <a href="donate.html" class="donation-link">Donate ₹1000</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- INITIATIVES -->
 <section id="initiatives">
@@ -926,7 +1118,7 @@ footer a {
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide">
-                    <img src="https://i.postimg.cc/y84c0n2V/img1.png">
+                    <img src="https://i.postimg.cc/CdTjm4PQ/img1.png">
                 </div>
 
                 <div class="swiper-slide">
@@ -946,6 +1138,9 @@ footer a {
                 </div>
 
             </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
 
         </div>
 
@@ -968,34 +1163,7 @@ footer a {
 </footer>
 
 
-<script>
-const slides=document.querySelectorAll('.carousel-slide');
-let current=0;
 
-function updateCarousel(){
- slides.forEach(s=>s.classList.remove('main','prev','next','hidden'));
- slides[current].classList.add('main');
-
- slides[(current-1+slides.length)%slides.length].classList.add('prev');
- slides[(current+1)%slides.length].classList.add('next');
-
- for(let i=0;i<slides.length;i++){
-   if(i!==current &&
-      i!==(current-1+slides.length)%slides.length &&
-      i!==(current+1)%slides.length){
-      slides[i].classList.add('hidden');
-   }
- }
-}
-
-updateCarousel();
-
-setInterval(()=>{
- current=(current+1)%slides.length;
- updateCarousel();
-},4000);
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
@@ -1011,6 +1179,11 @@ const swiper = new Swiper(".gallerySwiper", {
     slidesPerView: "auto",
 
     loop: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
 
     autoplay: {
         delay: 3500,
