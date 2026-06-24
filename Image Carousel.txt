@@ -1,0 +1,4 @@
+Image Carousel
+stops on hovering 
+odometer appearance of impact
+Android View
