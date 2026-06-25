@@ -269,13 +269,13 @@ nav.scrolled {
   gap: 0;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 32px 5%;
+  padding:24px 0 24px 24px;
   gap: 40px;
-  padding-top:24px;
+  padding-top:24px ;
 
 }
 
-.mega-left { display: flex; flex-direction: column; gap: 6px; }
+.mega-left { display: flex; flex-direction: column; gap: 6px;justify-content:center; flex:0 0 280px; }
 
 .mega-left a {
   display: flex;
@@ -294,17 +294,157 @@ nav.scrolled {
   padding-left: 22px;
 }
 
-.mega-right h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  color: var(--dark);
-  margin-bottom: 10px;
+.mega-right{
+
+    position:relative;
+
+    min-height:360px;
+
+    border-radius:0;
+
+    overflow:hidden;
+
+    background:url("images/food.jpg") center/cover no-repeat;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    height:100%;
+
+    min-height:380px;
+
+    flex:1;
+
 }
 
-.mega-right p {
-  color: var(--slate);
-  font-size: .9rem;
-  line-height: 1.75;
+.mega-right::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.15)
+    );
+
+}
+
+.mega-overlay{
+
+    position:relative;
+
+    z-index:2;
+
+    padding:48px;
+
+    color:white;
+
+}
+
+.mega-eyebrow{
+
+    color:#FDBA74;
+
+    font-size:.75rem;
+
+    letter-spacing:.12em;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+#megaImage{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    margin-bottom:22px;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+.mega-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+#megaEyebrow{
+
+    color:var(--orange);
+
+    font-size:.75rem;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+}
+
+#megaTitle{
+
+    font-family:'Playfair Display',serif;
+
+    font-size:2.2rem;
+
+    line-height:1.1;
+
+    margin-bottom:16px;
+
+}
+
+#megaText{
+
+    max-width:420px;
+
+    line-height:1.7;
+
+    color:rgba(255,255,255,.82);
+
+}
+
+#megaButton{
+
+    margin-top:10px;
+
+    color:var(--orange);
+
+    font-weight:700;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    transition:.3s;
+}
+
+#megaButton:hover{
+
+    gap:14px;
+
 }
 
 /* ═══════════════════════════════════════════
@@ -1100,8 +1240,27 @@ footer a { color: var(--orange); }
           <a href="#">🎉 Special Drives</a>
         </div>
         <div class="mega-right">
-          <h3>Our Initiatives</h3>
-          <p>Every initiative is designed to fight hunger, strengthen communities, and bring people together through compassion and action.</p>
+          <div class="mega-overlay">
+
+            <div class="mega-eyebrow" id="megaEyebrow">
+                OUR INITIATIVES
+            </div>
+
+            <h2 id="megaTitle">
+                Fighting Hunger,
+                One Meal at a Time
+            </h2>
+
+            <p id="megaText">
+                Every initiative is designed to fight hunger,
+                strengthen communities and restore dignity.
+            </p>
+
+            <a href="#" id="megaButton">
+                Learn More →
+            </a>
+
+          </div>
         </div>
       </div>
     </div>
