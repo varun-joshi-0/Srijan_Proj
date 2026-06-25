@@ -265,7 +265,7 @@ nav.scrolled {
 
 .mega-menu {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:40% 60%;
   gap: 0;
   max-width: 1180px;
   margin: 0 auto;
@@ -297,8 +297,6 @@ nav.scrolled {
 .mega-right{
 
     position:relative;
-
-    min-height:360px;
 
     border-radius:0;
 
@@ -1234,10 +1232,13 @@ footer a { color: var(--orange); }
     <div class="mega-drawer" id="megaDrawer">
       <div class="mega-menu">
         <div class="mega-left">
-          <a href="#">🍱 Food Distribution</a>
-          <a href="#">💛 ₹1 Per Day Campaign</a>
-          <a href="#">🤝 Community Support</a>
-          <a href="#">🎉 Special Drives</a>
+          <a href="#" id="foodItem">🍱 Food Distribution</a>
+
+          <a href="#" id="campaignItem">❤️ ₹1 Per Day Campaign</a>
+
+          <a href="#" id="communityItem">🤝 Community Support</a>
+
+          <a href="#" id="drivesItem">🎉 Special Drives</a>
         </div>
         <div class="mega-right">
           <div class="mega-overlay">
@@ -1479,6 +1480,7 @@ footer a { color: var(--orange); }
 const mainNav    = document.getElementById('mainNav');
 const megaDrawer = document.getElementById('megaDrawer');
 const trigger    = document.querySelector('.initiatives-trigger');
+const foodItem = document.getElementById("foodItem");
 let   drawerOpen = false;
 
 // Scroll shadow
@@ -1540,7 +1542,7 @@ window.addEventListener("scroll", () => {
 }, { passive:true });
 
 // Drawer open/close
-function openDrawer()  { megaDrawer.classList.add('active');    drawerOpen = true;  }
+function openDrawer()  { megaDrawer.classList.add('active');  updateMega(defaultMega);  drawerOpen = true;   }
 function closeDrawer() { megaDrawer.classList.remove('active'); drawerOpen = false; }
 
 trigger.addEventListener('mouseenter', openDrawer);
@@ -1676,6 +1678,122 @@ const revealObserver = new IntersectionObserver(entries => {
 revealEls.forEach(el => revealObserver.observe(el));
 
 window.dispatchEvent(new Event("scroll"));
+
+const megaContent = {
+
+    food:{
+
+        image:"images/food.jpg",
+
+        eyebrow:"OUR INITIATIVES",
+
+        title:"Fighting Hunger,<br>One Meal at a Time",
+
+        text:"Every initiative is designed to fight hunger, strengthen communities and restore dignity.",
+
+        button:"Learn More →"
+
+    },
+
+    campaign:{
+
+        image:"images/campaign.jpg",
+
+        eyebrow:"₹1 PER DAY",
+
+        title:"Small Donations,<br>Big Impact",
+
+        text:"Just one rupee every day can help build a stronger community of givers.",
+
+        button:"Join Campaign →"
+
+    },
+
+    community:{
+
+        image:"images/community.jpg",
+
+        eyebrow:"COMMUNITY",
+
+        title:"Together We<br>Stand Strong",
+
+        text:"Supporting families through food, care and community-driven initiatives.",
+
+        button:"Explore →"
+
+    },
+
+    drives:{
+
+        image:"images/drives.jpg",
+
+        eyebrow:"SPECIAL DRIVES",
+
+        title:"Emergency Relief<br>Whenever Needed",
+
+        text:"From disaster relief to festival drives, we respond where help is needed most.",
+
+        button:"View Drives →"
+
+    }
+
+};
+
+const defaultMega = {
+
+    image:"images/initiatives.jpg",
+
+    eyebrow:"OUR INITIATIVES",
+
+    title:"Fighting Hunger,<br>One Meal at a Time",
+
+    text:"Every initiative is designed to fight hunger, strengthen communities and restore dignity.",
+
+    button:"Learn More →"
+
+};
+
+const foodMega = {
+
+    image:"images/food.jpg",
+
+    eyebrow:"FOOD DISTRIBUTION",
+
+    title:"Serving Meals,<br>Restoring Dignity",
+
+    text:"We distribute fresh meals to those who need them most through daily food drives and community support.",
+
+    button:"Explore Food Distribution →"
+
+};
+
+function updateMega(data){
+
+    const panel = document.querySelector(".mega-right");
+
+    panel.style.backgroundImage = `url(${data.image})`;
+
+    megaEyebrow.innerHTML = data.eyebrow;
+
+    megaTitle.innerHTML = data.title;
+
+    megaText.innerHTML = data.text;
+
+    megaButton.innerHTML = data.button;
+
+}
+
+foodItem.addEventListener("mouseenter", () => {
+
+    updateMega(foodMega);
+
+});
+
+foodItem.addEventListener("mouseleave", () => {
+
+    updateMega(defaultMega);
+
+});
 
 </script>
 
