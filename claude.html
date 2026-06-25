@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apna Roti Bank — Fight Against Hunger</title>
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<!-- Odometer -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --orange:       #F97316;
+  --orange-deep:  #C2410C;
+  --orange-glow:  rgba(249,115,22,.18);
+  --amber:        #FBBF24;
+  --dark:         #0F172A;
+  --ink:          #1E293B;
+  --slate:        #64748B;
+  --bone:         #FDF8F2;
+  --white:        #FFFFFF;
+  --r-sm:         10px;
+  --r-md:         16px;
+  --r-lg:         24px;
+
+  /* timing */
+  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out:   cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bone);
+  color:var(--ink);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+img { display:block; max-width:100%; }
+a   { text-decoration:none; }
+
+.container { width:90%; max-width:1180px; margin:auto; }
+
+/* ═══════════════════════════════════════════
+   SCROLL-REVEAL — base state
+═══════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s var(--ease-out-expo),
+              transform .7s var(--ease-out-expo);
+}
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal="left"]  { transform: translateX(-32px); }
+[data-reveal="right"] { transform: translateX(32px);  }
+[data-reveal="left"].visible,
+[data-reveal="right"].visible { transform: translateX(0); }
+
+/* stagger siblings */
+[data-delay="1"] { transition-delay:.1s }
+[data-delay="2"] { transition-delay:.2s }
+[data-delay="3"] { transition-delay:.3s }
+[data-delay="4"] { transition-delay:.4s }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav {
+    --nav-text:#ffffff;
+    --nav-hover-text:#ffffff;
+    --nav-hover-bg:rgba(255,255,255,.08);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  box-shadow:none;
+  transition:
+    background .45s ease,
+    backdrop-filter .45s ease,
+    border-color .45s ease,
+    box-shadow .45s ease;
+}
+
+nav.scrolled {
+  background:rgba(15,23,42,.72);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:0 10px 35px rgba(0,0,0,.22);
+}
+
+.nav-wrapper { position: relative; }
+
+.nav-inner {
+  width: 90%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 14px 0;
+}
+
+/* Logo */
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-img { height:54px; width:auto; object-fit:contain; }
+
+/* Links */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.nav-item { position: relative; }
+
+.nav-item > a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color:var(--nav-text);
+  font-weight: 500;
+  font-size: .88rem;
+  transition: color .2s, background .2s;
+  white-space: nowrap;
+}
+
+.nav-item > a:hover{
+
+    color:var(--nav-hover-text);
+
+    background:var(--nav-hover-bg);
+
+}
+
+.arrow {
+  display: none;
+  transition: transform .25s var(--ease-in-out);
+  font-size: .7rem;
+  opacity:1;
+  color:var(--nav-text);
+}
+
+.nav-item:hover .arrow,
+.nav-item.open  .arrow { transform: rotate(180deg); }
+
+/* CTA button */
+.nav-cta {
+  background:rgba(249,115,22,.92);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .88rem;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--orange-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249,115,22,.35);
+}
+
+/* ── Mega drawer ── */
+.mega-drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 20px 50px rgba(0,0,0,.10);
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .25s var(--ease-out-expo),
+              transform .25s var(--ease-out-expo),
+              visibility .25s;
+  pointer-events: none;
+}
+
+.mega-drawer.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mega-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 5%;
+  gap: 40px;
+}
+
+.mega-left { display: flex; flex-direction: column; gap: 6px; }
+
+.mega-left a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  font-size: .9rem;
+  font-weight: 500;
+  transition: background .2s, color .2s, padding-left .2s;
+}
+.mega-left a:hover {
+  background: #FFF7ED;
+  color: var(--orange);
+  padding-left: 22px;
+}
+
+.mega-right h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.mega-right p {
+  color: var(--slate);
+  font-size: .9rem;
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.heroSwiper,
+.heroSwiper .swiper-slide { width:100%; height:100%; }
+
+.heroSwiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Ken-Burns zoom per slide */
+.heroSwiper .swiper-slide-active img {
+  animation: kenBurns 8s ease-out forwards;
+}
+@keyframes kenBurns {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.0);  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10,20,40,.72) 0%,
+    rgba(10,20,40,.45) 100%
+  );
+  z-index: 2;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to top, var(--bone), transparent);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 720px;
+  position: relative;
+  z-index: 5;
+  will-change: transform, opacity, filter;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(249,115,22,.22);
+  border: 1px solid rgba(249,115,22,.4);
+  color: #FED7AA;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 22px;
+  transition: opacity .5s, transform .5s;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--amber);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  line-height: 1.07;
+  margin-bottom: 20px;
+  font-weight: 800;
+  transition: opacity .5s .1s, transform .5s .1s;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.78);
+  max-width: 500px;
+  margin-bottom: 34px;
+  font-weight: 300;
+  line-height: 1.7;
+  transition: opacity .5s .2s, transform .5s .2s;
+}
+
+/* Text swap animation */
+.hero-text-out .hero-eyebrow,
+.hero-text-out .hero h1,
+.hero-text-out .hero-desc {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .95rem;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover {
+  background: var(--orange-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(249,115,22,.4);
+}
+
+.btn-ghost {
+  border: 1.5px solid rgba(255,255,255,.5);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: .95rem;
+  font-weight: 500;
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+
+/* ── hero progress bar ── */
+.hero-progress {
+  position: absolute;
+  bottom: 150px;
+  left: 5%;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+}
+
+.hero-dot {
+  width: 28px; height: 3px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.3);
+  transition: background .3s, width .3s;
+  cursor: pointer;
+  overflow:hidden;
+  position:relative;
+}
+
+.hero-dot::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:0%;
+    height:100%;
+
+    background:var(--orange);
+
+}
+
+.hero-dot.active::before{
+
+    animation:heroProgress 7s linear forwards;
+
+}
+
+.hero-dot.active {
+  background: var(--amber);
+  width: 52px;
+}
+
+@keyframes heroProgress{
+
+    from{
+
+        width:0%;
+
+    }
+
+    to{
+
+        width:100%;
+
+    }
+
+}
+
+/* ═══════════════════════════════════════════
+   SECTIONS — shared
+═══════════════════════════════════════════ */
+section { padding: 96px 0; }
+
+.section-label {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.15;
+}
+
+.section-sub {
+  color: var(--slate);
+  margin-top: 12px;
+  font-size: 1rem;
+  max-width: 540px;
+}
+
+.section-head            { margin-bottom: 56px; }
+.section-head.centered   { text-align: center; }
+.section-head.centered .section-sub { margin: 12px auto 0; }
+
+/* ═══════════════════════════════════════════
+   IMPACT
+═══════════════════════════════════════════ */
+#impact { background: var(--white); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--bone);
+  border-radius: var(--r-md);
+  padding: 38px 30px;
+  text-align: center;
+  border: 1px solid rgba(249,115,22,.08);
+  transition: transform .3s var(--ease-out-expo),
+              box-shadow .3s;
+  cursor: default;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(249,115,22,.13);
+}
+
+.stat-icon {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 1.5rem;
+}
+
+.stat-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--orange);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+/* Odometer override */
+.odometer {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 3rem !important;
+  color: var(--orange) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
+.stat-card p {
+  color: var(--slate);
+  font-size: .88rem;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+#about { background: var(--bone); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.about-visual { position: relative; }
+
+.about-image {
+  width: 100%;
+  height: 480px;
+  background: url("about.jpg") center/cover no-repeat;
+  border-radius: var(--r-lg);
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -22px;
+  right: -22px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--r-md);
+  padding: 22px 28px;
+  text-align: center;
+  box-shadow: 0 12px 36px rgba(249,115,22,.38);
+  transition: transform .3s var(--ease-out-expo);
+}
+
+.about-visual:hover .about-badge { transform: scale(1.06); }
+
+.about-badge strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.about-badge span { font-size: .78rem; opacity: .9; }
+
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--dark);
+  font-weight: 700;
+  line-height: 1.18;
+  margin-bottom: 20px;
+}
+
+.about-text p { color: var(--slate); margin-bottom: 16px; line-height: 1.75; }
+
+.about-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .93rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 12px 16px;
+  background: var(--white);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(249,115,22,.08);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.pillar:hover {
+  border-color: rgba(249,115,22,.25);
+  box-shadow: 0 4px 16px rgba(249,115,22,.07);
+}
+
+.pillar-dot {
+  width: 10px; height: 10px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+/* ═══════════════════════════════════════════
+   CAMPAIGN BANNER
+═══════════════════════════════════════════ */
+.campaign {
+  background: var(--dark);
+  color: #fff;
+  padding: 84px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ambient glows */
+.campaign::before,
+.campaign::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.campaign::before {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(249,115,22,.12), transparent 70%);
+  top: -200px; left: -100px;
+}
+.campaign::after {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(251,191,36,.08), transparent 70%);
+  bottom: -150px; right: -50px;
+}
+
+.campaign-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.campaign-amount {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.campaign-amount span {
+  font-family: 'Playfair Display', serif;
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: var(--amber);
+  display: block;
+  line-height: 1;
+}
+
+.campaign-amount small {
+  font-size: .82rem;
+  color: rgba(255,255,255,.45);
+  display: block;
+  margin-top: 6px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.campaign-divider {
+  width: 2px;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, rgba(249,115,22,.4), transparent);
+  flex-shrink: 0;
+}
+
+.campaign-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.campaign-text p {
+  color: rgba(255,255,255,.6);
+  max-width: 480px;
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════
+   DONATION
+═══════════════════════════════════════════ */
+#donate { background: var(--white); }
+
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.donation-card {
+  background: var(--bone);
+  border-radius: var(--r-md);
+  padding: 38px 28px;
+  text-align: center;
+  border: 1.5px solid transparent;
+  transition: border-color .25s, transform .3s var(--ease-out-expo), box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-card.featured {
+  border-color: var(--orange);
+  background: var(--white);
+}
+
+/* ribbon */
+.donation-card.featured::after {
+  content: 'Most Popular';
+  position: absolute;
+  top: 22px; right: -32px;
+  background: var(--orange);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+}
+
+.donation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,.09);
+  border-color: rgba(249,115,22,.3);
+}
+
+.donation-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: var(--orange);
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.donation-card p { color: var(--slate); font-size: .9rem; }
+
+.donation-link {
+  display: inline-block;
+  margin-top: 22px;
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .85rem;
+  transition: background .2s, transform .2s;
+}
+.donation-link:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   INITIATIVES
+═══════════════════════════════════════════ */
+#initiatives { background: var(--bone); }
+
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.initiative-card {
+  background: var(--white);
+  border-radius: var(--r-md);
+  padding: 36px 30px;
+  border: 1px solid rgba(0,0,0,.05);
+  transition: transform .3s var(--ease-out-expo), box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* top accent bar */
+.initiative-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--amber));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s var(--ease-out-expo);
+}
+
+.initiative-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.07); }
+.initiative-card:hover::before { transform: scaleX(1); }
+
+.initiative-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: rgba(249,115,22,.15);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.initiative-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.initiative-card p  { color: var(--slate); font-size: .9rem; line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   GALLERY SWIPER
+═══════════════════════════════════════════ */
+#gallery { background: var(--white); }
+
+.gallerySwiper {
+  width: 100%;
+  padding: 20px 0 56px;
+  overflow: hidden;
+}
+
+.gallerySwiper .swiper-slide {
+  width: 640px;
+  height: 400px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 56px rgba(0,0,0,.14);
+  transition: transform .45s var(--ease-out-expo), opacity .45s;
+  opacity: .7;
+}
+
+.gallerySwiper .swiper-slide-active {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.gallerySwiper .swiper-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease-out-expo);
+}
+
+.gallerySwiper .swiper-slide-active img { transform: scale(1.04); }
+
+/* Swiper nav buttons — shared */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(249,115,22,.35);
+  transition: background .2s, transform .2s;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover { background: var(--orange-deep); transform: scale(1.08); }
+.swiper-button-prev::after,
+.swiper-button-next::after { font-size: 17px; font-weight: 700; }
+
+/* swiper pagination */
+.swiper-pagination-bullet-active { background: var(--orange) !important; }
+
+@media (max-width: 768px) {
+  .gallerySwiper .swiper-slide { width: 88vw; height: 56vw; }
+}
+
+/* ═══════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════ */
+.cta-section {
+  background: linear-gradient(135deg, var(--orange) 0%, #EA580C 100%);
+  color: #fff;
+  text-align: center;
+  padding: 96px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  pointer-events: none;
+}
+
+.cta-inner { position: relative; z-index: 1; }
+
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.12;
+}
+
+.cta-section p {
+  font-size: 1.05rem;
+  opacity: .82;
+  margin: 0 auto 36px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--orange);
+  padding: 16px 38px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform .2s, box-shadow .2s;
+  display: inline-block;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,.2); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,.45);
+  padding: 36px;
+  text-align: center;
+  font-size: .84rem;
+  line-height: 1.8;
+}
+
+footer a { color: var(--orange); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .about-grid          { grid-template-columns: 1fr; gap: 48px; }
+  .about-badge         { right: 12px; bottom: 12px; }
+  .campaign-inner      { flex-direction: column; gap: 32px; text-align: center; }
+  .campaign-divider    { width: 80px; height: 2px; }
+  .campaign-text p     { margin: 0 auto; }
+}
+
+@media (max-width: 700px) {
+  .nav-inner       { grid-template-columns: 1fr auto; }
+  .nav-links       { display: none; }
+  .hero            { padding: 100px 0 70px; }
+  section          { padding: 70px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="mainNav">
+  <div class="nav-wrapper" id="navWrapper">
+    <div class="nav-inner">
+
+      <a href="#" class="logo">
+        <img src="https://i.postimg.cc/mDDHTn1n/logo.png" alt="Apna Roti Bank" class="logo-img">
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-item initiatives-trigger">
+          <a href="#">Initiatives <span class="arrow">▾</span></a>
+        </div>
+        <div class="nav-item about-trigger">
+            <a href="#">About <span class="arrow">▾</span></a>
+        </div>
+
+        <div class="nav-item involved-trigger">
+            <a href="#">Get Involved <span class="arrow">▾</span></a>
+        </div>
+
+        <div class="nav-item work-trigger">
+            <a href="#">Our Work <span class="arrow">▾</span></a>
+        </div>
+      </div>
+
+      <a href="donate.html" class="nav-cta">Donate Now</a>
+
+    </div><!-- /nav-inner -->
+
+    <!-- Mega drawer — scoped inside nav-wrapper -->
+    <div class="mega-drawer" id="megaDrawer">
+      <div class="mega-menu">
+        <div class="mega-left">
+          <a href="#">🍱 Food Distribution</a>
+          <a href="#">💛 ₹1 Per Day Campaign</a>
+          <a href="#">🤝 Community Support</a>
+          <a href="#">🎉 Special Drives</a>
+        </div>
+        <div class="mega-right">
+          <h3>Our Initiatives</h3>
+          <p>Every initiative is designed to fight hunger, strengthen communities, and bring people together through compassion and action.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /nav-wrapper -->
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="heroSection">
+
+  <div class="hero-slider swiper heroSwiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide"
+           data-eyebrow="SERVING MEALS EVERY DAY"
+           data-title="No one deserves<br>to sleep <em>hungry.</em>"
+           data-text="Together we provide meals, dignity, and hope to those who need it most — one roti at a time.">
+        <img src="images/hero1.jpg" alt="Food Distribution">
+      </div>
+
+      <div class="swiper-slide"
+           data-eyebrow="CHANGING LIVES"
+           data-title="Bringing hope<br>to every <em>plate.</em>"
+           data-text="Every meal we serve is more than food. It's dignity, a warm moment, and a chance for tomorrow.">
+        <img src="images/hero2.jpg" alt="Child Receiving Meal">
+      </div>
+
+      <div class="swiper-slide"
+           data-eyebrow="BE THE CHANGE"
+           data-title="One act of kindness<br><em>feeds</em> a community."
+           data-text="Whether you donate, volunteer, or spread awareness — you become part of the solution.">
+        <img src="images/hero3.jpg" alt="Volunteers">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">SERVING MEALS EVERY DAY</div>
+    <h1 id="heroTitle">No one deserves<br>to sleep <em>hungry.</em></h1>
+    <p class="hero-desc" id="heroText">Together we provide meals, dignity, and hope to those who need it most — one roti at a time.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Become a Volunteer ↗</a>
+      <a href="donate.html" class="btn-ghost">Donate Now</a>
+    </div>
+  </div>
+
+  <!-- Slide progress dots -->
+  <div class="hero-progress" id="heroDots">
+    <div class="hero-dot active" data-index="0"></div>
+    <div class="hero-dot"        data-index="1"></div>
+    <div class="hero-dot"        data-index="2"></div>
+  </div>
+
+</section>
+
+
+<!-- ═══ IMPACT ═══ -->
+<section id="impact">
+  <div class="container">
+    <div class="section-head centered" data-reveal>
+      <span class="section-label">Our Impact</span>
+      <h2 class="section-title">Every number is a life touched</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card" data-reveal data-delay="1">
+        <div class="stat-icon">🍱</div>
+        <h3 class="odometer" id="meals">0</h3>
+        <p>Meals Distributed</p>
+      </div>
+      <div class="stat-card" data-reveal data-delay="2">
+        <div class="stat-icon">🤝</div>
+        <h3 class="odometer" id="volunteers">0</h3>
+        <p>Active Volunteers</p>
+      </div>
+      <div class="stat-card" data-reveal data-delay="3">
+        <div class="stat-icon">🏘️</div>
+        <h3 class="odometer" id="communities">0</h3>
+        <p>Communities Reached</p>
+      </div>
+      <div class="stat-card" data-reveal data-delay="4">
+        <div class="stat-icon">📅</div>
+        <h3 class="odometer" id="years">0</h3>
+        <p>Years of Service</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual" data-reveal="left">
+        <div class="about-image"></div>
+        <div class="about-badge">
+          <strong>100%</strong>
+          <span>Volunteer-driven</span>
+        </div>
+      </div>
+      <div class="about-text" data-reveal="right">
+        <span class="section-label">Our Story</span>
+        <h2>A movement built on compassion</h2>
+        <p>Apna Roti Bank Charitable Trust works to fight hunger and support underprivileged communities through food distribution drives, volunteer initiatives, and community engagement.</p>
+        <p>Every meal shared creates dignity, hope and a stronger society. We believe no act of giving is too small — a single roti can change someone's day.</p>
+        <div class="about-pillars">
+          <div class="pillar"><div class="pillar-dot"></div>Regular food distribution drives across communities</div>
+          <div class="pillar"><div class="pillar-dot"></div>Volunteer-led grassroots outreach programs</div>
+          <div class="pillar"><div class="pillar-dot"></div>Family support during emergencies and festive seasons</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CAMPAIGN ═══ -->
+<div class="campaign">
+  <div class="container">
+    <div class="campaign-inner" data-reveal>
+      <div class="campaign-amount">
+        <span>₹1</span>
+        <small>per day</small>
+      </div>
+      <div class="campaign-divider"></div>
+      <div class="campaign-text">
+        <h2>The ₹1 Per Day Initiative</h2>
+        <p>A small daily contribution creates a lasting impact. Join a movement that fights hunger one meal at a time — together we become unstoppable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ INITIATIVES ═══ -->
+<section id="initiatives">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Our initiatives</h2>
+    </div>
+    <div class="initiatives-grid">
+      <div class="initiative-card" data-reveal data-delay="1">
+        <div class="initiative-num">01</div>
+        <h3>Food Distribution</h3>
+        <p>Regular drives to distribute freshly prepared meals to people facing hunger across underserved communities.</p>
+      </div>
+      <div class="initiative-card" data-reveal data-delay="2">
+        <div class="initiative-num">02</div>
+        <h3>Volunteer Programs</h3>
+        <p>Connecting compassionate individuals through coordinated volunteer programs that make giving effortless.</p>
+      </div>
+      <div class="initiative-card" data-reveal data-delay="3">
+        <div class="initiative-num">03</div>
+        <h3>Community Support</h3>
+        <p>Standing alongside families during difficult times — from daily needs to emergencies and festive seasons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="section-label">Gallery</span>
+      <h2 class="section-title">Moments from the ground</h2>
+    </div>
+
+    <div class="swiper gallerySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://i.postimg.cc/CdTjm4PQ/img1.png" alt="Gallery 1"></div>
+        <div class="swiper-slide"><img src="https://i.postimg.cc/sXXh3LG4/img2.png" alt="Gallery 2"></div>
+        <div class="swiper-slide"><img src="https://i.postimg.cc/QtyWCqcv/img3.png" alt="Gallery 3"></div>
+        <div class="swiper-slide"><img src="https://i.postimg.cc/4x6tPVTm/img4.png" alt="Gallery 4"></div>
+        <div class="swiper-slide"><img src="https://i.postimg.cc/GmxK2ZtV/img5.png" alt="Gallery 5"></div>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <div class="container cta-inner" data-reveal>
+    <h2>Together we can end hunger</h2>
+    <p>Join thousands of people making a difference every single day. Your contribution matters.</p>
+    <a href="donate.html" class="btn-white">Donate Now</a>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <p>© 2026 Apna Roti Bank Charitable Trust. All Rights Reserved.</p>
+  <p style="margin-top:6px;">Built with ❤️ to fight hunger across India.</p>
+</footer>
+
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+
+<script>
+/* ──────────────────────────────────────────
+   1. NAV — scroll shadow + mega drawer
+────────────────────────────────────────── */
+const mainNav    = document.getElementById('mainNav');
+const megaDrawer = document.getElementById('megaDrawer');
+const trigger    = document.querySelector('.initiatives-trigger');
+let   drawerOpen = false;
+
+// Scroll shadow
+const hero = document.getElementById("heroSection");
+
+window.addEventListener("scroll", () => {
+
+    const heroBottom = hero.getBoundingClientRect().height * 0.85;
+
+    if (window.scrollY < heroBottom) {
+
+        const progress = window.scrollY / heroBottom;
+
+        mainNav.style.background =
+            `rgba(255,255,255,${progress})`;
+        
+            const shade = Math.round(255 - (255 * progress));
+
+        mainNav.style.setProperty(
+            "--nav-text",
+            `rgb(${shade},${shade},${shade})`
+            
+        );
+
+        mainNav.style.setProperty("--nav-hover-text", "#ffffff");
+        mainNav.style.setProperty("--nav-hover-bg", "rgba(255,255,255,.08)");
+
+        mainNav.style.backdropFilter =
+            `blur(${progress * 18}px)`;
+
+        mainNav.style.webkitBackdropFilter =
+            `blur(${progress * 18}px)`;
+
+        mainNav.style.borderBottomColor =
+            `rgba(255,255,255,${progress * .12})`;
+
+        mainNav.style.boxShadow =
+            `0 10px 35px rgba(0,0,0,${progress * .18})`;
+
+    } else {
+
+
+
+        mainNav.style.background = "#ffffff";
+
+        mainNav.style.backdropFilter = "none";
+        mainNav.style.webkitBackdropFilter = "none";
+
+        mainNav.style.borderBottomColor = "rgba(0,0,0,.06)";
+
+        mainNav.style.boxShadow = "0 6px 24px rgba(0,0,0,.08)";
+
+        mainNav.style.setProperty("--nav-text","#1E293B");
+        mainNav.style.setProperty("--nav-hover-text", "#F97316");
+        mainNav.style.setProperty("--nav-hover-bg", "rgba(249,115,22,.08)");
+
+    }
+
+}, { passive:true });
+
+// Drawer open/close
+function openDrawer()  { megaDrawer.classList.add('active');    drawerOpen = true;  }
+function closeDrawer() { megaDrawer.classList.remove('active'); drawerOpen = false; }
+
+trigger.addEventListener('mouseenter', openDrawer);
+megaDrawer.addEventListener('mouseenter', openDrawer);
+
+trigger.addEventListener('mouseleave', () => {
+  setTimeout(() => { if (!megaDrawer.matches(':hover')) closeDrawer(); }, 80);
+});
+megaDrawer.addEventListener('mouseleave', closeDrawer);
+
+/* ──────────────────────────────────────────
+   2. HERO SWIPER
+────────────────────────────────────────── */
+const heroEyebrow = document.getElementById('heroEyebrow');
+const heroTitle   = document.getElementById('heroTitle');
+const heroText    = document.getElementById('heroText');
+const heroDots    = document.querySelectorAll('.hero-dot');
+const heroContent = document.querySelector('.hero-content');
+
+function setHeroDot(idx) {
+  heroDots.forEach((d, i) => {
+
+    d.classList.remove("active");
+
+    void d.offsetWidth;
+
+    if(i===idx){
+
+        d.classList.add("active");
+
+    }
+
+});
+}
+
+function updateHeroText(slide, idx) {
+  heroContent.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1), filter .55s ease';
+  heroContent.style.opacity = '0';
+  heroContent.style.transform = 'translateY(24px)';
+  heroContent.style.filter = 'blur(8px)';
+
+  setTimeout(() => {
+    heroEyebrow.textContent = slide.dataset.eyebrow || '';
+    heroTitle.innerHTML     = slide.dataset.title   || '';
+    heroText.textContent    = slide.dataset.text    || '';
+    setHeroDot(idx);
+
+    heroContent.style.opacity = '1';
+    heroContent.style.transform = 'translateY(0)';
+    heroContent.style.filter = 'blur(0)';
+  }, 500);
+}
+
+const heroSwiper = new Swiper('.heroSwiper', {
+  effect:    'fade',
+  fadeEffect: { crossFade: true },
+  speed:      1200,
+  loop:       true,
+  autoplay: { delay: 7000, disableOnInteraction: false },
+  on: {
+    init(sw) {
+      const slide = sw.slides[sw.activeIndex];
+      heroEyebrow.textContent = slide.dataset.eyebrow || '';
+      heroTitle.innerHTML     = slide.dataset.title   || '';
+      heroText.textContent    = slide.dataset.text    || '';
+      setHeroDot(0);
+    },
+    slideChangeTransitionStart(sw) {
+      const realIdx = sw.realIndex;
+      const slide   = sw.slides[sw.activeIndex];
+      updateHeroText(slide, realIdx);
+    }
+  }
+});
+
+// Dot click
+heroDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    heroSwiper.slideToLoop(parseInt(dot.dataset.index));
+  });
+});
+
+/* ──────────────────────────────────────────
+   3. GALLERY SWIPER
+────────────────────────────────────────── */
+new Swiper('.gallerySwiper', {
+  effect:          'coverflow',
+  grabCursor:      true,
+  centeredSlides:  true,
+  slidesPerView:   'auto',
+  loop:            true,
+  speed:           700,
+  coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 1.4, slideShadows: false, scale: 0.84 },
+  navigation:      { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  autoplay:        { delay: 3800, disableOnInteraction: false, pauseOnMouseEnter: true },
+  pagination:      { el: '.swiper-pagination', clickable: true }
+});
+
+/* ──────────────────────────────────────────
+   4. ODOMETER (count-up)
+────────────────────────────────────────── */
+const impactSection = document.querySelector('#impact');
+let odometerStarted = false;
+
+const oObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !odometerStarted) {
+    odometerStarted = true;
+    setTimeout(() => {
+      document.getElementById('meals').innerHTML       = 15000;
+      document.getElementById('volunteers').innerHTML  = 500;
+      document.getElementById('communities').innerHTML = 200;
+      document.getElementById('years').innerHTML       = 11;
+    }, 300);
+  }
+}, { threshold: 0.3 });
+
+oObserver.observe(impactSection);
+
+/* ──────────────────────────────────────────
+   5. SCROLL-REVEAL
+────────────────────────────────────────── */
+const revealEls = document.querySelectorAll('[data-reveal]');
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+window.dispatchEvent(new Event("scroll"));
+
+</script>
+
+</body>
+</html>

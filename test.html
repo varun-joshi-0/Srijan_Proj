@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apna Roti Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #F97316;
+  --orange-deep: #C2410C;
+  --orange-light: #FED7AA;
+  --amber: #FBBF24;
+  --dark: #0F172A;
+  --ink: #1E293B;
+  --slate: #64748B;
+  --bone: #FDF8F2;
+  --white: #FFFFFF;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.container { width: 90%; max-width: 1180px; margin: auto; }
+
+/* ---- NAV ---- */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(249,115,22,0.12);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+}
+
+.nav-inner{
+  width:90%;
+  max-width:1180px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:16px 0;
+}
+
+.nav-item{
+    position:relative;
+}
+
+.logo{justify-self:start;margin-left:-50px;}
+.nav-links{justify-self:center;display:flex;gap:40px;}
+.nav-cta{justify-self:end;}
+
+.logo {
+  display: flex;
+  align-items: left;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--slate);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  background: var(--orange);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 110px 0 80px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slider{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+}
+
+.hero-slider img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:2;
+
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to top, var(--bone), transparent);
+  pointer-events: none;
+}
+
+.hero-content { max-width: 680px; position: relative; z-index: 3; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(249,115,22,0.25);
+  border: 1px solid rgba(249,115,22,0.4);
+  color: #FED7AA;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--amber);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1.08;
+  margin-bottom: 22px;
+  font-weight: 800;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--amber);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  max-width: 520px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.heroSwiper{
+    width:100%;
+    height:100%;
+}
+
+.heroSwiper .swiper-slide{
+    width:100%;
+    height:100%;
+}
+
+.heroSwiper .swiper-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-prev,
+.hero-next{
+
+    display:none;
+
+}
+
+.heroSwiper .swiper-slide img{
+
+    animation: heroZoom 9s ease-out ;
+
+}
+
+@keyframes heroZoom{
+
+    from{
+
+        transform:scale(1.08);
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--orange-deep); transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* ---- SECTION BASE ---- */
+section { padding: 96px 0; }
+
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.15;
+}
+
+.section-sub {
+  color: var(--slate);
+  margin-top: 12px;
+  font-size: 1rem;
+  max-width: 540px;
+}
+
+.section-head {
+  margin-bottom: 56px;
+}
+
+.section-head.centered {
+  text-align: center;
+}
+
+.section-head.centered .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- IMPACT / STATS ---- */
+#impact { background: var(--white); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--bone);
+  border-radius: var(--radius-md);
+  padding: 36px 30px;
+  text-align: center;
+  border: 1px solid rgba(249,115,22,0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor:pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(249,115,22,0.12);
+  transform:
+    translateY(-8px)
+    scale(1.03);
+}
+
+.stat-icon {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 1.4rem;
+}
+
+.stat-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  color:var(--orange);
+  font-weight:800;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.stat-card p {
+  color: var(--slate);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ---- ABOUT ---- */
+#about { background: var(--bone); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-image {
+  width: 100%;
+  height: 480px;
+  background: url("about.jpg") center/cover no-repeat;
+  border-radius: var(--radius-lg);
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--orange);
+  color: white;
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(249,115,22,0.35);
+}
+
+.about-badge strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.about-badge span {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--dark);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  color: var(--slate);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.about-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pillar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pillar-dot {
+  width: 10px; height: 10px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---- CAMPAIGN BANNER ---- */
+.campaign {
+  background: var(--dark);
+  color: white;
+  padding: 80px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign::before {
+  content: '₹1';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 22rem;
+  font-weight: 800;
+  color: rgba(249,115,22,0.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.campaign-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.campaign-amount {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.campaign-amount span {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--amber);
+  display: block;
+  line-height: 1;
+}
+
+.campaign-amount small {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  margin-top: 4px;
+}
+
+.campaign-divider {
+  width: 2px;
+  height: 80px;
+  background: rgba(249,115,22,0.3);
+  flex-shrink: 0;
+}
+
+.campaign-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.campaign-text p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1rem;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* ---- DONATION ---- */
+#donate { background: var(--white); }
+
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.donation-card {
+  background: var(--bone);
+  border-radius: var(--radius-md);
+  padding: 36px 28px;
+  text-align: center;
+  border: 1.5px solid transparent;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-card.featured {
+  border-color: var(--orange);
+  background: white;
+}
+
+.donation-card.featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: 28px; right: -30px;
+  background: var(--orange);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 26px;
+  transform: rotate(45deg);
+}
+
+.donation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.donation-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  color: var(--orange);
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.donation-card p {
+  color: var(--slate);
+  font-size: 0.9rem;
+}
+
+.donation-link {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--orange);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.donation-link:hover { background: var(--orange-deep); }
+
+/* ---- INITIATIVES ---- */
+#initiatives { background: var(--bone); }
+
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.initiative-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.initiative-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+}
+
+.initiative-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--orange-light);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.initiative-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.initiative-card p {
+  color: var(--slate);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ---- GALLERY ---- */
+#gallery { background: var(--white); }
+
+
+.gallerySwiper{
+    width:100%;
+    padding-top:20px;
+    padding-bottom:50px;
+}
+
+.gallerySwiper .swiper-slide{
+
+    width:650px;
+    height:420px;
+
+    border-radius:24px;
+    overflow:hidden;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.15);
+}
+
+.gallerySwiper .swiper-slide img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    display:block;
+}
+
+.gallerySwiper .swiper-slide{
+
+    transition:all .4s ease;
+}
+
+.gallerySwiper .swiper-slide-active{
+
+    transform:scale(1.02);
+}
+
+@media (max-width:768px){
+
+    .gallerySwiper .swiper-slide{
+        width:95vw;
+        height:60vw;
+    }
+
+}
+
+.swiper-slide-active img{
+    transform:scale(1.03);
+}
+
+.swiper-slide img{
+    transition:transform .8s ease;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    background:#F97316;
+
+    color:white;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    font-size:20px;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+
+    .swiper-button-prev{
+        left:5px;
+    }
+
+    .swiper-button-next{
+        right:5px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev{
+
+        width:40px;
+        height:40px;
+    }
+}
+
+
+
+/* ---- CTA ---- */
+.cta-section {
+  background: linear-gradient(135deg, var(--orange), #EA580C);
+  color: white;
+  text-align: center;
+  padding: 96px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+
+.cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+
+.cta-inner { position: relative; z-index: 1; }
+
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.cta-section p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin-bottom: 36px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-white {
+  background: white;
+  color: var(--orange);
+  padding: 15px 34px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.5);
+  padding: 32px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-badge { right: 10px; bottom: 10px; }
+  .campaign-inner { flex-direction: column; gap: 28px; }
+  .campaign-divider { width: 80px; height: 2px; }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-item:first-child { grid-row: span 1; }
+}
+
+@media (max-width: 640px) {
+  .nav-inner { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/*------------------------------- Dropdown --------------------------------*/
+
+.mega-drawer{
+
+    position:absolute;
+
+    top:calc(100% + 6px);
+
+    left:0;
+    right:0;
+
+    width:100%;
+
+    min-height:360px;
+
+    background:white;
+
+    border-radius:0px;
+
+    padding:24px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    border:1px solid rgba(0,0,0,.06);
+
+    flex-direction:column;
+
+    z-index:1000;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+    opacity .25s ease,
+    transform .25s ease,
+    visibility .25s ease;
+
+    transform:translateY(12px);
+
+    border-top:1px solid rgba(0,0,0,.08);
+    
+}
+
+.mega-drawer.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+}
+
+.mega-drawer a{
+
+    padding:12px 18px;
+
+    text-decoration:none;
+
+    color:var(--ink);
+
+    font-size:.9rem;
+
+    font-weight:500;
+
+    display:block;
+
+    transition:
+    background .2s ease,
+    color .2s ease,
+    padding-left .2s ease;
+
+}
+
+/*------Arrow---------*/
+
+.arrow{
+
+    display:inline-block;
+
+    transition:
+    transform .25s ease;
+
+}
+
+.nav-item:hover .arrow{
+
+    transform:rotate(180deg);
+
+}
+
+/*-------Menu--------*/
+
+.mega-menu{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    padding:24px;
+}
+
+.mega-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.mega-left a{
+
+    padding:12px 16px;
+
+    border-radius:12px;
+
+    transition:.25s;
+
+}
+
+.mega-left a:hover{
+
+    background:#FFF7ED;
+
+}
+
+.mega-right h3{
+
+    color:var(--dark);
+
+    margin-bottom:12px;
+}
+
+.mega-right p{
+
+    color:var(--slate);
+
+    line-height:1.7;
+}
+
+.nav-wrapper{
+    position:relative;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-wrapper">
+        <div class="nav-inner">
+            <a href="#" class="logo">
+            <img src="https://i.postimg.cc/mDDHTn1n/logo.png" alt="Apna Roti Bank Logo" class="logo-img">
+            </a>
+
+            <div class="nav-links">
+
+                <div class="nav-item initiatives-item">
+
+                <a href="#">
+                    Initiatives
+                    <span class="arrow">▾</span>
+                </a>
+
+                </div>
+                
+                <div class="nav-item">
+                    <a href="#">About ▾</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#">Get Involved ▾</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#">Our Work ▾</a>
+                </div>
+
+            </div>
+
+            <a href="donate.html" class="nav-cta">Donate Now</a>
+        </div>
+        <div class="mega-drawer">
+
+            <div class="mega-menu">
+
+                <div class="mega-left">
+
+                    <a href="#">🍱 Food Distribution</a>
+
+                    <a href="#">❤️ ₹1 Per Day Campaign</a>
+
+                    <a href="#">🤝 Community Support</a>
+
+                    <a href="#">🎉 Special Drives</a>
+
+                </div>
+
+                <div class="mega-right">
+
+                <h3>Our Initiatives</h3>
+
+                <p>
+                    Every initiative is designed to fight hunger,
+                    strengthen communities, and bring people
+                    together through compassion.
+                </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  
+    <div class="hero-slider swiper heroSwiper">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide"
+                data-eyebrow="SERVING MEALS"
+                data-title="Bringing hope<br>to every plate."
+                data-text="Every meal we serve is more than food. It's dignity, hope, and a chance for tomorrow.">
+                <img src="images/hero1.jpg" alt="Food Distribution">
+            </div>
+
+            <div class="swiper-slide"
+                data-eyebrow="CHANGING LIVES"
+                data-title="Nobody deserves&lt;br&gt;to sleep hungry."
+                data-text="Together with our volunteers and supporters, we're making sure fewer families go to bed hungry.">
+                <img src="images/hero2.jpg" alt="Child Receiving Meal">
+            </div>
+
+            <div class="swiper-slide"
+                data-eyebrow="BE THE CHANGE"
+                data-title="One act of kindness&lt;br&gt;feeds a community."
+                data-text="Whether you donate, volunteer, or spread awareness, you become part of the solution.">
+                <img src="images/hero3.jpg" alt="Volunteers">
+            </div>
+
+        </div>
+
+        <div class="swiper-button-prev hero-prev"></div>
+        <div class="swiper-button-next hero-next"></div>
+
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+        <div class="hero-eyebrow" id="heroEyebrow">Fighting hunger since 2015</div>
+            <h1 id="heroTitle">No one deserves<br>to sleep <em>hungry.</em></h1>
+            <p id="heroText">Together we provide meals, dignity, and hope to those who need it most — one roti at a time.</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Become a Volunteer ↗</a>
+            <a href="donate.html" class="btn-ghost">Donate Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="container">
+    <div class="section-head centered">
+      <span class="section-label">Our Impact</span>
+      <h2 class="section-title">Every number is a life touched</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🍱</div>
+        <h3 class="odometer" id="meals">0</h3>
+        <p>Meals Distributed</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🤝</div>
+        <h3 class="odometer" id="volunteers">0</h3>
+        <p>Active Volunteers</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏘️</div>
+        <h3 class="odometer" id="communities">0</h3>
+        <p>Communities Reached</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <h3 class="odometer" id="years">0</h3>
+        <p>Years of Service</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-image"></div>
+        <div class="about-badge">
+          <strong>100%</strong>
+          <span>Volunteer-driven</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2>A movement built on compassion</h2>
+        <p>Apna Roti Bank Charitable Trust works to fight hunger and support underprivileged communities through food distribution drives, volunteer initiatives, and community engagement.</p>
+        <p>Every meal shared creates dignity, hope and a stronger society. We believe no act of giving is too small — a single roti can change someone's day.</p>
+        <div class="about-pillars">
+          <div class="pillar"><div class="pillar-dot"></div>Regular food distribution drives across communities</div>
+          <div class="pillar"><div class="pillar-dot"></div>Volunteer-led grassroots outreach programs</div>
+          <div class="pillar"><div class="pillar-dot"></div>Family support during emergencies and festivals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGN BANNER -->
+<div class="campaign">
+  <div class="container">
+    <div class="campaign-inner">
+      <div class="campaign-amount">
+        <span>₹1</span>
+        <small>per day</small>
+      </div>
+      <div class="campaign-divider"></div>
+      <div class="campaign-text">
+        <h2>The ₹1 Per Day Initiative</h2>
+        <p>A small daily contribution creates a lasting impact. Join a movement that fights hunger one meal at a time — together we become unstoppable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- INITIATIVES -->
+<section id="initiatives">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Our initiatives</h2>
+    </div>
+    <div class="initiatives-grid">
+      <div class="initiative-card">
+        <div class="initiative-num">01</div>
+        <h3>Food Distribution</h3>
+        <p>Regular drives to distribute freshly prepared meals to people facing hunger across underserved communities.</p>
+      </div>
+      <div class="initiative-card">
+        <div class="initiative-num">02</div>
+        <h3>Volunteer Programs</h3>
+        <p>Connecting compassionate individuals through coordinated volunteer programs that make giving effortless.</p>
+      </div>
+      <div class="initiative-card">
+        <div class="initiative-num">03</div>
+        <h3>Community Support</h3>
+        <p>Standing alongside families during difficult times — from daily needs to emergencies and festive seasons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">Moments From The Ground</h2>
+        </div>
+
+        <div class="swiper gallerySwiper">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <img src="https://i.postimg.cc/CdTjm4PQ/img1.png">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://i.postimg.cc/sXXh3LG4/img2.png">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://i.postimg.cc/QtyWCqcv/img3.png">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://i.postimg.cc/4x6tPVTm/img4.png">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="https://i.postimg.cc/GmxK2ZtV/img5.png">
+                </div>
+
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container cta-inner">
+    <h2>Together we can end hunger</h2>
+    <p>Join thousands of people making a difference every single day. Your contribution matters.</p>
+    <a href="donate.html" class="btn-white">Donate Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <p>© 2026 Apna Roti Bank Charitable Trust. All Rights Reserved.<br>
+  Built with ❤️ to fight hunger across India.</p>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+
+const swiper = new Swiper(".gallerySwiper", {
+
+    effect: "coverflow",
+
+    grabCursor: true,
+
+    centeredSlides: true,
+
+    slidesPerView: "auto",
+
+    loop: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+    },
+
+    coverflowEffect: {
+
+        rotate: 0,
+
+        stretch: 0,
+
+        depth: 220,
+
+        modifier: 1.5,
+
+        slideShadows: false,
+
+        scale: 0.82
+    }
+
+});
+
+const heroSwiper = new Swiper(".heroSwiper", {
+
+    effect: "fade",
+
+    speed: 1200,
+
+    loop: true,
+
+    autoplay: {
+        delay: 7000,
+        disableOnInteraction: false,
+    },
+
+    navigation: {
+    nextEl: ".hero-next",
+    prevEl: ".hero-prev",
+},
+
+on: {
+
+    init() {
+
+        const slide = this.slides[this.activeIndex];
+
+        heroEyebrow.innerHTML = slide.dataset.eyebrow;
+        heroTitle.innerHTML = slide.dataset.title;
+        heroText.innerHTML = slide.dataset.text;
+
+    },
+
+    slideChangeTransitionStart() {
+
+        const slide = this.slides[this.activeIndex];
+
+        heroEyebrow.innerHTML = slide.dataset.eyebrow;
+        heroTitle.innerHTML = slide.dataset.title;
+        heroText.innerHTML = slide.dataset.text;
+        document.querySelectorAll(".heroSwiper .swiper-slide img").forEach(img => {
+          img.style.animation = "none";
+          img.offsetHeight; // force reflow
+          img.style.animation = "";
+        });
+    }
+
+}
+
+});
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+
+<script>
+
+const impactSection =
+document.querySelector('#impact');
+
+let started = false;
+
+const observer =
+new IntersectionObserver(entries=>{
+
+    if(entries[0].isIntersecting && !started){
+
+        started = true;
+
+        setTimeout(()=>{
+            meals.innerHTML = 15000;
+            volunteers.innerHTML = 500;
+            communities.innerHTML = 2000;
+            years.innerHTML = 11;
+        },300);
+
+    }
+
+});
+
+observer.observe(impactSection);
+
+</script>
+
+<script>
+
+const nav = document.querySelector("nav-wrapper");
+
+const drawer = document.querySelector(".mega-drawer");
+
+const initiatives = document.querySelector(".initiatives-item");
+
+initiatives.addEventListener("mouseenter", () => {
+
+    drawer.classList.add("active");
+
+});
+
+drawer.addEventListener("mouseenter", () => {
+    drawer.classList.add("active");
+});
+
+drawer.addEventListener("mouseleave", () => {
+    drawer.classList.remove("active");
+});
+
+initiatives.addEventListener("mouseleave", () => {
+
+    setTimeout(() => {
+
+        if (!drawer.matches(":hover")) {
+            drawer.classList.remove("active");
+        }
+
+    }, 100);
+
+});
+
+wrapper.addEventListener("mouseleave", () => {
+
+    drawer.classList.remove("active");
+
+});
+
+</script>
+
+</body>
+</html>

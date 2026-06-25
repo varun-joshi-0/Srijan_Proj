@@ -766,25 +766,24 @@ footer a {
 
 /*------------------------------- Dropdown --------------------------------*/
 
-.dropdown{
+.mega-drawer{
 
     position:absolute;
 
-    top:calc(100% + 12px);
+    top:calc(100% + 6px);
 
     left:0;
+    right:0;
 
-    width:100vw;
+    width:100%;
 
-    top:calc(100% + 1px);
-
-    min-height:320px;
+    min-height:360px;
 
     background:white;
 
-    border-radius:16px;
+    border-radius:0px;
 
-    padding:12px 0;
+    padding:24px;
 
     box-shadow:0 15px 40px rgba(0,0,0,.12);
 
@@ -802,21 +801,24 @@ footer a {
     opacity .25s ease,
     transform .25s ease,
     visibility .25s ease;
+
+    transform:translateY(12px);
+
+    border-top:1px solid rgba(0,0,0,.08);
+    
 }
 
-.nav-item:hover .dropdown{
+.mega-drawer.active{
 
     opacity:1;
 
     visibility:visible;
 
-    transform:
-    translateX(-50%)
-    translateY(0);
+    transform:translateY(0);
 
 }
 
-.dropdown a{
+.mega-drawer a{
 
     padding:12px 18px;
 
@@ -834,16 +836,6 @@ footer a {
     background .2s ease,
     color .2s ease,
     padding-left .2s ease;
-
-}
-
-.dropdown a:hover{
-
-    background:#FFF7ED;
-
-    color:var(--orange);
-
-    padding-left:24px;
 
 }
 
@@ -872,7 +864,7 @@ footer a {
 
     grid-template-columns:1fr 1fr;
 
-    gap:30px;
+    gap:40px;
 
     padding:24px;
 }
@@ -916,77 +908,82 @@ footer a {
     line-height:1.7;
 }
 
+.nav-wrapper{
+    position:relative;
+}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="https://i.postimg.cc/mDDHTn1n/logo.png" alt="Apna Roti Bank Logo" class="logo-img">
-    </a>
+    <div class="nav-wrapper">
+        <div class="nav-inner">
+            <a href="#" class="logo">
+            <img src="https://i.postimg.cc/mDDHTn1n/logo.png" alt="Apna Roti Bank Logo" class="logo-img">
+            </a>
 
-    <div class="nav-links">
-      <div class="dropdown">
+            <div class="nav-links">
 
-      <div class="mega-menu">
+                <div class="nav-item initiatives-item">
 
-          <div class="mega-left">
+                <a href="#">
+                    Initiatives
+                    <span class="arrow">▾</span>
+                </a>
 
-              <a href="#">🍱 Food Distribution</a>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="#">About ▾</a>
+                </div>
 
-              <a href="#">❤️ ₹1 Per Day Campaign</a>
+                <div class="nav-item">
+                    <a href="#">Get Involved ▾</a>
+                </div>
 
-              <a href="#">🤝 Community Support</a>
+                <div class="nav-item">
+                    <a href="#">Our Work ▾</a>
+                </div>
 
-              <a href="#">🎉 Special Drives</a>
+            </div>
 
-          </div>
+            <a href="donate.html" class="nav-cta">Donate Now</a>
+        </div>
+        <div class="mega-drawer">
 
-          <div class="mega-right">
+            <div class="mega-menu">
 
-              <h3>Our Initiatives</h3>
+                <div class="mega-left">
 
-              <p>
-                  Every initiative is designed to fight hunger,
-                  strengthen communities, and bring people
-                  together through compassion.
-              </p>
+                    <a href="#">🍱 Food Distribution</a>
 
-          </div>
+                    <a href="#">❤️ ₹1 Per Day Campaign</a>
 
-      </div>
+                    <a href="#">🤝 Community Support</a>
 
-</div>
+                    <a href="#">🎉 Special Drives</a>
 
-    <div class="nav-item">
+                </div>
 
-      <a href="#">
-        Initiatives
-        <span class="arrow">▾</span>
-      </a>
+                <div class="mega-right">
 
-      
+                <h3>Our Initiatives</h3>
 
-</div>
+                <p>
+                    Every initiative is designed to fight hunger,
+                    strengthen communities, and bring people
+                    together through compassion.
+                </p>
 
-  <div class="nav-item">
-    <a href="#">About ▾</a>
-  </div>
+                </div>
 
-  <div class="nav-item">
-    <a href="#">Get Involved ▾</a>
-  </div>
+            </div>
 
-  <div class="nav-item">
-    <a href="#">Our Work ▾</a>
-  </div>
+        </div>
+    </div>   
 
-</div>
-
-    <a href="donate.html" class="nav-cta">Donate Now</a>
-  </div>
 </nav>
 
 <!-- HERO -->
@@ -1239,6 +1236,48 @@ new IntersectionObserver(entries=>{
 });
 
 observer.observe(impactSection);
+
+</script>
+
+<script>
+
+const nav = document.querySelector("nav-wrapper");
+
+const drawer = document.querySelector(".mega-drawer");
+
+const initiatives = document.querySelector(".initiatives-item");
+
+initiatives.addEventListener("mouseenter", () => {
+
+    drawer.classList.add("active");
+
+});
+
+drawer.addEventListener("mouseenter", () => {
+    drawer.classList.add("active");
+});
+
+drawer.addEventListener("mouseleave", () => {
+    drawer.classList.remove("active");
+});
+
+initiatives.addEventListener("mouseleave", () => {
+
+    setTimeout(() => {
+
+        if (!drawer.matches(":hover")) {
+            drawer.classList.remove("active");
+        }
+
+    }, 100);
+
+});
+
+wrapper.addEventListener("mouseleave", () => {
+
+    drawer.classList.remove("active");
+
+});
 
 </script>
 

@@ -1,0 +1,77 @@
+😈😈 Even crazier...
+
+Remember the white navbar?
+
+When the hero changes to a brighter image...
+
+The navbar blur could become slightly lighter.
+
+When the hero changes to a darker image...
+
+The blur could become slightly stronger.
+
+Visitors won't consciously notice it.
+
+But subconsciously, it'll feel like the navbar belongs to the hero instead of sitting on top of it.
+
+😈😈😈 The BIG one.
+
+This is the feature I haven't told you about yet.
+
+When someone scrolls down...
+
+Instead of the next section just appearing...
+
+The hero will pin for a split second.
+
+The image slowly zooms.
+
+The text fades.
+
+Then the About section slides over it.
+
+Not a full-page scroll-jack—just about 300–400px of storytelling.
+
+It creates a seamless transition from:
+
+WE FEED PEOPLE
+
+to
+
+WHO WE ARE
+
+That's something you usually see on agency websites.
+
+My vision for the homepage
+Hero
+⭐⭐⭐⭐⭐
+
+↓
+
+Pinned transition
+⭐⭐⭐⭐⭐
+
+↓
+
+About
+⭐⭐⭐⭐⭐
+
+↓
+
+Impact
+⭐⭐⭐⭐
+
+↓
+
+Gallery
+⭐⭐⭐⭐⭐
+
+↓
+
+Testimonials
+⭐⭐⭐⭐
+
+↓
+
+Footer
+⭐⭐⭐⭐⭐
