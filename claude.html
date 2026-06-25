@@ -117,7 +117,7 @@ nav.scrolled {
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
+  align-items: stretch;
   gap: 32px;
   padding: 14px 0;
 }
@@ -133,7 +133,13 @@ nav.scrolled {
   gap: 4px;
 }
 
-.nav-item { position: relative; }
+.nav-item { position: relative;
+            display:flex;
+
+            align-items:center;
+
+            height:100%; 
+}
 
 .nav-item > a {
   display: flex;
@@ -146,6 +152,47 @@ nav.scrolled {
   font-size: .88rem;
   transition: color .2s, background .2s;
   white-space: nowrap;
+  position:relative;
+  height:100%;
+  position: relative;
+}
+
+.nav-item > a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-6px;
+
+    width:0;
+
+    height:2px;
+
+    background:var(--orange);
+
+    transform:translateX(-50%);
+
+    transition:width .35s cubic-bezier(.22,1,.36,1);
+
+}
+
+.nav-item::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:100%;
+
+    width:100%;
+
+    height:20px;
+
 }
 
 .nav-item > a:hover{
@@ -153,6 +200,12 @@ nav.scrolled {
     color:var(--nav-hover-text);
 
     background:var(--nav-hover-bg);
+
+}
+
+.nav-item:hover > a::after{
+
+    width:70%;
 
 }
 
@@ -196,7 +249,7 @@ nav.scrolled {
   padding: 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
+  transform: translateY(0);
   transition: opacity .25s var(--ease-out-expo),
               transform .25s var(--ease-out-expo),
               visibility .25s;
@@ -218,6 +271,8 @@ nav.scrolled {
   margin: 0 auto;
   padding: 32px 5%;
   gap: 40px;
+  padding-top:24px;
+
 }
 
 .mega-left { display: flex; flex-direction: column; gap: 6px; }
@@ -1011,7 +1066,7 @@ footer a { color: var(--orange); }
     <div class="nav-inner">
 
       <a href="#" class="logo">
-        <img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/logo.png?raw=true" alt="Apna Roti Bank" class="logo-img">
+        <img src="images/logo.png" alt="Apna Roti Bank" class="logo-img">
       </a>
 
       <div class="nav-links">
@@ -1065,21 +1120,21 @@ footer a { color: var(--orange); }
            data-eyebrow="SERVING MEALS EVERY DAY"
            data-title="No one deserves<br>to sleep <em>hungry.</em>"
            data-text="Together we provide meals, dignity, and hope to those who need it most — one roti at a time.">
-        <img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/hero1.jpg>raw=true" alt="Food Distribution">
+        <img src="images/hero1.jpg" alt="Food Distribution">
       </div>
 
       <div class="swiper-slide"
            data-eyebrow="CHANGING LIVES"
            data-title="Bringing hope<br>to every <em>plate.</em>"
            data-text="Every meal we serve is more than food. It's dignity, a warm moment, and a chance for tomorrow.">
-        <img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/hero2.jpg?raw=true" alt="Child Receiving Meal">
+        <img src="images/hero2.jpg" alt="Child Receiving Meal">
       </div>
 
       <div class="swiper-slide"
            data-eyebrow="BE THE CHANGE"
            data-title="One act of kindness<br><em>feeds</em> a community."
            data-text="Whether you donate, volunteer, or spread awareness — you become part of the solution.">
-        <img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/hero3.jpg?raw=true" alt="Volunteers">
+        <img src="images/hero3.jpg" alt="Volunteers">
       </div>
 
     </div>
@@ -1223,11 +1278,11 @@ footer a { color: var(--orange); }
 
     <div class="swiper gallerySwiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/img1.png?raw=true" alt="Gallery 1"></div>
-        <div class="swiper-slide"><img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/img2.png?raw=true" alt="Gallery 2"></div>
-        <div class="swiper-slide"><img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/img3.png?raw=true" alt="Gallery 3"></div>
-        <div class="swiper-slide"><img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/img4.png?raw=true" alt="Gallery 4"></div>
-        <div class="swiper-slide"><img src="https://github.com/varun-joshi-0/Srijan_Proj/blob/main/images/img5.png?raw=true" alt="Gallery 5"></div>
+        <div class="swiper-slide"><img src="images/img1.png" alt="Gallery 1"></div>
+        <div class="swiper-slide"><img src="images/img2.png" alt="Gallery 2"></div>
+        <div class="swiper-slide"><img src="images/img3.png" alt="Gallery 3"></div>
+        <div class="swiper-slide"><img src="images/img4.png" alt="Gallery 4"></div>
+        <div class="swiper-slide"><img src="images/img5.png" alt="Gallery 5"></div>
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
