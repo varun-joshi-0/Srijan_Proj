@@ -254,6 +254,7 @@ nav.scrolled {
               transform .25s var(--ease-out-expo),
               visibility .25s;
   pointer-events: none;
+  min-height:420px;
 }
 
 .mega-drawer.active {
@@ -263,19 +264,29 @@ nav.scrolled {
   pointer-events: auto;
 }
 
-.mega-menu {
-  display: grid;
-  grid-template-columns:40% 60%;
-  gap: 0;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding:24px 0 24px 24px;
-  gap: 40px;
-  padding-top:24px ;
+.mega-menu{
+
+    display:grid;
+
+    grid-template-columns:38% 62%;
+
+    min-height:420px;
 
 }
 
-.mega-left { display: flex; flex-direction: column; gap: 6px;justify-content:center; flex:0 0 280px; }
+.mega-left{
+
+    padding:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:6px;
+
+}
 
 .mega-left a {
   display: flex;
@@ -298,21 +309,13 @@ nav.scrolled {
 
     position:relative;
 
-    border-radius:0;
-
     overflow:hidden;
-
-    background:url("images/food.jpg") center/cover no-repeat;
 
     display:flex;
 
     align-items:flex-end;
 
-    height:100%;
-
-    min-height:380px;
-
-    flex:1;
+    background:center/cover no-repeat;
 
 }
 
@@ -358,33 +361,6 @@ nav.scrolled {
 
 }
 
-#megaImage{
-
-    width:100%;
-
-    height:260px;
-
-    object-fit:cover;
-
-    border-radius:18px;
-
-    margin-bottom:22px;
-
-    transition:
-        opacity .35s ease,
-        transform .35s ease;
-
-}
-
-.mega-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
 
 #megaEyebrow{
 
