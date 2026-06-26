@@ -272,3 +272,70 @@ Unify shadows so they all feel like they're from the same design system.
 Check typography scale so H1, H2, H3, and body text have consistent rhythm.
 
 That kind of polish is invisible on its own, but it makes the whole site feel cohesive. It's the difference between "this looks good" and "this feels professionally designed." 😤
+
+✅ 2. Polish the drawer
+Smooth image zoom when switching
+Active left item highlight
+Tiny orange line beside active item
+Keyboard accessibility (Arrow keys, Esc)
+✅ 3. Navbar polish
+Animate logo on scroll
+Orange underline slide between nav items
+CTA button hover glow
+✅ 4. Homepage polish
+Better hover on initiative cards
+Gallery improvements
+Footer redesign
+Mobile menu
+
+IconSet instead of emojis
+
+🎨 Phase 1 (15–20 min)
+
+Finish the navbar completely.
+
+✅ Get Involved dropdown
+Maybe add a subtle active state
+Done forever.
+🖼 Phase 2
+
+Upgrade the Gallery.
+
+Right now it's a Swiper.
+
+We can make it look like:
+
+        Large Image
+
+Small     Large     Small
+
+
+with depth, hover zoom, and captions.
+
+📞 Phase 3
+
+Build the Contact section.
+
+This will probably become one of the nicest sections.
+
+✨ Phase 4
+
+Micro interactions.
+
+This is my favorite phase.
+
+Things like:
+
+Buttons breathe slightly.
+Cards lift differently.
+Images have parallax.
+Navbar blur improves.
+Mouse hover feels alive.
+Smooth page transitions.
+
+🌊 Animated SVG Journey (left side)
+✨ Read More polish
+📞 Contact section
+🦶 Premium footer
+📱 Responsive/mobile
+🎬 Final polish (page loader, scroll-to-top, cursor effects if we want them)
