@@ -75,3 +75,200 @@ Testimonials
 
 Footer
 ⭐⭐⭐⭐⭐
+
+
+I've got a roadmap that'll make this look like a website people ask "Who designed this?"
+
+🥇 Phase 1 (Current) — Finish Homepage ⭐
+✅ Hero
+✅ Mega Menu
+✅ Impact
+🔄 About
+Gallery polish
+CTA polish
+Footer
+🥈 Phase 2 — Microinteractions
+
+This is where the magic happens.
+
+Cursor magnetic buttons
+Cursor
+
+↓
+
+Donate button
+
+↓
+
+Button moves 6px toward cursor
+
+Looks incredibly premium.
+
+Card spotlight
+
+When you move over a card:
+
+Mouse
+
+↓
+
+Soft light follows cursor
+
+Apple uses this.
+
+Tilt cards
+
+Very subtle.
+
+Mouse left
+
+↓
+
+Card tilts 3°
+
+↓
+
+Shadow shifts
+
+Not cheesy.
+
+Very smooth.
+
+Image parallax
+
+Your About image.
+
+Gallery.
+
+Hero.
+
+As you scroll
+
+Image
+
+↓
+
+moves slower than page
+
+Makes everything feel alive.
+
+🥉 Phase 3 — Tiny Details
+
+These are my favorites.
+
+Navigation underline
+
+Instead of
+
+────
+
+it grows
+
+—
+
+──────
+
+──────────
+
+from the center.
+
+Numbers
+
+Instead of
+
+15000+
+
+they overshoot
+
+14920
+
+↓
+
+15110
+
+↓
+
+15000
+
+Tiny.
+
+Looks amazing.
+
+CTA button
+
+Instead of
+
+Donate Now ❤️
+
+Hover
+
+Donate Now ❤️
+
+↓
+
+❤️ pulses once
+
+↓
+
+Arrow slides
+
+↓
+
+Button lifts
+Hero image
+
+Very slow zoom.
+
+100%
+
+↓
+
+103%
+
+↓
+
+100%
+
+Over 15 seconds.
+
+Almost impossible to notice consciously.
+
+Feels cinematic.
+
+🏆 Then...
+
+I'd optimize every animation to use
+
+transform
+
+opacity
+
+ONLY.
+
+No width.
+
+No height.
+
+No top.
+
+No left.
+
+Everything becomes GPU accelerated.
+
+The site will feel ridiculously smooth.
+
+😂 And one thing...
+
+We've basically been building this page feature by feature for a while now.
+
+When we're done, I genuinely want to do one final pass over the entire homepage.
+
+Not adding new sections—just spending an hour polishing the tiny inconsistencies:
+
+Make all spacing follow an 8px grid.
+Standardize border radii (e.g. 16px, 24px, 32px).
+Ensure every heading, button, and card uses the same transition timing.
+Unify shadows so they all feel like they're from the same design system.
+Check typography scale so H1, H2, H3, and body text have consistent rhythm.
+
+That kind of polish is invisible on its own, but it makes the whole site feel cohesive. It's the difference between "this looks good" and "this feels professionally designed." 😤

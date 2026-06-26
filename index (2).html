@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apna Roti Bank — Fight Against Hunger</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════
+   TOKENS
+═══════════════════════════════════ */
+:root {
+  --o:        #F97316;   /* orange */
+  --od:       #C2410C;   /* orange deep */
+  --og:       rgba(249,115,22,.14);
+  --am:       #FBBF24;   /* amber */
+  --dark:     #0C1322;
+  --ink:      #1A2535;
+  --slate:    #5A6A82;
+  --bone:     #FCF8F3;
+  --cream:    #FDF6EC;
+  --white:    #FFFFFF;
+  --line:     rgba(0,0,0,.07);
+
+  --r1: 8px;
+  --r2: 14px;
+  --r3: 20px;
+  --r4: 28px;
+
+  --expo: cubic-bezier(0.16,1,0.3,1);
+  --smooth: cubic-bezier(0.4,0,0.2,1);
+
+  /* nav surface — interpolated by JS */
+  --nav-bg:   rgba(255,255,255,0);
+  --nav-text:  #ffffff;
+}
+
+/* ═══════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════ */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bone);
+  color:var(--ink);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+img { display:block; max-width:100%; }
+a   { text-decoration:none; color:inherit; }
+
+.container { width:88%; max-width:1200px; margin:auto; }
+section { padding:104px 0; }
+
+/* ═══════════════════════════════════
+   SCROLL-REVEAL
+═══════════════════════════════════ */
+[data-sr] {
+  opacity:0;
+  transform:translateY(28px);
+  transition:
+    opacity .8s var(--expo),
+    transform .8s var(--expo);
+}
+[data-sr="left"]  { transform:translateX(-28px); }
+[data-sr="right"] { transform:translateX(28px); }
+[data-sr="scale"] { transform:scale(.96) translateY(16px); }
+
+[data-sr].in { opacity:1; transform:none; }
+
+[data-sd="1"] { transition-delay:.08s }
+[data-sd="2"] { transition-delay:.16s }
+[data-sd="3"] { transition-delay:.24s }
+[data-sd="4"] { transition-delay:.32s }
+[data-sd="5"] { transition-delay:.40s }
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+nav {
+  position:fixed;
+  inset:0 0 auto;
+  z-index:900;
+  transition:
+    background .5s var(--smooth),
+    backdrop-filter .5s,
+    box-shadow .5s;
+}
+
+nav.opaque {
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 1px 0 var(--line), 0 8px 32px rgba(0,0,0,.06);
+}
+
+.nav-shell {
+  width:88%;
+  max-width:1200px;
+  margin:0 auto;
+  height:72px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:24px;
+}
+
+/* Logo */
+.logo { display:flex; align-items:center; }
+.logo-img { height:52px; width:auto; object-fit:contain; }
+
+/* Links */
+.nav-links {
+  display:flex;
+  justify-content:center;
+  gap:2px;
+}
+
+.ni { position:relative; }
+
+.ni > a {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:7px 13px;
+  border-radius:var(--r1);
+  font-size:.86rem;
+  font-weight:500;
+  color:var(--nav-text);
+  transition:color .2s, background .2s;
+  white-space:nowrap;
+}
+
+nav.opaque .ni > a { color:var(--ink); }
+nav.opaque .ni > a:hover { color:var(--o); background:var(--og); }
+
+.ni > a:not(nav.opaque .ni > a):hover { background:rgba(255,255,255,.12); }
+
+.ni-arrow {
+  font-size:.6rem;
+  transition:transform .25s var(--expo);
+  opacity:.7;
+}
+.ni:hover .ni-arrow { transform:rotate(180deg); }
+
+/* CTA */
+.nav-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:10px 20px;
+  border-radius:50px;
+  font-size:.86rem;
+  font-weight:600;
+  background:var(--o);
+  color:#fff;
+  transition:background .25s, transform .25s, box-shadow .25s;
+}
+.nav-btn:hover {
+  background:var(--od);
+  transform:translateY(-1px);
+  box-shadow:0 6px 22px rgba(249,115,22,.38);
+}
+.nav-btn-heart {
+  font-size:.75rem;
+  transition:transform .3s var(--expo);
+}
+.nav-btn:hover .nav-btn-heart { transform:scale(1.3); }
+
+/* ── Mega ── */
+.mega-wrap {
+  position:absolute;
+  top:100%;
+  left:0; right:0;
+  background:#fff;
+  border-top:1px solid var(--line);
+  box-shadow:0 24px 60px rgba(0,0,0,.10);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(6px);
+  transition:
+    opacity .28s var(--expo),
+    transform .28s var(--expo),
+    visibility .28s;
+  pointer-events:none;
+}
+.mega-wrap.open {
+  opacity:1; visibility:visible; transform:none; pointer-events:auto;
+}
+
+.mega-grid {
+  display:grid;
+  grid-template-columns:minmax(300px,38%) 1fr;
+  min-height:380px;
+}
+
+/* Left list */
+.mega-list {
+  padding:20px;
+  border-right:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  justify-content:center;
+}
+
+.mega-link {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:15px 18px;
+  border-radius:var(--r2);
+  transition:background .25s, transform .25s;
+  cursor:pointer;
+}
+.mega-link:hover { background:#FFF7ED; transform:translateX(6px); }
+.mega-link.active { background:#FFF3E6; }
+
+.ml-icon {
+  width:44px; height:44px;
+  background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(251,191,36,.12));
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+  flex-shrink:0;
+  transition:background .25s;
+}
+.mega-link:hover .ml-icon,
+.mega-link.active .ml-icon {
+  background:linear-gradient(135deg,rgba(249,115,22,.22),rgba(251,191,36,.18));
+}
+
+.ml-text { flex:1; }
+.ml-name { font-size:.92rem; font-weight:600; color:var(--ink); }
+.ml-sub  { font-size:.78rem; color:var(--slate); margin-top:2px; }
+.ml-arr  {
+  font-size:1rem; color:var(--o);
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .2s, transform .2s;
+}
+.mega-link:hover .ml-arr,
+.mega-link.active .ml-arr { opacity:1; transform:none; }
+
+/* Right panel */
+.mega-panel {
+  position:relative;
+  overflow:hidden;
+}
+
+.mega-scene {
+  position:absolute; inset:0;
+  background:center/cover no-repeat;
+  transition:opacity .4s ease;
+}
+
+.mega-panel::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(10,18,36,.82) 0%, rgba(10,18,36,.2) 60%, transparent 100%);
+  z-index:1;
+}
+
+.mega-caption {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  z-index:2;
+  padding:40px;
+  color:#fff;
+  transform:translateY(8px);
+  opacity:0;
+  transition:opacity .35s ease, transform .35s var(--expo);
+}
+.mega-caption.show { opacity:1; transform:none; }
+
+.mega-cap-eye {
+  font-family:'Outfit',sans-serif;
+  font-size:.68rem; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(251,191,36,.9);
+  margin-bottom:10px;
+}
+
+.mega-cap-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem; font-weight:600;
+  line-height:1.1;
+  margin-bottom:12px;
+}
+
+.mega-cap-body {
+  font-size:.88rem;
+  color:rgba(255,255,255,.75);
+  line-height:1.65;
+  max-width:380px;
+  margin-bottom:18px;
+}
+
+.mega-cap-link {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.84rem; font-weight:600; color:#fff;
+  transition:gap .25s;
+}
+.mega-cap-link:hover { gap:14px; color:var(--am); }
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+.hero {
+  min-height:100vh;
+  position:relative;
+  display:flex; align-items:center;
+  padding:120px 0 90px;
+  color:#fff;
+  overflow:hidden;
+}
+
+.hero-reel {
+  position:absolute; inset:0;
+  z-index:0;
+}
+
+.heroSwiper, .heroSwiper .swiper-slide { width:100%; height:100%; }
+
+.heroSwiper .swiper-slide img {
+  width:100%; height:100%; object-fit:cover;
+  will-change:transform;
+}
+
+.heroSwiper .swiper-slide-active img {
+  animation:kb 9s ease-out forwards;
+}
+@keyframes kb {
+  from { transform:scale(1.09); }
+  to   { transform:scale(1.0);  }
+}
+
+.hero-shade {
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(
+    100deg,
+    rgba(8,14,28,.78) 0%,
+    rgba(8,14,28,.4) 70%,
+    transparent 100%
+  );
+}
+
+/* bottom fade into page */
+.hero-fade {
+  position:absolute; bottom:0; left:0; right:0; z-index:2;
+  height:160px;
+  background:linear-gradient(to top, var(--bone), transparent);
+  pointer-events:none;
+}
+
+.hero-body {
+  position:relative; z-index:3;
+  max-width:700px;
+}
+
+/* eyebrow pill */
+.h-pill {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(249,115,22,.18);
+  border:1px solid rgba(249,115,22,.38);
+  color:#FED7AA;
+  font-size:.72rem; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+  padding:6px 14px;
+  border-radius:50px;
+  margin-bottom:22px;
+}
+.h-pill-dot {
+  width:6px; height:6px;
+  background:var(--am); border-radius:50%;
+}
+
+.hero-body h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,7vw,5.4rem);
+  font-weight:600;
+  line-height:1.02;
+  margin-bottom:22px;
+  letter-spacing:-.01em;
+}
+
+.hero-body h1 em {
+  font-style:italic;
+  color:var(--am);
+}
+
+.hero-sub {
+  font-size:1.05rem;
+  color:rgba(255,255,255,.76);
+  max-width:480px;
+  margin-bottom:36px;
+  font-weight:300;
+  line-height:1.72;
+}
+
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+
+.btn-solid {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--o);
+  color:#fff;
+  padding:13px 28px;
+  border-radius:50px;
+  font-size:.92rem; font-weight:600;
+  transition:background .22s, transform .22s, box-shadow .22s;
+}
+.btn-solid:hover { background:var(--od); transform:translateY(-2px); box-shadow:0 8px 26px rgba(249,115,22,.42); }
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1.5px solid rgba(255,255,255,.45);
+  color:#fff;
+  padding:13px 28px;
+  border-radius:50px;
+  font-size:.92rem; font-weight:500;
+  transition:border-color .22s, background .22s;
+}
+.btn-outline:hover { border-color:#fff; background:rgba(255,255,255,.1); }
+
+/* Hero dots */
+.hero-pips {
+  position:absolute;
+  bottom:180px; left:6%;
+  z-index:3;
+  display:flex; gap:10px;
+}
+
+.pip {
+  width:26px; height:3px;
+  border-radius:3px;
+  background:rgba(255,255,255,.25);
+  cursor:pointer;
+  overflow:hidden;
+  transition:width .3s;
+}
+.pip.on { width:54px; background:rgba(255,255,255,.25); }
+.pip::after {
+  content:'';
+  display:block; height:100%; width:0;
+  background:var(--am); border-radius:3px;
+}
+.pip.on::after { animation:pipfill 7s linear forwards; }
+@keyframes pipfill { to { width:100%; } }
+
+/* Slide counter */
+.hero-counter {
+  position:absolute;
+  bottom:180px; right:6%;
+  z-index:3;
+  font-size:.75rem; font-weight:600;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;
+}
+.hero-counter strong { color:#fff; font-size:1.1rem; }
+
+/* ═══════════════════════════════════
+   SECTION ATOMS
+═══════════════════════════════════ */
+.eyebrow {
+  display:inline-block;
+  font-size:.68rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--o);
+  margin-bottom:10px;
+}
+
+.display {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4.5vw,3rem);
+  font-weight:600;
+  color:var(--dark);
+  line-height:1.12;
+  letter-spacing:-.01em;
+}
+
+.sub {
+  color:var(--slate);
+  margin-top:14px;
+  font-size:.98rem;
+  max-width:520px;
+  line-height:1.72;
+}
+
+.s-head { margin-bottom:60px; }
+.s-head.c { text-align:center; }
+.s-head.c .sub { margin-left:auto; margin-right:auto; }
+
+/* ═══════════════════════════════════
+   IMPACT / STATS
+═══════════════════════════════════ */
+#impact { background:var(--white); }
+
+.stats-row {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:var(--r3);
+  overflow:hidden;
+}
+
+.sc {
+  background:var(--bone);
+  padding:44px 32px;
+  text-align:center;
+  transition:background .3s, transform .3s var(--expo);
+  cursor:default;
+  position:relative;
+}
+
+.sc::after {
+  content:'';
+  position:absolute; bottom:0; left:50%; right:50%;
+  height:2px;
+  background:linear-gradient(90deg,var(--o),var(--am));
+  transition:left .4s var(--expo), right .4s var(--expo);
+}
+.sc:hover::after { left:10%; right:10%; }
+.sc:hover { background:var(--white); }
+
+.sc-icon {
+  width:48px; height:48px;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--o),var(--am));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem;
+  margin:0 auto 18px;
+}
+
+.sc h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;
+  font-weight:700;
+  color:var(--o);
+  line-height:1;
+  margin-bottom:8px;
+}
+
+/* odometer theme reset */
+.odometer {
+  font-family:'Cormorant Garamond',serif !important;
+  font-size:3.2rem !important;
+  font-weight:700 !important;
+  color:var(--o) !important;
+  line-height:1 !important;
+}
+
+.sc p {
+  color:var(--slate);
+  font-size:.84rem;
+  font-weight:500;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* plus suffix */
+#meals::after,#volunteers::after,#communities::after {
+  content:'+';
+  font-size:.7em;
+  vertical-align:super;
+}
+
+/* ═══════════════════════════════════
+   ABOUT
+═══════════════════════════════════ */
+#about {
+  position:relative;
+  overflow:hidden;
+  padding:120px 0;
+}
+
+/* full-bleed photo on the left half */
+.about-photo {
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:44%;
+  background:url('images/about.jpg') center/cover no-repeat;
+}
+.about-photo::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent 60%,var(--bone));
+}
+
+.about-inner {
+  position:relative; z-index:1;
+  display:grid;
+  grid-template-columns:44% 1fr;
+  gap:0;
+  align-items:center;
+}
+
+.about-col { padding-left:52px; }
+
+.about-col h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,2.8rem);
+  font-weight:600;
+  color:var(--dark);
+  line-height:1.12;
+  margin-bottom:20px;
+}
+
+.about-col h2 em { font-style:italic; color:var(--o); }
+
+.about-col p { color:var(--slate); line-height:1.75; margin-bottom:16px; }
+
+.pillar-stack { display:flex; flex-direction:column; gap:10px; margin-top:30px; }
+
+.pil {
+  display:flex; align-items:flex-start; gap:14px;
+  padding:16px 18px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:var(--r2);
+  transition:transform .3s var(--expo), box-shadow .3s;
+}
+.pil:hover { transform:translateX(6px); box-shadow:0 10px 28px rgba(0,0,0,.06); }
+
+.pil-ico {
+  width:44px; height:44px;
+  border-radius:11px;
+  background:#FFF3E8;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+  flex-shrink:0;
+}
+
+.pil-t { font-size:.93rem; font-weight:600; color:var(--ink); }
+.pil-s { font-size:.82rem; color:var(--slate); margin-top:3px; line-height:1.55; }
+
+/* ═══════════════════════════════════
+   CAMPAIGN STRIP
+═══════════════════════════════════ */
+.campaign-strip {
+  background:var(--dark);
+  overflow:hidden;
+  position:relative;
+  padding:88px 0;
+}
+
+/* ambient radial glows */
+.campaign-strip::before {
+  content:'';
+  position:absolute;
+  width:700px; height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(249,115,22,.1),transparent 68%);
+  top:-250px; left:-150px;
+  pointer-events:none;
+}
+.campaign-strip::after {
+  content:'';
+  position:absolute;
+  width:500px; height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(251,191,36,.07),transparent 68%);
+  bottom:-180px; right:-80px;
+  pointer-events:none;
+}
+
+.camp-inner {
+  position:relative; z-index:1;
+  display:flex; align-items:center; gap:64px;
+}
+
+.camp-num {
+  flex-shrink:0; text-align:center;
+}
+.camp-num span {
+  font-family:'Cormorant Garamond',serif;
+  font-size:6rem; font-weight:700;
+  color:var(--am);
+  display:block; line-height:1;
+}
+.camp-num small {
+  font-size:.76rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+  display:block; margin-top:6px;
+}
+
+.camp-rule {
+  width:1px; height:88px; flex-shrink:0;
+  background:linear-gradient(to bottom,transparent,rgba(249,115,22,.4),transparent);
+}
+
+.camp-text h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem; font-weight:600;
+  color:#fff; line-height:1.15;
+  margin-bottom:14px;
+}
+.camp-text p {
+  color:rgba(255,255,255,.58);
+  max-width:480px; line-height:1.72;
+}
+
+/* ═══════════════════════════════════
+   DONATION
+═══════════════════════════════════ */
+#donate { background:var(--white); }
+
+.don-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.don-card {
+  background:var(--bone);
+  border-radius:var(--r3);
+  padding:40px 30px;
+  text-align:center;
+  border:1.5px solid transparent;
+  position:relative; overflow:hidden;
+  transition:transform .3s var(--expo), box-shadow .3s, border-color .3s;
+}
+
+/* shimmer sweep on hover */
+.don-card::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(249,115,22,.06) 50%,transparent 60%);
+  transform:translateX(-100%);
+  transition:transform .5s ease;
+}
+.don-card:hover::before { transform:translateX(100%); }
+
+.don-card.feat {
+  border-color:var(--o);
+  background:var(--white);
+}
+
+/* ribbon */
+.don-card.feat::after {
+  content:'Most Popular';
+  position:absolute;
+  top:20px; right:-34px;
+  background:var(--o); color:#fff;
+  font-size:.62rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  padding:5px 42px;
+  transform:rotate(45deg);
+}
+
+.don-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 22px 52px rgba(0,0,0,.09);
+  border-color:rgba(249,115,22,.35);
+}
+
+.don-card h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem; font-weight:700;
+  color:var(--o);
+  margin-bottom:10px; line-height:1;
+}
+
+.don-card p { color:var(--slate); font-size:.9rem; line-height:1.6; }
+
+.don-btn {
+  display:inline-block;
+  margin-top:22px;
+  background:var(--o); color:#fff;
+  padding:10px 24px;
+  border-radius:50px;
+  font-size:.84rem; font-weight:600;
+  transition:background .22s, transform .22s;
+}
+.don-btn:hover { background:var(--od); transform:translateY(-1px); }
+
+/* ═══════════════════════════════════
+   INITIATIVES
+═══════════════════════════════════ */
+#initiatives { background:var(--bone); }
+
+.init-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.init-card {
+  background:var(--white);
+  border-radius:var(--r3);
+  padding:38px 32px;
+  border:1px solid var(--line);
+  position:relative; overflow:hidden;
+  transition:transform .3s var(--expo), box-shadow .3s;
+}
+
+.init-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--o),var(--am));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s var(--expo);
+}
+.init-card:hover { transform:translateY(-6px); box-shadow:0 18px 44px rgba(0,0,0,.07); }
+.init-card:hover::before { transform:scaleX(1); }
+
+.init-n {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.6rem; font-weight:700;
+  color:rgba(249,115,22,.12);
+  line-height:1; margin-bottom:16px;
+}
+
+.init-card h3 { font-size:1.08rem; font-weight:700; color:var(--dark); margin-bottom:8px; }
+.init-card p  { color:var(--slate); font-size:.88rem; line-height:1.65; }
+
+/* ═══════════════════════════════════
+   GALLERY
+═══════════════════════════════════ */
+#gallery { background:var(--white); }
+
+.gallerySwiper {
+  width:100%;
+  padding:24px 0 60px;
+}
+
+.gallerySwiper .swiper-slide {
+  width:620px; height:390px;
+  border-radius:var(--r4);
+  overflow:hidden;
+  box-shadow:0 28px 60px rgba(0,0,0,.14);
+  opacity:.65;
+  transition:opacity .4s, transform .4s var(--expo);
+}
+.gallerySwiper .swiper-slide-active {
+  opacity:1; transform:scale(1.03);
+}
+.gallerySwiper .swiper-slide img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--expo);
+}
+.gallerySwiper .swiper-slide-active img { transform:scale(1.05); }
+
+.swiper-button-prev,
+.swiper-button-next {
+  width:48px; height:48px;
+  border-radius:50%;
+  background:var(--o); color:#fff;
+  box-shadow:0 6px 22px rgba(249,115,22,.35);
+  transition:background .22s, transform .22s;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover { background:var(--od); transform:scale(1.1); }
+.swiper-button-prev::after,
+.swiper-button-next::after { font-size:16px; font-weight:700; }
+
+/* ═══════════════════════════════════
+   CTA
+═══════════════════════════════════ */
+.cta-band {
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:100px 0;
+  position:relative; overflow:hidden;
+}
+
+/* subtle noise texture via radial gradients */
+.cta-band::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 80% at 20% 50%,rgba(249,115,22,.09),transparent),
+    radial-gradient(ellipse 50% 60% at 80% 50%,rgba(251,191,36,.05),transparent);
+  pointer-events:none;
+}
+
+.cta-inner { position:relative; z-index:1; }
+
+/* big decorative text */
+.cta-deco {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4rem,12vw,10rem);
+  font-weight:700;
+  color:rgba(255,255,255,.03);
+  line-height:1;
+  position:absolute;
+  inset:0; display:flex; align-items:center; justify-content:center;
+  pointer-events:none; user-select:none;
+  letter-spacing:-.03em;
+}
+
+.cta-band h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  font-weight:600;
+  margin-bottom:16px;
+  line-height:1.1;
+}
+.cta-band h2 em { font-style:italic; color:var(--am); }
+
+.cta-band p {
+  font-size:1rem; opacity:.7;
+  max-width:440px; margin:0 auto 38px;
+  line-height:1.72;
+}
+
+.btn-white {
+  display:inline-flex; align-items:center; gap:9px;
+  background:#fff; color:var(--o);
+  padding:15px 36px;
+  border-radius:50px;
+  font-weight:700; font-size:.96rem;
+  transition:transform .22s, box-shadow .22s;
+}
+.btn-white:hover { transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.22); }
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  background:#080f1e;
+  color:rgba(255,255,255,.38);
+  padding:40px 0;
+  text-align:center;
+  font-size:.82rem;
+  line-height:1.9;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+footer a { color:var(--o); }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width:960px) {
+  .about-photo   { display:none; }
+  .about-inner   { grid-template-columns:1fr; }
+  .about-col     { padding-left:0; }
+  .camp-inner    { flex-direction:column; gap:32px; text-align:center; }
+  .camp-rule     { width:80px; height:1px; }
+  .camp-text p   { margin:0 auto; }
+}
+
+@media (max-width:680px) {
+  .nav-shell     { grid-template-columns:1fr auto; }
+  .nav-links     { display:none; }
+  section        { padding:72px 0; }
+  .gallerySwiper .swiper-slide { width:90vw; height:58vw; }
+}
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="mega-wrap" id="megaWrap">
+    <div class="mega-grid">
+
+      <div class="mega-list">
+        <div class="mega-link active" data-idx="0">
+          <div class="ml-icon">🍱</div>
+          <div class="ml-text">
+            <div class="ml-name">Food Distribution</div>
+            <div class="ml-sub">Daily meals to those in need</div>
+          </div>
+          <span class="ml-arr">→</span>
+        </div>
+        <div class="mega-link" data-idx="1">
+          <div class="ml-icon">❤️</div>
+          <div class="ml-text">
+            <div class="ml-name">₹1 Per Day Campaign</div>
+            <div class="ml-sub">Every rupee creates impact</div>
+          </div>
+          <span class="ml-arr">→</span>
+        </div>
+        <div class="mega-link" data-idx="2">
+          <div class="ml-icon">🤝</div>
+          <div class="ml-text">
+            <div class="ml-name">Community Support</div>
+            <div class="ml-sub">Standing with families in need</div>
+          </div>
+          <span class="ml-arr">→</span>
+        </div>
+        <div class="mega-link" data-idx="3">
+          <div class="ml-icon">🎉</div>
+          <div class="ml-text">
+            <div class="ml-name">Special Drives</div>
+            <div class="ml-sub">Emergency &amp; festive relief</div>
+          </div>
+          <span class="ml-arr">→</span>
+        </div>
+      </div>
+
+      <div class="mega-panel" id="megaPanel">
+        <!-- scenes swapped by JS -->
+        <div class="mega-scene" id="megaScene" style="background-image:url('images/food.jpg')"></div>
+        <div class="mega-caption show" id="megaCap">
+          <div class="mega-cap-eye" id="mcEye">FOOD DISTRIBUTION</div>
+          <div class="mega-cap-title" id="mcTitle">Serving Meals,<br>Restoring Dignity</div>
+          <div class="mega-cap-body" id="mcBody">We distribute freshly prepared meals to those who need them most through daily food drives.</div>
+          <a href="#" class="mega-cap-link" id="mcLink">Learn more <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /mega-wrap -->
+
+  <div class="nav-shell">
+    <a href="#" class="logo">
+      <img src="images/logo.png" alt="Apna Roti Bank" class="logo-img">
+    </a>
+
+    <nav class="nav-links">
+      <div class="ni mega-trigger">
+        <a href="#">Initiatives <span class="ni-arrow">▾</span></a>
+      </div>
+      <div class="ni mega-trigger">
+        <a href="#about">About</a>
+      </div>
+      <div class="ni mega-trigger">
+        <a href="#impact">Impact</a>
+      </div>
+      <div class="ni">
+        <a href="#gallery">Gallery</a>
+      </div>
+    </nav>
+
+    <a href="donate.html" class="nav-btn">
+      Donate <span class="nav-btn-heart">❤</span>
+    </a>
+  </div>
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="heroSec">
+
+  <div class="hero-reel swiper heroSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"
+        data-ey="SERVING MEALS EVERY DAY"
+        data-ti="No one deserves<br>to sleep <em>hungry.</em>"
+        data-tx="Together we provide meals, dignity, and hope — one roti at a time.">
+        <img src="images/hero1.jpg" alt="">
+      </div>
+      <div class="swiper-slide"
+        data-ey="CHANGING LIVES"
+        data-ti="Bringing hope<br>to every <em>plate.</em>"
+        data-tx="Every meal we serve is more than food. It's dignity, warmth, and a chance for tomorrow.">
+        <img src="images/hero2.jpg" alt="">
+      </div>
+      <div class="swiper-slide"
+        data-ey="BE THE CHANGE"
+        data-ti="One act of kindness<br><em>feeds</em> a community."
+        data-tx="Whether you donate, volunteer, or spread awareness — you become part of the solution.">
+        <img src="images/hero3.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-shade"></div>
+  <div class="hero-fade"></div>
+
+  <div class="container hero-body">
+    <div class="h-pill"><span class="h-pill-dot"></span><span id="hEye">SERVING MEALS EVERY DAY</span></div>
+    <h1 id="hTitle">No one deserves<br>to sleep <em>hungry.</em></h1>
+    <p class="hero-sub" id="hSub">Together we provide meals, dignity, and hope — one roti at a time.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-solid">Become a Volunteer ↗</a>
+      <a href="donate.html" class="btn-outline">Donate Now</a>
+    </div>
+  </div>
+
+  <div class="hero-pips" id="heroPips">
+    <div class="pip on"  data-i="0"></div>
+    <div class="pip"     data-i="1"></div>
+    <div class="pip"     data-i="2"></div>
+  </div>
+
+  <div class="hero-counter">
+    <strong id="hCur">01</strong> / 03
+  </div>
+
+</section>
+
+
+<!-- ═══ IMPACT ═══ -->
+<section id="impact">
+  <div class="container">
+    <div class="s-head c" data-sr>
+      <span class="eyebrow">Our Impact</span>
+      <h2 class="display">Every number is a life touched</h2>
+    </div>
+    <div class="stats-row">
+      <div class="sc" data-sr data-sd="1">
+        <div class="sc-icon">🍱</div>
+        <h3 class="odometer" id="meals">0</h3>
+        <p>Meals Distributed</p>
+      </div>
+      <div class="sc" data-sr data-sd="2">
+        <div class="sc-icon">🤝</div>
+        <h3 class="odometer" id="volunteers">0</h3>
+        <p>Active Volunteers</p>
+      </div>
+      <div class="sc" data-sr data-sd="3">
+        <div class="sc-icon">🏘️</div>
+        <h3 class="odometer" id="communities">0</h3>
+        <p>Communities Reached</p>
+      </div>
+      <div class="sc" data-sr data-sd="4">
+        <div class="sc-icon">📅</div>
+        <h3 class="odometer" id="years">0</h3>
+        <p>Years of Service</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-photo"></div>
+  <div class="container about-inner">
+    <div><!-- spacer column --></div>
+    <div class="about-col">
+      <span class="eyebrow" data-sr>Our Story</span>
+      <h2 data-sr>Fighting Hunger,<br>Restoring Dignity.<br><em>One Meal at a Time.</em></h2>
+      <p data-sr>Apna Roti Bank Charitable Trust is a volunteer-driven movement ensuring no one sleeps hungry. Every day our volunteers prepare and distribute freshly cooked meals across our communities.</p>
+      <p data-sr>Beyond food, we restore hope and belonging — proving that the smallest act of kindness creates a lasting impact.</p>
+      <div class="pillar-stack">
+        <div class="pil" data-sr data-sd="1">
+          <div class="pil-ico">🍱</div>
+          <div>
+            <div class="pil-t">Daily Food Distribution</div>
+            <div class="pil-s">Freshly prepared meals served every day across communities.</div>
+          </div>
+        </div>
+        <div class="pil" data-sr data-sd="2">
+          <div class="pil-ico">🤝</div>
+          <div>
+            <div class="pil-t">Volunteer-Powered Mission</div>
+            <div class="pil-s">Driven entirely by compassionate volunteers working together.</div>
+          </div>
+        </div>
+        <div class="pil" data-sr data-sd="3">
+          <div class="pil-ico">❤️</div>
+          <div>
+            <div class="pil-t">Emergency &amp; Community Support</div>
+            <div class="pil-s">Supporting families during emergencies, festivals and difficult times.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CAMPAIGN ═══ -->
+<div class="campaign-strip">
+  <div class="container">
+    <div class="camp-inner" data-sr>
+      <div class="camp-num">
+        <span>₹1</span>
+        <small>per day</small>
+      </div>
+      <div class="camp-rule"></div>
+      <div class="camp-text">
+        <h2>The ₹1 Per Day Initiative</h2>
+        <p>A small daily contribution creates a lasting impact. Join a movement that fights hunger one meal at a time — together we become unstoppable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ DONATIONS ═══ -->
+<section id="donate">
+  <div class="container">
+    <div class="s-head c" data-sr>
+      <span class="eyebrow">Give Today</span>
+      <h2 class="display">Your donation creates real impact</h2>
+      <p class="sub">Every rupee goes directly to those who need it most.</p>
+    </div>
+    <div class="don-grid">
+      <div class="don-card" data-sr data-sd="1">
+        <h3>₹100</h3>
+        <p>Provides a wholesome meal to a family in need.</p>
+        <a href="donate.html" class="don-btn">Donate ₹100</a>
+      </div>
+      <div class="don-card feat" data-sr data-sd="2">
+        <h3>₹500</h3>
+        <p>Powers a full food distribution drive in your area.</p>
+        <a href="donate.html" class="don-btn">Donate ₹500</a>
+      </div>
+      <div class="don-card" data-sr data-sd="3">
+        <h3>₹1000+</h3>
+        <p>Strengthens our long-term community support programs.</p>
+        <a href="donate.html" class="don-btn">Donate ₹1000</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ INITIATIVES ═══ -->
+<section id="initiatives">
+  <div class="container">
+    <div class="s-head" data-sr>
+      <span class="eyebrow">What We Do</span>
+      <h2 class="display">Our initiatives</h2>
+    </div>
+    <div class="init-grid">
+      <div class="init-card" data-sr data-sd="1">
+        <div class="init-n">01</div>
+        <h3>Food Distribution</h3>
+        <p>Regular drives distributing freshly prepared meals to people facing hunger across underserved communities.</p>
+      </div>
+      <div class="init-card" data-sr data-sd="2">
+        <div class="init-n">02</div>
+        <h3>Volunteer Programs</h3>
+        <p>Connecting compassionate individuals through coordinated programs that make giving effortless.</p>
+      </div>
+      <div class="init-card" data-sr data-sd="3">
+        <div class="init-n">03</div>
+        <h3>Community Support</h3>
+        <p>Standing alongside families during difficult times — from daily needs to emergencies and festive seasons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery">
+  <div class="container">
+    <div class="s-head" data-sr>
+      <span class="eyebrow">Gallery</span>
+      <h2 class="display">Moments from the ground</h2>
+    </div>
+  </div>
+  <div class="swiper gallerySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="images/img1.png" alt=""></div>
+      <div class="swiper-slide"><img src="images/img2.png" alt=""></div>
+      <div class="swiper-slide"><img src="images/img3.png" alt=""></div>
+      <div class="swiper-slide"><img src="images/img4.png" alt=""></div>
+      <div class="swiper-slide"><img src="images/img5.png" alt=""></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-band">
+  <div class="cta-deco">End Hunger</div>
+  <div class="container cta-inner" data-sr>
+    <h2>Together we can <em>end hunger</em></h2>
+    <p>Join thousands of people making a difference every day. Your contribution matters more than you know.</p>
+    <a href="donate.html" class="btn-white">Donate Now ↗</a>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="container">
+    <p>© 2026 Apna Roti Bank Charitable Trust. All Rights Reserved.</p>
+    <p>Built with ❤️ to fight hunger across India.</p>
+  </div>
+</footer>
+
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+
+<script>
+/* ── 1. NAV ─────────────────────────────── */
+const nav       = document.getElementById('nav');
+const megaWrap  = document.getElementById('megaWrap');
+const triggers  = document.querySelectorAll('.mega-trigger');
+const heroSec   = document.getElementById('heroSec');
+
+// Transparent → opaque as hero scrolls out
+const navObserver = new IntersectionObserver(
+  ([e]) => nav.classList.toggle('opaque', !e.isIntersecting),
+  { threshold: 0.15 }
+);
+navObserver.observe(heroSec);
+
+// Mega drawer open/close via hover
+let megaTimer;
+function openMega()  { clearTimeout(megaTimer); megaWrap.classList.add('open'); }
+function closeMega() { megaTimer = setTimeout(() => megaWrap.classList.remove('open'), 90); }
+
+triggers.forEach(t => {
+  t.addEventListener('mouseenter', openMega);
+  t.addEventListener('mouseleave', closeMega);
+});
+megaWrap.addEventListener('mouseenter', openMega);
+megaWrap.addEventListener('mouseleave', closeMega);
+
+// Mega panel content
+const megaData = [
+  { eye:'FOOD DISTRIBUTION',    title:'Serving Meals,<br>Restoring Dignity',    body:'We distribute freshly prepared meals to those who need them most through daily food drives.',             img:'images/food.jpg',      link:'Explore →' },
+  { eye:'₹1 PER DAY CAMPAIGN',  title:'Small Donations,<br>Big Impact',          body:'Just ₹1 a day can collectively provide thousands of meals and keep our mission running.',              img:'images/campaign.jpg',  link:'Join Campaign →' },
+  { eye:'COMMUNITY SUPPORT',    title:'Together We<br>Stand Strong',             body:'Working with local communities to support families through food, care and compassion every day.',     img:'images/community.jpg', link:'Explore →' },
+  { eye:'SPECIAL DRIVES',       title:'Helping When It<br>Matters Most',         body:'From disaster relief to festive food drives, we reach those who need us at critical moments.',        img:'images/drives.jpg',    link:'View Drives →' },
+];
+
+const megaLinks   = document.querySelectorAll('.mega-link');
+const megaScene   = document.getElementById('megaScene');
+const megaCap     = document.getElementById('megaCap');
+const mcEye       = document.getElementById('mcEye');
+const mcTitle     = document.getElementById('mcTitle');
+const mcBody      = document.getElementById('mcBody');
+const mcLink      = document.getElementById('mcLink');
+
+let activeIdx = 0;
+let panelTimer;
+
+function setPanel(idx) {
+  if (idx === activeIdx) return;
+  activeIdx = idx;
+
+  megaLinks.forEach((l, i) => l.classList.toggle('active', i === idx));
+  const d = megaData[idx];
+
+  // fade out caption
+  megaCap.classList.remove('show');
+
+  clearTimeout(panelTimer);
+  panelTimer = setTimeout(() => {
+    // swap image
+    megaScene.style.opacity = '0';
+    megaScene.style.transition = 'opacity .3s ease';
+    setTimeout(() => {
+      megaScene.style.backgroundImage = `url('${d.img}')`;
+      megaScene.style.opacity = '1';
+    }, 150);
+
+    // swap text
+    mcEye.innerHTML   = d.eye;
+    mcTitle.innerHTML = d.title;
+    mcBody.innerHTML  = d.body;
+    mcLink.innerHTML  = d.link + ' <span>→</span>';
+    megaCap.classList.add('show');
+  }, 200);
+}
+
+megaLinks.forEach((link, i) => {
+  link.addEventListener('mouseenter', () => setPanel(i));
+});
+
+/* ── 2. HERO SWIPER ─────────────────────── */
+const hEye   = document.getElementById('hEye');
+const hTitle = document.getElementById('hTitle');
+const hSub   = document.getElementById('hSub');
+const hCur   = document.getElementById('hCur');
+const pips   = document.querySelectorAll('.pip');
+const hBody  = document.querySelector('.hero-body');
+
+function setPip(idx) {
+  pips.forEach(p => {
+    p.classList.remove('on');
+    // Force reflow so animation replays
+    void p.offsetWidth;
+  });
+  pips[idx].classList.add('on');
+}
+
+function morphHeroText(slide, realIdx) {
+  hBody.style.transition = 'opacity .5s ease, transform .5s var(--expo), filter .5s ease';
+  hBody.style.opacity    = '0';
+  hBody.style.transform  = 'translateY(22px)';
+  hBody.style.filter     = 'blur(6px)';
+
+  setTimeout(() => {
+    hEye.textContent   = slide.dataset.ey || '';
+    hTitle.innerHTML   = slide.dataset.ti || '';
+    hSub.textContent   = slide.dataset.tx || '';
+    hCur.textContent   = String(realIdx + 1).padStart(2, '0');
+    setPip(realIdx);
+
+    hBody.style.opacity   = '1';
+    hBody.style.transform = 'none';
+    hBody.style.filter    = 'blur(0)';
+  }, 480);
+}
+
+const heroSw = new Swiper('.heroSwiper', {
+  effect:     'fade',
+  fadeEffect: { crossFade: true },
+  speed:       1300,
+  loop:        true,
+  autoplay:   { delay: 7000, disableOnInteraction: false },
+  on: {
+    init(sw) {
+      const s = sw.slides[sw.activeIndex];
+      hEye.textContent = s.dataset.ey || '';
+      hTitle.innerHTML = s.dataset.ti || '';
+      hSub.textContent = s.dataset.tx || '';
+      setPip(0);
+    },
+    slideChangeTransitionStart(sw) {
+      morphHeroText(sw.slides[sw.activeIndex], sw.realIndex);
+    }
+  }
+});
+
+pips.forEach(p => {
+  p.addEventListener('click', () => heroSw.slideToLoop(+p.dataset.i));
+});
+
+/* ── 3. GALLERY SWIPER ──────────────────── */
+new Swiper('.gallerySwiper', {
+  effect:          'coverflow',
+  grabCursor:       true,
+  centeredSlides:   true,
+  slidesPerView:   'auto',
+  loop:             true,
+  speed:            700,
+  coverflowEffect: { rotate:0, stretch:0, depth:220, modifier:1.4, slideShadows:false, scale:.84 },
+  navigation:      { nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' },
+  autoplay:        { delay:3800, disableOnInteraction:false, pauseOnMouseEnter:true },
+});
+
+/* ── 4. ODOMETER ────────────────────────── */
+let oStarted = false;
+new IntersectionObserver(([e]) => {
+  if (e.isIntersecting && !oStarted) {
+    oStarted = true;
+    setTimeout(() => {
+      document.getElementById('meals').innerHTML       = 15000;
+      document.getElementById('volunteers').innerHTML  = 500;
+      document.getElementById('communities').innerHTML = 200;
+      document.getElementById('years').innerHTML       = 11;
+    }, 300);
+  }
+}, { threshold: .3 }).observe(document.getElementById('impact'));
+
+/* ── 5. SCROLL-REVEAL ───────────────────── */
+new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      // don't unobserve — let [data-sd] delays finish
+    }
+  });
+}, { threshold: .1 }).observe(document.body);
+
+// Observe all [data-sr] elements
+const srEls = document.querySelectorAll('[data-sr]');
+const srObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      srObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .1 });
+
+srEls.forEach(el => srObs.observe(el));
+</script>
+
+</body>
+</html>

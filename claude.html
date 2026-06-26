@@ -117,7 +117,7 @@ nav.scrolled {
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: stretch;
+  align-items: center;
   gap: 32px;
   padding: 14px 0;
 }
@@ -221,15 +221,39 @@ nav.scrolled {
 .nav-item.open  .arrow { transform: rotate(180deg); }
 
 /* CTA button */
-.nav-cta {
-  background:rgba(249,115,22,.92);
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: .88rem;
-  transition: background .2s, transform .2s, box-shadow .2s;
-  white-space: nowrap;
+.nav-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    background:rgba(249,115,22,.92);
+    color:#fff;
+    padding:10px 22px;
+    border-radius:50px;
+    font-weight:600;
+    font-size:.88rem;
+
+    transition:
+        background .25s,
+        transform .25s,
+        box-shadow .25s;
+}
+
+.nav-cta::after{
+
+    content:"❤";
+
+    font-size:.8rem;
+
+    transition:transform .25s ease;
+
+}
+
+.nav-cta:hover::after{
+
+    transform:scale(1.2);
+
 }
 .nav-cta:hover {
   background: var(--orange-deep);

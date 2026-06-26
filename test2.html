@@ -117,7 +117,7 @@ nav.scrolled {
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: stretch;
+  align-items: center;
   gap: 32px;
   padding: 14px 0;
 }
@@ -221,16 +221,41 @@ nav.scrolled {
 .nav-item.open  .arrow { transform: rotate(180deg); }
 
 /* CTA button */
-.nav-cta {
-  background:rgba(249,115,22,.92);
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: .88rem;
-  transition: background .2s, transform .2s, box-shadow .2s;
-  white-space: nowrap;
+.nav-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    background:rgba(249,115,22,.92);
+    color:#fff;
+    padding:10px 22px;
+    border-radius:50px;
+    font-weight:600;
+    font-size:.88rem;
+
+    transition:
+        background .25s,
+        transform .25s,
+        box-shadow .25s;
 }
+
+.nav-cta::after{
+
+    content:"❤";
+
+    font-size:.8rem;
+
+    transition:transform .25s ease;
+
+}
+
+.nav-cta:hover::after{
+
+    transform:scale(1.2);
+
+}
+
 .nav-cta:hover {
   background: var(--orange-deep);
   transform: translateY(-1px);
@@ -265,13 +290,8 @@ nav.scrolled {
 }
 
 .mega-menu{
-
     display:grid;
-
-    grid-template-columns:36% 64%;
-
-    min-height:420px;
-
+    grid-template-columns:minmax(320px,36%) 1fr;
 }
 
 .mega-left{
@@ -802,35 +822,58 @@ section { padding: 96px 0; }
 /* ═══════════════════════════════════════════
    ABOUT
 ═══════════════════════════════════════════ */
-#about { background: var(--bone); }
+#about{
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: center;
+    position:relative;
+
+    overflow:hidden;
+
+    padding:120px 0;
+
+    background:url("images/about-bg.jpg") left center/cover no-repeat;
+
 }
 
-.about-visual { position: relative; }
+#about::before{
 
-.about-image {
-  width: 100%;
-  height: 480px;
-  background: url("about.jpg") center/cover no-repeat;
-  border-radius: var(--r-lg);
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0) 35%,
+            rgba(253,248,242,.65) 48%,
+            rgba(253,248,242,.92) 58%,
+            var(--bone) 72%
+        );
+
 }
 
-.about-badge {
-  position: absolute;
-  bottom: -22px;
-  right: -22px;
-  background: var(--orange);
-  color: #fff;
-  border-radius: var(--r-md);
-  padding: 22px 28px;
-  text-align: center;
-  box-shadow: 0 12px 36px rgba(249,115,22,.38);
-  transition: transform .3s var(--ease-out-expo);
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:70% 30%;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+.about-badge{
+
+    position:absolute;
+
+    left:44%;
+
+    bottom:70px;
+
 }
 
 .about-visual:hover .about-badge { transform: scale(1.06); }
@@ -863,18 +906,98 @@ section { padding: 96px 0; }
   margin-top: 28px;
 }
 
-.pillar {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: .93rem;
-  font-weight: 500;
-  color: var(--ink);
-  padding: 12px 16px;
-  background: var(--white);
-  border-radius: var(--r-sm);
-  border: 1px solid rgba(249,115,22,.08);
-  transition: border-color .2s, box-shadow .2s;
+.accent-line{
+
+    color:var(--orange);
+
+    font-size:.7em;
+
+}
+
+.pillar{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    border-radius:18px;
+
+    transition:.3s;
+
+}
+
+.pillar:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 30px rgba(0,0,0,.08);
+
+}
+
+.pillar-icon{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    background:#FFF3E8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.4rem;
+
+    flex-shrink:0;
+
+}
+
+.pillar-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.pillar-content h4{
+
+    margin:0;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:var(--ink);
+
+}
+
+.pillar-content p{
+
+    margin:0;
+
+    color:var(--slate);
+
+    font-size:.88rem;
+
+    line-height:1.55;
+
 }
 
 .pillar:hover {
@@ -1472,21 +1595,71 @@ footer a { color: var(--orange); }
     <div class="about-grid">
       <div class="about-visual" data-reveal="left">
         <div class="about-image"></div>
-        <div class="about-badge">
+        <!-- <div class="about-badge">
           <strong>100%</strong>
           <span>Volunteer-driven</span>
-        </div>
+        </div> -->
       </div>
-      <div class="about-text" data-reveal="right">
-        <span class="section-label">Our Story</span>
-        <h2>A movement built on compassion</h2>
-        <p>Apna Roti Bank Charitable Trust works to fight hunger and support underprivileged communities through food distribution drives, volunteer initiatives, and community engagement.</p>
-        <p>Every meal shared creates dignity, hope and a stronger society. We believe no act of giving is too small — a single roti can change someone's day.</p>
-        <div class="about-pillars">
-          <div class="pillar"><div class="pillar-dot"></div>Regular food distribution drives across communities</div>
-          <div class="pillar"><div class="pillar-dot"></div>Volunteer-led grassroots outreach programs</div>
-          <div class="pillar"><div class="pillar-dot"></div>Family support during emergencies and festive seasons</div>
-        </div>
+      <div class="about-text">
+        <span class="section-label" data-reveal="right">
+            Our Story
+        </span>
+
+        <h2 data-reveal="right">
+            Fighting Hunger,<br>
+            Restoring Dignity.<br>
+            <span class="accent-line">One Meal at a Time.</span>
+        </h2>
+
+        <p data-reveal="right">
+            Apna Roti Bank Charitable Trust is a volunteer-driven movement committed to ensuring that no one sleeps hungry. Every day, our dedicated volunteers prepare and distribute freshly cooked meals to individuals and families across our communities.
+        </p>
+
+        <p data-reveal="right">
+            Beyond providing food, we restore hope, dignity, and a sense of belonging. Every meal shared represents compassion in action, proving that even the smallest act of kindness can create a lasting impact.
+        </p>
+
+            <div class="pillar" data-reveal="right">
+
+                <div class="pillar-icon">🍱</div>
+
+                <div class="pillar-content">
+
+                    <h4>Daily Food Distribution</h4>
+
+                    <p>Freshly prepared meals served every day across communities.</p>
+
+                </div>
+
+            </div>
+
+            <div class="pillar" data-reveal="right">
+
+                <div class="pillar-icon">🤝</div>
+
+                <div class="pillar-content">
+
+                    <h4>Volunteer-Powered Mission</h4>
+
+                    <p>Driven entirely by compassionate volunteers working together.</p>
+
+                </div>
+
+            </div>
+
+            <div class="pillar" data-reveal="right">
+
+                <div class="pillar-icon">❤️</div>
+
+                <div class="pillar-content">
+
+                    <h4>Emergency & Community Support</h4>
+
+                    <p>Supporting families during emergencies, festivals and difficult times.</p>
+
+                </div>
+
+            </div>
       </div>
     </div>
   </div>
@@ -1590,7 +1763,7 @@ footer a { color: var(--orange); }
 ────────────────────────────────────────── */
 const mainNav    = document.getElementById('mainNav');
 const megaDrawer = document.getElementById('megaDrawer');
-const trigger    = document.querySelector('.initiatives-trigger');
+const triggers = document.querySelectorAll(".nav-item");
 const foodItem = document.getElementById("foodItem");
 const campaignItem = document.getElementById("campaignItem");
 const communityItem = document.getElementById("communityItem");
@@ -1668,7 +1841,11 @@ function closeDrawer() {
 
 }
 
-trigger.addEventListener('mouseenter', openDrawer);
+triggers.forEach(trigger => {
+
+    trigger.addEventListener("mouseenter", openDrawer);
+
+});
 megaDrawer.addEventListener('mouseenter', openDrawer);
 
 trigger.addEventListener('mouseleave', () => {
@@ -1787,20 +1964,42 @@ oObserver.observe(impactSection);
 /* ──────────────────────────────────────────
    5. SCROLL-REVEAL
 ────────────────────────────────────────── */
-const revealEls = document.querySelectorAll('[data-reveal]');
 
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+document.querySelectorAll("section").forEach(section => {
 
-revealEls.forEach(el => revealObserver.observe(el));
+    const items = section.querySelectorAll("[data-reveal]");
 
-window.dispatchEvent(new Event("scroll"));
+    items.forEach((item, index) => {
+
+        item.style.transitionDelay = `${index * 120}ms`;
+
+    });
+
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+document.querySelectorAll("[data-reveal]").forEach(el => {
+
+    revealObserver.observe(el);
+
+});
 
 const defaultMega = {
 
