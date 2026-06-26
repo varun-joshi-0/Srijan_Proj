@@ -268,7 +268,7 @@ nav.scrolled {
 
     display:grid;
 
-    grid-template-columns:38% 62%;
+    grid-template-columns:36% 64%;
 
     min-height:420px;
 
@@ -284,25 +284,84 @@ nav.scrolled {
 
     justify-content:center;
 
-    gap:6px;
+    gap:0px;
 
 }
 
-.mega-left a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-radius: var(--r-sm);
-  color: var(--ink);
-  font-size: .9rem;
-  font-weight: 500;
-  transition: background .2s, color .2s, padding-left .2s;
+.mega-left a{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px 20px;
+
+    border-radius:16px;
+
+    color:var(--ink);
+
+    transition:all .3s cubic-bezier(.22,1,.36,1);
+
 }
-.mega-left a:hover {
-  background: #FFF7ED;
-  color: var(--orange);
-  padding-left: 22px;
+
+.mega-item-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.mega-item-title{
+
+    font-weight:600;
+
+    font-size:1rem;
+
+    color:var(--ink);
+
+}
+
+.mega-item-sub{
+
+    font-size:.82rem;
+
+    color:var(--slate);
+
+}
+
+.mega-arrow{
+
+    font-size:1.1rem;
+
+    color:var(--orange);
+
+    opacity:0.25;
+
+    transform:translateX(-10px);
+
+    transition:all .3s ease;
+
+}
+
+.mega-left a:hover{
+
+    background:#FFF7ED;
+
+    transform:translateX(8px);
+
+}
+
+.mega-left a:hover .mega-arrow{
+
+    opacity:1;
+
+    transform:translateX(6px);
+
 }
 
 .mega-right{
@@ -315,7 +374,19 @@ nav.scrolled {
 
     align-items:flex-end;
 
+}
+
+.mega-bg{
+
+    position:absolute;
+
+    inset:0;
+
     background:center/cover no-repeat;
+
+    transition:opacity .45s ease;
+
+    z-index:0;
 
 }
 
@@ -345,6 +416,12 @@ nav.scrolled {
 
     color:white;
 
+    width:100%;
+
+    transition:
+        opacity .35s ease,
+        transform .35s cubic-bezier(.22,1,.36,1);
+
 }
 
 .mega-eyebrow{
@@ -358,21 +435,6 @@ nav.scrolled {
     font-weight:700;
 
     margin-bottom:12px;
-
-}
-
-
-#megaEyebrow{
-
-    color:var(--orange);
-
-    font-size:.75rem;
-
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
 
 }
 
@@ -402,7 +464,7 @@ nav.scrolled {
 
     margin-top:10px;
 
-    color:var(--orange);
+    color:white;
 
     font-weight:700;
 
@@ -418,6 +480,7 @@ nav.scrolled {
 #megaButton:hover{
 
     gap:14px;
+    color:#FDBA74;
 
 }
 
@@ -715,12 +778,19 @@ section { padding: 96px 0; }
 }
 
 /* Odometer override */
-.odometer {
-  font-family: 'Playfair Display', serif !important;
-  font-size: 3rem !important;
-  color: var(--orange) !important;
-  font-weight: 800 !important;
-  line-height: 1 !important;
+.odometer{
+    display:inline-flex !important;
+    align-items:baseline;
+}
+
+#meals::after,
+#volunteers::after,
+#communities::after{
+    content:" +";
+    font-size:.8em;
+    font-weight:700;
+    color:var(--orange);
+    margin-left:2px;
 }
 
 .stat-card p {
@@ -1208,15 +1278,80 @@ footer a { color: var(--orange); }
     <div class="mega-drawer" id="megaDrawer">
       <div class="mega-menu">
         <div class="mega-left">
-          <a href="#" id="foodItem">🍱 Food Distribution</a>
+          <a href="#" id="foodItem">
 
-          <a href="#" id="campaignItem">❤️ ₹1 Per Day Campaign</a>
+              <div class="mega-item-text">
 
-          <a href="#" id="communityItem">🤝 Community Support</a>
+                  <span class="mega-item-title">
+                      🍱 Food Distribution
+                  </span>
 
-          <a href="#" id="drivesItem">🎉 Special Drives</a>
+                  <span class="mega-item-sub">
+                      Daily meal distribution
+                  </span>
+
+              </div>
+
+              <span class="mega-arrow">→</span>
+
+          </a>
+
+          <a href="#" id="campaignItem">
+
+              <div class="mega-item-text">
+
+                  <span class="mega-item-title">
+                      ❤️ ₹1 Per Day Campaign
+                  </span>
+
+                  <span class="mega-item-sub">
+                      Every rupee creates impact
+                  </span>
+
+              </div>
+
+              <span class="mega-arrow">→</span>
+
+          </a>
+
+          <a href="#" id="communityItem">
+
+              <div class="mega-item-text">
+
+                  <span class="mega-item-title">
+                      🤝 Community Support
+                  </span>
+
+                  <span class="mega-item-sub">
+                      Helping families together
+                  </span>
+
+              </div>
+
+              <span class="mega-arrow">→</span>
+
+          </a>
+
+          <a href="#" id="drivesItem">
+
+              <div class="mega-item-text">
+
+                  <span class="mega-item-title">
+                      🎉 Special Drives
+                  </span>
+
+                  <span class="mega-item-sub">
+                      Emergency & festive relief
+                  </span>
+
+              </div>
+
+              <span class="mega-arrow">→</span>
+
+          </a>
         </div>
         <div class="mega-right">
+          <div class="mega-bg" id="megaBg"></div>
           <div class="mega-overlay">
 
             <div class="mega-eyebrow" id="megaEyebrow">
@@ -1457,7 +1592,13 @@ const mainNav    = document.getElementById('mainNav');
 const megaDrawer = document.getElementById('megaDrawer');
 const trigger    = document.querySelector('.initiatives-trigger');
 const foodItem = document.getElementById("foodItem");
-let   drawerOpen = false;
+const campaignItem = document.getElementById("campaignItem");
+const communityItem = document.getElementById("communityItem");
+const drivesItem = document.getElementById("drivesItem");
+const megaBg = document.getElementById("megaBg");
+const megaOverlay = document.querySelector(".mega-overlay");
+const megaLeft = document.querySelector(".mega-left");
+megaBg.style.opacity = 1;
 
 // Scroll shadow
 const hero = document.getElementById("heroSection");
@@ -1518,8 +1659,14 @@ window.addEventListener("scroll", () => {
 }, { passive:true });
 
 // Drawer open/close
-function openDrawer()  { megaDrawer.classList.add('active');  updateMega(defaultMega);  drawerOpen = true;   }
-function closeDrawer() { megaDrawer.classList.remove('active'); drawerOpen = false; }
+function openDrawer()  { megaDrawer.classList.add('active');  updateMega(defaultMega);   }
+function closeDrawer() {
+
+    megaDrawer.classList.remove('active');
+
+    updateMega(defaultMega);
+
+}
 
 trigger.addEventListener('mouseenter', openDrawer);
 megaDrawer.addEventListener('mouseenter', openDrawer);
@@ -1655,66 +1802,6 @@ revealEls.forEach(el => revealObserver.observe(el));
 
 window.dispatchEvent(new Event("scroll"));
 
-const megaContent = {
-
-    food:{
-
-        image:"images/food.jpg",
-
-        eyebrow:"OUR INITIATIVES",
-
-        title:"Fighting Hunger,<br>One Meal at a Time",
-
-        text:"Every initiative is designed to fight hunger, strengthen communities and restore dignity.",
-
-        button:"Learn More →"
-
-    },
-
-    campaign:{
-
-        image:"images/campaign.jpg",
-
-        eyebrow:"₹1 PER DAY",
-
-        title:"Small Donations,<br>Big Impact",
-
-        text:"Just one rupee every day can help build a stronger community of givers.",
-
-        button:"Join Campaign →"
-
-    },
-
-    community:{
-
-        image:"images/community.jpg",
-
-        eyebrow:"COMMUNITY",
-
-        title:"Together We<br>Stand Strong",
-
-        text:"Supporting families through food, care and community-driven initiatives.",
-
-        button:"Explore →"
-
-    },
-
-    drives:{
-
-        image:"images/drives.jpg",
-
-        eyebrow:"SPECIAL DRIVES",
-
-        title:"Emergency Relief<br>Whenever Needed",
-
-        text:"From disaster relief to festival drives, we respond where help is needed most.",
-
-        button:"View Drives →"
-
-    }
-
-};
-
 const defaultMega = {
 
     image:"images/initiatives.jpg",
@@ -1743,33 +1830,126 @@ const foodMega = {
 
 };
 
+const campaignMega = {
+
+    image:"images/campaign.jpg",
+
+    eyebrow:"₹1 PER DAY CAMPAIGN",
+
+    title:"Small Donations,<br>Big Impact",
+
+    text:"Just ₹1 a day can collectively provide thousands of meals and keep our mission alive.",
+
+    button:"Join Campaign →"
+
+};
+
+const communityMega = {
+
+    image:"images/community.jpg",
+
+    eyebrow:"COMMUNITY SUPPORT",
+
+    title:"Together We<br>Stand Strong",
+
+    text:"Working with local communities to support families through food, care and compassion.",
+
+    button:"Explore Community →"
+
+};
+
+const drivesMega = {
+
+    image:"images/drives.jpg",
+
+    eyebrow:"SPECIAL DRIVES",
+
+    title:"Helping When It<br>Matters Most",
+
+    text:"From disaster relief to festive food drives, we reach those who need us during critical moments.",
+
+    button:"View Drives →"
+
+};
+
+let megaTextOutTimer;
+let megaSwapTimer;
+let megaImageInTimer;
+let megaTextInTimer;
+
+let currentMega = null;
+
+
+
 function updateMega(data){
 
-    const panel = document.querySelector(".mega-right");
 
-    panel.style.backgroundImage = `url(${data.image})`;
+    if(currentMega === data) return;
 
-    megaEyebrow.innerHTML = data.eyebrow;
+    currentMega = data;
+    // Cancel any previous animation
+    clearTimeout(megaTextOutTimer);
+    clearTimeout(megaSwapTimer);
+    clearTimeout(megaImageInTimer);
+    clearTimeout(megaTextInTimer);
 
-    megaTitle.innerHTML = data.title;
+    // Start text animation
+    megaOverlay.style.opacity = "0";
+    megaOverlay.style.transform = "translateY(18px)";
 
-    megaText.innerHTML = data.text;
+    // Fade image shortly after
+    megaTextOutTimer = setTimeout(() => {
 
-    megaButton.innerHTML = data.button;
+        megaBg.style.opacity = "0";
+
+    },80);
+
+    // Swap content
+    megaSwapTimer = setTimeout(() => {
+
+        megaBg.style.backgroundImage = `url(${data.image})`;
+
+        megaEyebrow.innerHTML = data.eyebrow;
+        megaTitle.innerHTML   = data.title;
+        megaText.innerHTML    = data.text;
+        megaButton.innerHTML  = data.button;
+
+    },250);
+
+    // Fade image back
+    megaImageInTimer = setTimeout(() => {
+
+        megaBg.style.opacity = "1";
+
+    },280);
+
+    // Fade text back
+    megaTextInTimer = setTimeout(() => {
+
+        megaOverlay.style.opacity = "1";
+        megaOverlay.style.transform = "translateY(0)";
+
+    },360);
 
 }
 
-foodItem.addEventListener("mouseenter", () => {
+const megaItems = [
+    [foodItem, foodMega],
+    [campaignItem, campaignMega],
+    [communityItem, communityMega],
+    [drivesItem, drivesMega]
+];
 
-    updateMega(foodMega);
-
+megaItems.forEach(([item, data]) => {
+    item.addEventListener("mouseenter", () => updateMega(data));
 });
 
-foodItem.addEventListener("mouseleave", () => {
+megaDrawer.addEventListener("mouseleave", () => {
 
     updateMega(defaultMega);
 
 });
+
 
 </script>
 
