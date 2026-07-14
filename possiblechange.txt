@@ -339,3 +339,34 @@ Smooth page transitions.
 🦶 Premium footer
 📱 Responsive/mobile
 🎬 Final polish (page loader, scroll-to-top, cursor effects if we want them)
+
+I just realized something.
+
+We've been calling it the "S" this whole time.
+
+But for Apna Roti Bank, we could subtly tweak the curve so it resembles a flowing river instead of a perfect S.
+
+A river symbolizes:
+
+compassion,
+continuity,
+nourishment,
+and the idea that kindness keeps flowing.
+
+Most visitors will never consciously notice it—but they'll feel that it's more organic than a geometric S. I honestly think that tiny design decision could become one of those invisible touches that makes the site feel truly premium.
+
+We've come a long way from a basic homepage. It's starting to feel like a crafted experience. 🚀
+
+
+
+✅ Navbar (done)
+✅ Hero (done)
+✅ Mega menu (done)
+✅ Impact (done)
+✅ About (done)
+✅ Stories (done)
+⏳ Gallery (current)
+⏳ Footer
+⏳ Mobile responsiveness
+⏳ Performance optimization
+⏳ Final polish (animations, spacing, accessibility)
