@@ -1040,11 +1040,49 @@
         }
 
         .section-head {
-            margin-bottom: 56px;
+            margin-bottom: 80px;
         }
 
         .section-head.centered {
             text-align: center;
+        }
+
+        .gallery-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+        .gallery-line {
+
+            width: 140px;
+
+            height: 1px;
+
+            background: rgba(100, 116, 139, .35);
+
+        }
+
+        .gallery-heading .section-label{
+
+            margin:0;
+
+            white-space:nowrap;
+
+            font-size:1rem;
+
+            letter-spacing:.18em;
+
+            font-weight:700;
+
         }
 
         .section-head.centered .section-sub {
@@ -2121,144 +2159,233 @@
             transform: scale(1.04);
         }
 
-        .gallery-showcase{
+        #gallery .container {
 
-    display:flex;
+            max-width: 1450px;
 
-    align-items:center;
+        }
 
-    justify-content:center;
+        .gallery-showcase::before,
+        .gallery-showcase::after {
 
-    gap:28px;
+            content: "";
 
-    margin-top:60px;
+            position: absolute;
 
-}
+            top: 0;
 
-.gallery-track{
+            bottom: 0;
 
-    display:flex;
+            width: 120px;
 
-    justify-content:center;
+            z-index: 4;
 
-    align-items:flex-start;
+            pointer-events: none;
 
-    gap:24px;
+        }
 
-    flex:1;
+        .gallery-showcase::before {
 
-    overflow:hidden;
+            left: 58px;
 
-    width:100%;
+            background: linear-gradient(to right,
+                    var(--white),
+                    transparent);
 
-}
+        }
 
-.gallery-card{
+        .gallery-showcase::after {
 
-    flex:1;
+            right: 58px;
 
-    min-width:220px;
+            background: linear-gradient(to left,
+                    var(--white),
+                    transparent);
 
-    max-width:260px;
+        }
 
-    cursor:pointer;
+        .gallery-showcase {
 
-    transition:
-        transform .45s cubic-bezier(.22,1,.36,1),
-        box-shadow .45s ease;
+            position: relative;
 
-}
+            width: 100%;
 
-.gallery-card img{
+            margin-top: 70px;
 
-    width:100%;
+            display: flex;
 
-    height:420px;
+            align-items: center;
 
-    object-fit:cover;
+        }
 
-    border-radius:26px;
+        .gallery-viewport {
 
-    display:block;
+            flex: 1;
 
-    transition:
-        transform .5s cubic-bezier(.22,1,.36,1),
-        border-radius .35s ease;
+            overflow-x: auto;
 
-}
+            overflow-y: hidden;
 
-.gallery-card h3{
+            scroll-behavior: smooth;
 
-    margin-top:18px;
+            scrollbar-width: none;
 
-    font-size:1.25rem;
+            -ms-overflow-style: none;
 
-    font-weight:700;
+            margin: 0 90px;
 
-    color:var(--dark);
+        }
 
-}
+        .gallery-viewport::-webkit-scrollbar {
 
-.gallery-card p{
+            display: none;
 
-    margin-top:8px;
+        }
 
-    color:var(--slate);
+        .gallery-track {
 
-    line-height:1.7;
+            display: flex;
 
-}
+            gap: 36px;
 
-.gallery-card:hover{
+            width: max-content;
 
-    transform:translateY(-10px);
+        }
 
-}
+        .gallery-card {
 
-.gallery-card:hover img{
+            flex: 0 0 340px;
 
-    transform:scale(1.04);
+            cursor: pointer;
 
-    border-radius:34px;
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease;
 
-}
+        }
 
-.gallery-nav{
+        .gallery-card img {
 
-    width:56px;
+            width: 100%;
 
-    height:56px;
+            height: 520px;
 
-    flex-shrink:0;
+            object-fit: cover;
 
-    border:none;
+            border-radius: 30px;
 
-    border-radius:50%;
+            display: block;
 
-    background:#fff;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
 
-    font-size:1.4rem;
+            transition:
+                transform .45s ease,
+                border-radius .35s ease,
+                box-shadow .35s ease;
 
-    cursor:pointer;
+        }
 
-    color:var(--dark);
+        .gallery-card h3 {
 
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.10);
+            margin-top: 24px;
 
-    transition:.35s;
+            font-size: 1.25rem;
 
-}
+            font-weight: 700;
 
-.gallery-nav:hover{
+            color: var(--dark);
 
-    background:var(--orange);
+        }
 
-    color:white;
+        .gallery-card p {
 
-    transform:translateY(-4px);
+            margin-top: 12px;
 
-}
+            color: var(--slate);
+
+            line-height: 1.7;
+
+        }
+
+        .gallery-card:hover {
+
+            transform: translateY(-8px);
+
+        }
+
+        .gallery-card:hover img {
+
+            transform: scale(1.05);
+
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .18);
+
+        }
+
+        .gallery-card:hover h3{
+
+            color:var(--orange);
+
+        }
+
+        .gallery-nav {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 58px;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, .92);
+
+            backdrop-filter: blur(12px);
+
+            -webkit-backdrop-filter: blur(12px);
+
+            color: var(--dark);
+
+            cursor: pointer;
+
+            font-size: 1.4rem;
+
+            box-shadow:
+                0 12px 30px rgba(15, 23, 42, .12),
+                0 2px 8px rgba(15, 23, 42, .08);
+
+            transition: .35s ease;
+
+            z-index: 5;
+
+        }
+
+        .gallery-prev {
+
+            left: 0;
+
+        }
+
+        .gallery-next {
+
+            right: 0;
+
+        }
+
+        .gallery-nav:hover {
+
+            background: var(--orange);
+
+            color: white;
+
+            transform: translateY(-50%) scale(1.08);
+
+        }
 
         .gallery-card img {
 
@@ -2267,7 +2394,7 @@
 
         }
 
-        
+
 
         .gallery-card {
 
@@ -2277,7 +2404,7 @@
 
         }
 
-        
+
 
         .gallery-footer::before {
 
@@ -2808,180 +2935,180 @@
 <body>
 
     <header id="siteHeader">
-    <!-- TOP -->
-    <div class="top-bar" id="topBar">
+        <!-- TOP -->
+        <div class="top-bar" id="topBar">
 
-        <div class="top-bar-inner">
+            <div class="top-bar-inner">
 
-            <div class="top-left">
+                <div class="top-left">
 
-                <span>📍 Dehradun, Uttarakhand</span>
+                    <span>📍 Dehradun, Uttarakhand</span>
 
-                <span>📞 +91 XXXXX XXXXX</span>
+                    <span>📞 +91 XXXXX XXXXX</span>
 
-                <span>✉ info@apnarotibank.org</span>
+                    <span>✉ info@apnarotibank.org</span>
 
-            </div>
+                </div>
 
-            <div class="top-right">
+                <div class="top-right">
 
-                <a href="#" class="social-icon">
-                    <i class="ri-instagram-line"></i>
-                </a>
+                    <a href="#" class="social-icon">
+                        <i class="ri-instagram-line"></i>
+                    </a>
 
-                <a href="#" class="social-icon">
-                    <i class="ri-facebook-circle-line"></i>
-                </a>
+                    <a href="#" class="social-icon">
+                        <i class="ri-facebook-circle-line"></i>
+                    </a>
 
-                <a href="#" class="social-icon">
-                    <i class="ri-youtube-line"></i>
-                </a>
+                    <a href="#" class="social-icon">
+                        <i class="ri-youtube-line"></i>
+                    </a>
 
-                <a href="#" class="social-icon">
-                    <i class="ri-linkedin-box-line"></i>
-                </a>
+                    <a href="#" class="social-icon">
+                        <i class="ri-linkedin-box-line"></i>
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <!-- ═══ NAV ═══ -->
+        <nav id="mainNav">
+            <div class="nav-wrapper" id="navWrapper">
+                <div class="nav-inner">
 
-    <!-- ═══ NAV ═══ -->
-    <nav id="mainNav">
-        <div class="nav-wrapper" id="navWrapper">
-            <div class="nav-inner">
+                    <a href="#" class="logo">
+                        <img src="images/logo.png" alt="Apna Roti Bank" class="logo-img">
+                    </a>
 
-                <a href="#" class="logo">
-                    <img src="images/logo.png" alt="Apna Roti Bank" class="logo-img">
-                </a>
+                    <div class="nav-links">
+                        <div class="nav-item initiatives-trigger">
+                            <a href="#">Initiatives <span class="arrow">▾</span></a>
+                        </div>
+                        <div class="nav-item about-trigger">
+                            <a href="#">About <span class="arrow">▾</span></a>
+                        </div>
 
-                <div class="nav-links">
-                    <div class="nav-item initiatives-trigger">
-                        <a href="#">Initiatives <span class="arrow">▾</span></a>
+                        <div class="nav-item involved-trigger">
+                            <a href="#">Get Involved <span class="arrow">▾</span></a>
+                        </div>
+
+                        <div class="nav-item work-trigger">
+                            <a href="#">Our Work <span class="arrow">▾</span></a>
+                        </div>
                     </div>
-                    <div class="nav-item about-trigger">
-                        <a href="#">About <span class="arrow">▾</span></a>
-                    </div>
 
-                    <div class="nav-item involved-trigger">
-                        <a href="#">Get Involved <span class="arrow">▾</span></a>
-                    </div>
+                    <a href="donate.html" class="nav-cta">Donate Now</a>
 
-                    <div class="nav-item work-trigger">
-                        <a href="#">Our Work <span class="arrow">▾</span></a>
-                    </div>
-                </div>
+                </div><!-- /nav-inner -->
 
-                <a href="donate.html" class="nav-cta">Donate Now</a>
+                <!-- Mega drawer — scoped inside nav-wrapper -->
+                <div class="mega-drawer" id="megaDrawer">
+                    <div class="mega-menu">
+                        <div class="mega-left">
+                            <a href="#" id="foodItem">
 
-            </div><!-- /nav-inner -->
+                                <div class="mega-item-text">
 
-            <!-- Mega drawer — scoped inside nav-wrapper -->
-            <div class="mega-drawer" id="megaDrawer">
-                <div class="mega-menu">
-                    <div class="mega-left">
-                        <a href="#" id="foodItem">
+                                    <span class="mega-item-title">
+                                        👥 Our Story
+                                    </span>
 
-                            <div class="mega-item-text">
+                                    <span class="mega-item-sub">
+                                        Daily meal distribution
+                                    </span>
 
-                                <span class="mega-item-title">
-                                    👥 Our Story
-                                </span>
+                                </div>
 
-                                <span class="mega-item-sub">
-                                    Daily meal distribution
-                                </span>
+                                <span class="mega-arrow">→</span>
 
-                            </div>
-
-                            <span class="mega-arrow">→</span>
-
-                        </a>
-
-                        <a href="#" id="campaignItem">
-
-                            <div class="mega-item-text">
-
-                                <span class="mega-item-title">
-                                    🎯 Mission & Vision
-                                </span>
-
-                                <span class="mega-item-sub">
-                                    Every rupee creates impact
-                                </span>
-
-                            </div>
-
-                            <span class="mega-arrow">→</span>
-
-                        </a>
-
-                        <a href="#" id="communityItem">
-
-                            <div class="mega-item-text">
-
-                                <span class="mega-item-title">
-                                    ❤️ Meet Our Team
-                                </span>
-
-                                <span class="mega-item-sub">
-                                    Helping families together
-                                </span>
-
-                            </div>
-
-                            <span class="mega-arrow">→</span>
-
-                        </a>
-
-                        <a href="#" id="drivesItem">
-
-                            <div class="mega-item-text">
-
-                                <span class="mega-item-title">
-                                    📈 Our Impact
-                                </span>
-
-                                <span class="mega-item-sub">
-                                    Emergency & festive relief
-                                </span>
-
-                            </div>
-
-                            <span class="mega-arrow">→</span>
-
-                        </a>
-                    </div>
-                    <div class="mega-right">
-                        <div class="mega-bg" id="megaBg"></div>
-                        <div class="mega-overlay">
-
-                            <div class="mega-eyebrow" id="megaEyebrow">
-                                OUR INITIATIVES
-                            </div>
-
-                            <h2 id="megaTitle">
-                                Fighting Hunger,
-                                One Meal at a Time
-                            </h2>
-
-                            <p id="megaText">
-                                Every initiative is designed to fight hunger,
-                                strengthen communities and restore dignity.
-                            </p>
-
-                            <a href="#" id="megaButton">
-                                Learn More →
                             </a>
 
+                            <a href="#" id="campaignItem">
+
+                                <div class="mega-item-text">
+
+                                    <span class="mega-item-title">
+                                        🎯 Mission & Vision
+                                    </span>
+
+                                    <span class="mega-item-sub">
+                                        Every rupee creates impact
+                                    </span>
+
+                                </div>
+
+                                <span class="mega-arrow">→</span>
+
+                            </a>
+
+                            <a href="#" id="communityItem">
+
+                                <div class="mega-item-text">
+
+                                    <span class="mega-item-title">
+                                        ❤️ Meet Our Team
+                                    </span>
+
+                                    <span class="mega-item-sub">
+                                        Helping families together
+                                    </span>
+
+                                </div>
+
+                                <span class="mega-arrow">→</span>
+
+                            </a>
+
+                            <a href="#" id="drivesItem">
+
+                                <div class="mega-item-text">
+
+                                    <span class="mega-item-title">
+                                        📈 Our Impact
+                                    </span>
+
+                                    <span class="mega-item-sub">
+                                        Emergency & festive relief
+                                    </span>
+
+                                </div>
+
+                                <span class="mega-arrow">→</span>
+
+                            </a>
+                        </div>
+                        <div class="mega-right">
+                            <div class="mega-bg" id="megaBg"></div>
+                            <div class="mega-overlay">
+
+                                <div class="mega-eyebrow" id="megaEyebrow">
+                                    OUR INITIATIVES
+                                </div>
+
+                                <h2 id="megaTitle">
+                                    Fighting Hunger,
+                                    One Meal at a Time
+                                </h2>
+
+                                <p id="megaText">
+                                    Every initiative is designed to fight hunger,
+                                    strengthen communities and restore dignity.
+                                </p>
+
+                                <a href="#" id="megaButton">
+                                    Learn More →
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div><!-- /nav-wrapper -->
-    </nav>
+            </div><!-- /nav-wrapper -->
+        </nav>
     </header>
 
     <!-- ═══ HERO ═══ -->
@@ -3272,67 +3399,75 @@
     <!-- ═══ GALLERY ═══ -->
     <section id="gallery">
         <div class="container">
-            <div class="section-head" data-reveal>
-                <span class="section-label">Gallery</span>
-                <h2 class="section-title">Moments from the ground</h2>
+            <div class="section-head centered" data-reveal>
+
+                <div class="gallery-heading">
+
+                    <span class="gallery-line"></span>
+
+                    <span class="section-label">
+                        Captured Moments
+                    </span>
+
+                    <span class="gallery-line"></span>
+
+                </div>
+
+                <h2 class="section-title">
+
+                    Every photograph tells a story of kindness, hope, and lives changed.
+
+                </h2>
+
             </div>
 
             <div class="gallery-showcase">
 
-    <button class="gallery-nav gallery-prev">
+                <button class="gallery-nav gallery-prev">
 
-        &#10094;
+                    &#10094;
 
-    </button>
+                </button>
 
-    <div class="gallery-track">
+                <div class="gallery-viewport">
 
-        <div class="gallery-card">
-            <img src="images/story1.jpg" alt="">
-            <h3>Food Distribution</h3>
-            <p>Placeholder description.</p>
-        </div>
+                    <div class="gallery-track">
 
-        <div class="gallery-card">
-            <img src="images/story2.jpg" alt="">
-            <h3>Youth Festival</h3>
-            <p>Placeholder description.</p>
-        </div>
+                        <div class="gallery-card">
+                            <img src="images/story1.jpg" alt="">
+                            <h3>Food Distribution</h3>
+                            <p>Freshly prepared meals served daily to individuals and families across Dehradun.</p>
+                        </div>
 
-        <div class="gallery-card">
-            <img src="images/story3.jpg" alt="">
-            <h3>Community Support</h3>
-            <p>Placeholder description.</p>
-        </div>
+                        <div class="gallery-card">
+                            <img src="images/story2.jpg" alt="">
+                            <h3>Youth Festival</h3>
+                            <p>Bringing communities together through celebrations, food, and volunteer initiatives.</p>
+                        </div>
 
-        <div class="gallery-card">
-            <img src="images/story4.jpg" alt="">
-            <h3>Special Drives</h3>
-            <p>Placeholder description.</p>
-        </div>
+                        <div class="gallery-card">
+                            <img src="images/story3.jpg" alt="">
+                            <h3>Community Support</h3>
+                            <p>Standing beside families during difficult times with compassion and care.</p>
+                        </div>
 
-        <div class="gallery-card">
-            <img src="images/story4.jpg" alt="">
-            <h3>Special Drives</h3>
-            <p>Placeholder description.</p>
-        </div>
+                        <div class="gallery-card">
+                            <img src="images/story4.jpg" alt="">
+                            <h3>Special Drives</h3>
+                            <p>Relief campaigns during festivals, emergencies, and seasonal challenges.</p>
+                        </div>
 
-        <div class="gallery-card">
-            <img src="images/story4.jpg" alt="">
-            <h3>Special Drives</h3>
-            <p>Placeholder description.</p>
-        </div>
+                    </div>
 
+                </div>
 
-    </div>
+                <button class="gallery-nav gallery-next">
 
-    <button class="gallery-nav gallery-next">
+                    &#10095;
 
-        &#10095;
+                </button>
 
-    </button>
-
-</div>
+            </div>
 
             <div class="gallery-footer">
 
@@ -3422,1288 +3557,1371 @@
     </footer>
 
 
-<!-- ═══ SCRIPTS ═══ -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+    <!-- ═══ SCRIPTS ═══ -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
 
-<script>
-/* ──────────────────────────────────────────
-   1. NAV — scroll shadow + mega drawer
-────────────────────────────────────────── */
-const mainNav    = document.getElementById('mainNav');
-const megaDrawer = document.getElementById('megaDrawer');
-const foodItem = document.getElementById("foodItem");
-const campaignItem = document.getElementById("campaignItem");
-const communityItem = document.getElementById("communityItem");
-const drivesItem = document.getElementById("drivesItem");
-const megaBg = document.getElementById("megaBg");
-const megaOverlay = document.querySelector(".mega-overlay");
-const megaLeft = document.querySelector(".mega-left");
-const storiesSection = document.getElementById("stories");
-const storiesBg = document.querySelector(".stories-background");
-const storyEyebrow = document.getElementById("storyEyebrow");
-const storyTitle = document.getElementById("storyTitle");
-const storyText = document.getElementById("storyText");
-const storyImgA = document.getElementById("storyImgA");
-const storyImgB = document.getElementById("storyImgB");
-const storiesContent = document.querySelector(".stories-content");
-const storyEnd = document.querySelector(".story-end");
-const journeyTrack = document.getElementById("journeyTrack");
-const journeyProgress = document.getElementById("journeyProgress");
-const journeyDot = document.getElementById("journeyDot");
-const journeyCheckpoints = document.getElementById("journeyCheckpoints");
+    <script>
+        /* ──────────────────────────────────────────
+           1. NAV — scroll shadow + mega drawer
+        ────────────────────────────────────────── */
+        const mainNav = document.getElementById('mainNav');
+        const megaDrawer = document.getElementById('megaDrawer');
+        const foodItem = document.getElementById("foodItem");
+        const campaignItem = document.getElementById("campaignItem");
+        const communityItem = document.getElementById("communityItem");
+        const drivesItem = document.getElementById("drivesItem");
+        const megaBg = document.getElementById("megaBg");
+        const megaOverlay = document.querySelector(".mega-overlay");
+        const megaLeft = document.querySelector(".mega-left");
+        const storiesSection = document.getElementById("stories");
+        const storiesBg = document.querySelector(".stories-background");
+        const storyEyebrow = document.getElementById("storyEyebrow");
+        const storyTitle = document.getElementById("storyTitle");
+        const storyText = document.getElementById("storyText");
+        const storyImgA = document.getElementById("storyImgA");
+        const storyImgB = document.getElementById("storyImgB");
+        const storiesContent = document.querySelector(".stories-content");
+        const storyEnd = document.querySelector(".story-end");
+        const journeyTrack = document.getElementById("journeyTrack");
+        const journeyProgress = document.getElementById("journeyProgress");
+        const journeyDot = document.getElementById("journeyDot");
+        const journeyCheckpoints = document.getElementById("journeyCheckpoints");
 
 
-let storyTextOutTimer;
-let storySwapTimer;
-let storyImageTimer;
-let activeStoryImage = storyImgA;
-let currentCard = null;
-let currentIndex = 0;
+        let storyTextOutTimer;
+        let storySwapTimer;
+        let storyImageTimer;
+        let activeStoryImage = storyImgA;
+        let currentCard = null;
+        let currentIndex = 0;
+        let galleryPosition = 0;
 
-megaBg.style.opacity = 1;
 
-const navWrapper = document.getElementById("navWrapper");
+        megaBg.style.opacity = 1;
 
-// Scroll shadow
-const hero = document.getElementById("heroSection");
-const heroBottom = hero.offsetHeight;
+        const navWrapper = document.getElementById("navWrapper");
 
-const triggers = document.querySelectorAll(
-    ".initiatives-trigger, .about-trigger, .work-trigger, .involved-trigger"
-);
+        // Scroll shadow
+        const hero = document.getElementById("heroSection");
+        const heroBottom = hero.offsetHeight;
 
-window.addEventListener("scroll", () => {
-
-    const topBar = document.querySelector(".top-bar");
-
-    if(window.scrollY > 80){
-
-        topBar.classList.add("hidden");
-
-        mainNav.classList.add("top-hidden");
-
-    }
-    else{
-
-        topBar.classList.remove("hidden");
-
-        mainNav.classList.remove("top-hidden");
-
-    }
-
-    if (window.scrollY < heroBottom) {
-
-        const progress = window.scrollY / heroBottom;
-
-        mainNav.style.background =
-            `rgba(255,255,255,${progress})`;
-        
-            const shade = Math.round(255 - (255 * progress));
-
-        mainNav.style.setProperty(
-            "--nav-text",
-            `rgb(${shade},${shade},${shade})`
-            
+        const triggers = document.querySelectorAll(
+            ".initiatives-trigger, .about-trigger, .work-trigger, .involved-trigger"
         );
 
-        mainNav.style.setProperty("--nav-hover-text", "#ffffff");
-        mainNav.style.setProperty("--nav-hover-bg", "rgba(255,255,255,.08)");
+        window.addEventListener("scroll", () => {
 
-        mainNav.style.backdropFilter =
-            `blur(${progress * 18}px)`;
+            const topBar = document.querySelector(".top-bar");
 
-        mainNav.style.webkitBackdropFilter =
-            `blur(${progress * 18}px)`;
+            if (window.scrollY > 80) {
 
-        mainNav.style.borderBottomColor =
-            `rgba(255,255,255,${progress * .12})`;
+                topBar.classList.add("hidden");
 
-        mainNav.style.boxShadow =
-            `0 10px 35px rgba(0,0,0,${progress * .18})`;
+                mainNav.classList.add("top-hidden");
 
-    } else {
+            }
+            else {
 
+                topBar.classList.remove("hidden");
 
+                mainNav.classList.remove("top-hidden");
 
-        mainNav.style.background = "#ffffff";
-
-        mainNav.style.backdropFilter = "none";
-        mainNav.style.webkitBackdropFilter = "none";
-
-        mainNav.style.borderBottomColor = "rgba(0,0,0,.06)";
-
-        mainNav.style.boxShadow = "0 6px 24px rgba(0,0,0,.08)";
-
-        mainNav.style.setProperty("--nav-text","#1E293B");
-        mainNav.style.setProperty("--nav-hover-text", "#F97316");
-        mainNav.style.setProperty("--nav-hover-bg", "rgba(249,115,22,.08)");
-
-    }
-
-}, { passive:true });
-
-// Drawer open/close
-function openDrawer(menu){
-
-    megaDrawer.classList.add("active");
-
-    loadMenu(menu);
-
-}
-function closeDrawer() {
-
-    megaDrawer.classList.remove('active');
-
-    updateMega(defaultMega);
-
-}
-
-document.querySelector(".initiatives-trigger")
-.addEventListener("mouseenter",()=>openDrawer("initiatives"));
-
-document.querySelector(".about-trigger")
-.addEventListener("mouseenter",()=>openDrawer("about"));
-
-document.querySelector(".work-trigger")
-.addEventListener("mouseenter",()=>openDrawer("work"));
-
-document.querySelector(".involved-trigger")
-.addEventListener("mouseenter",()=>openDrawer("involved"));
-
-megaDrawer.addEventListener("mouseenter",()=>{
-
-    megaDrawer.classList.add("active");
-
-});
-
-navWrapper.addEventListener("mouseleave", () => {
-
-    closeDrawer();
-
-});
-
-megaDrawer.addEventListener("mouseleave", () => {
-
-    closeDrawer();
-
-});
-
-/* ──────────────────────────────────────────
-   2. HERO SWIPER
-────────────────────────────────────────── */
-const heroEyebrow = document.getElementById('heroEyebrow');
-const heroTitle   = document.getElementById('heroTitle');
-const heroText    = document.getElementById('heroText');
-const heroDots    = document.querySelectorAll('.hero-dot');
-const heroContent = document.querySelector('.hero-content');
-
-function setHeroDot(idx) {
-  heroDots.forEach((d, i) => {
-
-    d.classList.remove("active");
-
-    void d.offsetWidth;
-
-    if(i===idx){
-
-        d.classList.add("active");
-
-    }
-
-});
-}
-
-function updateHeroText(slide, idx) {
-  heroContent.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1), filter .55s ease';
-  heroContent.style.opacity = '0';
-  heroContent.style.transform = 'translateY(24px)';
-  heroContent.style.filter = 'blur(8px)';
-
-  setTimeout(() => {
-    heroEyebrow.textContent = slide.dataset.eyebrow || '';
-    heroTitle.innerHTML     = slide.dataset.title   || '';
-    heroText.textContent    = slide.dataset.text    || '';
-    setHeroDot(idx);
-
-    heroContent.style.opacity = '1';
-    heroContent.style.transform = 'translateY(0)';
-    heroContent.style.filter = 'blur(0)';
-  }, 500);
-}
-
-const heroSwiper = new Swiper('.heroSwiper', {
-  effect:    'fade',
-  fadeEffect: { crossFade: true },
-  speed:      1200,
-  loop:       true,
-  autoplay: { delay: 7000, disableOnInteraction: false },
-  on: {
-    init(sw) {
-      const slide = sw.slides[sw.activeIndex];
-      heroEyebrow.textContent = slide.dataset.eyebrow || '';
-      heroTitle.innerHTML     = slide.dataset.title   || '';
-      heroText.textContent    = slide.dataset.text    || '';
-      setHeroDot(0);
-    },
-    slideChangeTransitionStart(sw) {
-      const realIdx = sw.realIndex;
-      const slide   = sw.slides[sw.activeIndex];
-      updateHeroText(slide, realIdx);
-    }
-  }
-});
-
-// Dot click
-heroDots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    heroSwiper.slideToLoop(parseInt(dot.dataset.index));
-  });
-});
-
-/* ──────────────────────────────────────────
-   3. GALLERY SWIPER
-────────────────────────────────────────── */
-new Swiper('.gallerySwiper', {
-  effect:          'coverflow',
-  grabCursor:      true,
-  centeredSlides:  true,
-  slidesPerView:   'auto',
-  loop:            true,
-  speed:           700,
-  coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 1.4, slideShadows: false, scale: 0.84 },
-  navigation:      { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-  autoplay:        { delay: 3800, disableOnInteraction: false, pauseOnMouseEnter: true },
-  pagination:      { el: '.swiper-pagination', clickable: true }
-});
-
-/* ──────────────────────────────────────────
-   4. ODOMETER (count-up)
-────────────────────────────────────────── */
-const impactSection = document.querySelector('#impact');
-let odometerStarted = false;
-
-const oObserver = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting && !odometerStarted) {
-    odometerStarted = true;
-    setTimeout(() => {
-      document.getElementById('meals').innerHTML       = 15000;
-      document.getElementById('volunteers').innerHTML  = 500;
-      document.getElementById('communities').innerHTML = 200;
-      document.getElementById('years').innerHTML       = 11;
-    }, 300);
-  }
-}, { threshold: 0.3 });
-
-oObserver.observe(impactSection);
-
-/* ──────────────────────────────────────────
-   5. SCROLL-REVEAL
-────────────────────────────────────────── */
-const revealEls = document.querySelectorAll('[data-reveal]');
-
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-revealEls.forEach(el => revealObserver.observe(el));
-
-window.dispatchEvent(new Event("scroll"));
-
-const defaultMega = {
-
-    image:"images/initiatives.jpg",
-
-    eyebrow:"OUR INITIATIVES",
-
-    title:"Fighting Hunger,<br>One Meal at a Time",
-
-    text:"Every initiative is designed to fight hunger, strengthen communities and restore dignity.",
-
-    button:"Learn More →"
-
-};
-
-const foodMega = {
-
-    image:"images/food.jpg",
-
-    eyebrow:"FOOD DISTRIBUTION",
-
-    title:"Serving Meals,<br>Restoring Dignity",
-
-    text:"We distribute fresh meals to those who need them most through daily food drives and community support.",
-
-    button:"Explore Food Distribution →"
-
-};
-
-const campaignMega = {
-
-    image:"images/campaign.jpg",
-
-    eyebrow:"₹1 PER DAY CAMPAIGN",
-
-    title:"Small Donations,<br>Big Impact",
-
-    text:"Just ₹1 a day can collectively provide thousands of meals and keep our mission alive.",
-
-    button:"Join Campaign →"
-
-};
-
-const communityMega = {
-
-    image:"images/community.jpg",
-
-    eyebrow:"COMMUNITY SUPPORT",
-
-    title:"Together We<br>Stand Strong",
-
-    text:"Working with local communities to support families through food, care and compassion.",
-
-    button:"Explore Community →"
-
-};
-
-const drivesMega = {
-
-    image:"images/drives.jpg",
-
-    eyebrow:"SPECIAL DRIVES",
-
-    title:"Helping When It<br>Matters Most",
-
-    text:"From disaster relief to festive food drives, we reach those who need us during critical moments.",
-
-    button:"View Drives →"
-
-};
-
-const aboutDefault = {
-
-    image:"images/about.jpg",
-
-    eyebrow:"ABOUT US",
-
-    title:"Serving Society,<br>Since 2014",
-
-    text:"Learn about our journey, mission and the volunteers behind every meal we serve.",
-
-    button:"Explore About →"
-
-};
-
-const storyMega = {
-
-    image:"images/story.jpg",
-
-    eyebrow:"OUR STORY",
-
-    title:"A Journey of<br>Compassion",
-
-    text:"Discover how a simple idea became a movement fighting hunger every day.",
-
-    button:"Read Story →"
-
-};
-
-const missionMega = {
-
-    image:"images/mission.jpg",
-
-    eyebrow:"MISSION & VISION",
-
-    title:"Hope Through<br>Action",
-
-    text:"Our mission is simple: ensure no one sleeps hungry while building stronger communities.",
-
-    button:"Our Mission →"
-
-};
-
-const teamMega = {
-
-    image:"images/team.jpg",
-
-    eyebrow:"OUR TEAM",
-
-    title:"People Behind<br>The Mission",
-
-    text:"Meet the volunteers and supporters who make every food drive possible.",
-
-    button:"Meet The Team →"
-
-};
-
-const impactMega = {
-
-    image:"images/about-impact.jpg",
-
-    eyebrow:"OUR IMPACT",
-
-    title:"Thousands of<br>Lives Touched",
-
-    text:"Every meal served is another step toward a hunger-free community.",
-
-    button:"View Impact →"
-
-};
-
-const workDefault = {
-
-    image:"images/work.jpg",
-
-    eyebrow:"HOW WE MAKE AN IMPACT",
-
-    title:"Changing Lives,<br>Beyond Every Meal",
-
-    text:"Our work goes beyond distributing food. We build resilient communities through compassion, collaboration and sustainable support.",
-
-    button:"See Our Impact →"
-
-};
-
-const hungerMega = {
-
-    image:"images/hunger.jpg",
-
-    eyebrow:"HUNGER RELIEF",
-
-    title:"Fighting Hunger,<br>Every Single Day",
-
-    text:"Providing nutritious meals to individuals and families facing food insecurity.",
-
-    button:"Learn More →"
-
-};
-
-const youthMega = {
-
-    image:"images/youth.jpg",
-
-    eyebrow:"YOUTH ENGAGEMENT",
-
-    title:"Empowering Youth,<br>Inspiring Change",
-
-    text:"Through initiatives like the Uttarakhand Youth Festival and other youth-focused programs, we encourage leadership, creativity, community participation and social responsibility.",
-
-    button:"Explore Youth Festival →"
-
-};
-
-const crisisMega = {
-
-    image:"images/crisis.jpg",
-
-    eyebrow:"CRISIS RESPONSE",
-
-    title:"Helping When<br>It Matters Most",
-
-    text:"Rapid assistance during disasters, emergencies and unexpected hardships.",
-
-    button:"View Relief Work →"
-
-};
-
-const sustainableMega = {
-
-    image:"images/sustainable.jpg",
-
-    eyebrow:"SUSTAINABLE GIVING",
-
-    title:"Creating Change,<br>For The Future",
-
-    text:"Encouraging long-term support through awareness, partnerships and community engagement.",
-
-    button:"Discover More →"
-
-};
-
-const involvedDefault = {
-
-    image:"images/getinvolved.jpg",
-
-    eyebrow:"GET INVOLVED",
-
-    title:"Every Helping Hand<br>Makes a Difference",
-
-    text:"Whether you volunteer, donate or partner with us, your support directly helps us fight hunger and spread hope.",
-
-    button:"Join Our Mission →"
-
-};
-
-const volunteerMega = {
-
-    image:"images/volunteer.jpg",
-
-    eyebrow:"VOLUNTEER",
-
-    title:"Be The Change,<br>One Meal At A Time",
-
-    text:"Join our dedicated volunteers and make a real difference in your community.",
-
-    button:"Become A Volunteer →"
-
-};
-
-const donateMega = {
-
-    image:"images/donate.jpg",
-
-    eyebrow:"DONATE",
-
-    title:"Your Gift,<br>Their Hope",
-
-    text:"Every donation helps us prepare and distribute fresh meals to those in need.",
-
-    button:"Donate Now →"
-
-};
-
-const partnerMega = {
-
-    image:"images/partner.jpg",
-
-    eyebrow:"PARTNER WITH US",
-
-    title:"Together We<br>Create Bigger Impact",
-
-    text:"Collaborate with us through CSR initiatives, sponsorships and community partnerships.",
-
-    button:"Partner With Us →"
-
-};
-
-const awarenessMega = {
-
-    image:"images/awareness.jpg",
-
-    eyebrow:"SPREAD AWARENESS",
-
-    title:"Inspire Others<br>To Join",
-
-    text:"Share our mission, encourage others and help us reach more communities.",
-
-    button:"Share Our Story →"
-
-};
-
-let currentMenu = "initiatives";
-
-const menus = {
-
-    initiatives:{
-
-        defaultData:defaultMega,
-
-        items:[
-
-            {
-                title:"🍱 Food Distribution",
-                subtitle:"Daily meal distribution",
-                data:foodMega
-            },
-
-            {
-                title:"❤️ ₹1 Per Day Campaign",
-                subtitle:"Every rupee creates impact",
-                data:campaignMega
-            },
-
-            {
-                title:"🤝 Community Support",
-                subtitle:"Helping families together",
-                data:communityMega
-            },
-
-            {
-                title:"🎉 Special Drives",
-                subtitle:"Emergency & festive relief",
-                data:drivesMega
             }
 
-        ]
+            if (window.scrollY < heroBottom) {
 
-    },
+                const progress = window.scrollY / heroBottom;
 
-    about:{
+                mainNav.style.background =
+                    `rgba(255,255,255,${progress})`;
 
-        defaultData:aboutDefault,
+                const shade = Math.round(255 - (255 * progress));
 
-        items:[
+                mainNav.style.setProperty(
+                    "--nav-text",
+                    `rgb(${shade},${shade},${shade})`
 
-            {
-                title:"👥 Our Story",
-                subtitle:"Discover how our journey began.",
-                data:storyMega
-            },
+                );
 
-            {
-                title:"🎯 Mission & Vision",
-                subtitle:"What drives every meal we serve.",
-                data:missionMega
-            },
+                mainNav.style.setProperty("--nav-hover-text", "#ffffff");
+                mainNav.style.setProperty("--nav-hover-bg", "rgba(255,255,255,.08)");
 
-            {
-                title:"❤️ Meet Our Team",
-                subtitle:"The volunteers behind the mission.",
-                data:teamMega
-            },
+                mainNav.style.backdropFilter =
+                    `blur(${progress * 18}px)`;
 
-            {
-                title:"📈 Our Impact",
-                subtitle:"The change we've created together.",
-                data:impactMega
+                mainNav.style.webkitBackdropFilter =
+                    `blur(${progress * 18}px)`;
+
+                mainNav.style.borderBottomColor =
+                    `rgba(255,255,255,${progress * .12})`;
+
+                mainNav.style.boxShadow =
+                    `0 10px 35px rgba(0,0,0,${progress * .18})`;
+
+            } else {
+
+
+
+                mainNav.style.background = "#ffffff";
+
+                mainNav.style.backdropFilter = "none";
+                mainNav.style.webkitBackdropFilter = "none";
+
+                mainNav.style.borderBottomColor = "rgba(0,0,0,.06)";
+
+                mainNav.style.boxShadow = "0 6px 24px rgba(0,0,0,.08)";
+
+                mainNav.style.setProperty("--nav-text", "#1E293B");
+                mainNav.style.setProperty("--nav-hover-text", "#F97316");
+                mainNav.style.setProperty("--nav-hover-bg", "rgba(249,115,22,.08)");
+
             }
 
-        ]
+        }, { passive: true });
 
-    },
+        // Drawer open/close
+        function openDrawer(menu) {
 
-    work:{
+            megaDrawer.classList.add("active");
 
-        defaultData:workDefault,
+            loadMenu(menu);
 
-        items:[
+        }
+        function closeDrawer() {
 
-    {
+            megaDrawer.classList.remove('active');
 
-        title:"🥣 Hunger Relief",
-
-        subtitle:"Combating food insecurity.",
-
-        data:hungerMega
-
-    },
-
-    {
-
-        title:"🎤 Youth Engagement",
-
-        subtitle:"Empowering the next generation.",
-
-        data:youthMega
-
-    },
-
-    {
-
-        title:"🚨 Crisis Response",
-
-        subtitle:"Supporting people during emergencies.",
-
-        data:crisisMega
-
-    },
-
-    {
-
-        title:"🌱 Sustainable Giving",
-
-        subtitle:"Creating long-term impact.",
-
-        data:sustainableMega
-
-    }
-
-]
-
-    },
-
-    involved:{
-
-    defaultData:involvedDefault,
-
-    items:[
-
-        {
-
-            title:"🙋 Become a Volunteer",
-
-            subtitle:"Join our family of changemakers.",
-
-            data:volunteerMega
-
-        },
-
-        {
-
-            title:"❤️ Donate",
-
-            subtitle:"Every contribution provides hope.",
-
-            data:donateMega
-
-        },
-
-        {
-
-            title:"🤝 Partner With Us",
-
-            subtitle:"CSR & NGO collaborations.",
-
-            data:partnerMega
-
-        },
-
-        {
-
-            title:"📢 Spread Awareness",
-
-            subtitle:"Help our mission reach more people.",
-
-            data:awarenessMega
+            updateMega(defaultMega);
 
         }
 
-    ]
+        document.querySelector(".initiatives-trigger")
+            .addEventListener("mouseenter", () => openDrawer("initiatives"));
 
-},
-    
+        document.querySelector(".about-trigger")
+            .addEventListener("mouseenter", () => openDrawer("about"));
+
+        document.querySelector(".work-trigger")
+            .addEventListener("mouseenter", () => openDrawer("work"));
+
+        document.querySelector(".involved-trigger")
+            .addEventListener("mouseenter", () => openDrawer("involved"));
+
+        megaDrawer.addEventListener("mouseenter", () => {
+
+            megaDrawer.classList.add("active");
+
+        });
+
+        navWrapper.addEventListener("mouseleave", () => {
+
+            closeDrawer();
+
+        });
+
+        megaDrawer.addEventListener("mouseleave", () => {
+
+            closeDrawer();
+
+        });
+
+        /* ──────────────────────────────────────────
+           2. HERO SWIPER
+        ────────────────────────────────────────── */
+        const heroEyebrow = document.getElementById('heroEyebrow');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroText = document.getElementById('heroText');
+        const heroDots = document.querySelectorAll('.hero-dot');
+        const heroContent = document.querySelector('.hero-content');
+
+        function setHeroDot(idx) {
+            heroDots.forEach((d, i) => {
+
+                d.classList.remove("active");
+
+                void d.offsetWidth;
+
+                if (i === idx) {
+
+                    d.classList.add("active");
+
+                }
+
+            });
+        }
+
+        function updateHeroText(slide, idx) {
+            heroContent.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1), filter .55s ease';
+            heroContent.style.opacity = '0';
+            heroContent.style.transform = 'translateY(24px)';
+            heroContent.style.filter = 'blur(8px)';
+
+            setTimeout(() => {
+                heroEyebrow.textContent = slide.dataset.eyebrow || '';
+                heroTitle.innerHTML = slide.dataset.title || '';
+                heroText.textContent = slide.dataset.text || '';
+                setHeroDot(idx);
+
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+                heroContent.style.filter = 'blur(0)';
+            }, 500);
+        }
+
+        const heroSwiper = new Swiper('.heroSwiper', {
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 1200,
+            loop: true,
+            autoplay: { delay: 7000, disableOnInteraction: false },
+            on: {
+                init(sw) {
+                    const slide = sw.slides[sw.activeIndex];
+                    heroEyebrow.textContent = slide.dataset.eyebrow || '';
+                    heroTitle.innerHTML = slide.dataset.title || '';
+                    heroText.textContent = slide.dataset.text || '';
+                    setHeroDot(0);
+                },
+                slideChangeTransitionStart(sw) {
+                    const realIdx = sw.realIndex;
+                    const slide = sw.slides[sw.activeIndex];
+                    updateHeroText(slide, realIdx);
+                }
+            }
+        });
 
-};
+        // Dot click
+        heroDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                heroSwiper.slideToLoop(parseInt(dot.dataset.index));
+            });
+        });
 
-const stories = [
+        /* ──────────────────────────────────────────
+           3. GALLERY SWIPER
+        ────────────────────────────────────────── */
+        new Swiper('.gallerySwiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            speed: 700,
+            coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 1.4, slideShadows: false, scale: 0.84 },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            autoplay: { delay: 3800, disableOnInteraction: false, pauseOnMouseEnter: true },
+            pagination: { el: '.swiper-pagination', clickable: true }
+        });
 
-    {
+        /* ──────────────────────────────────────────
+           4. ODOMETER (count-up)
+        ────────────────────────────────────────── */
+        const impactSection = document.querySelector('#impact');
+        let odometerStarted = false;
 
-        image:"images/story1.jpg",
+        const oObserver = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && !odometerStarted) {
+                odometerStarted = true;
+                setTimeout(() => {
+                    document.getElementById('meals').innerHTML = 15000;
+                    document.getElementById('volunteers').innerHTML = 500;
+                    document.getElementById('communities').innerHTML = 200;
+                    document.getElementById('years').innerHTML = 11;
+                }, 300);
+            }
+        }, { threshold: 0.3 });
 
-        eyebrow:"STORIES OF HOPE",
+        oObserver.observe(impactSection);
 
-        title:"Changing Lives,<br>One Meal At A Time",
+        /* ──────────────────────────────────────────
+           5. SCROLL-REVEAL
+        ────────────────────────────────────────── */
+        const revealEls = document.querySelectorAll('[data-reveal]');
 
-        text:"Every day our volunteers prepare and distribute freshly cooked meals to those who need them most, restoring hope one meal at a time."
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
 
-    },
+        revealEls.forEach(el => revealObserver.observe(el));
 
-    {
+        window.dispatchEvent(new Event("scroll"));
 
-        image:"images/story2.jpg",
+        const defaultMega = {
 
-        eyebrow:"YOUTH ENGAGEMENT",
+            image: "images/initiatives.jpg",
 
-        title:"Empowering<br>The Next Generation",
+            eyebrow: "OUR INITIATIVES",
 
-        text:"Through the Uttarakhand Youth Festival and other initiatives, we inspire young minds to become changemakers."
+            title: "Fighting Hunger,<br>One Meal at a Time",
 
-    },
+            text: "Every initiative is designed to fight hunger, strengthen communities and restore dignity.",
 
-    {
+            button: "Learn More →"
 
-        image:"images/story3.jpg",
+        };
 
-        eyebrow:"COMMUNITY SUPPORT",
+        const foodMega = {
 
-        title:"Standing Together<br>In Every Season",
+            image: "images/food.jpg",
 
-        text:"Whether during festivals, emergencies or difficult times, we stand beside families with compassion and dignity."
+            eyebrow: "FOOD DISTRIBUTION",
 
-    }
+            title: "Serving Meals,<br>Restoring Dignity",
 
-];
+            text: "We distribute fresh meals to those who need them most through daily food drives and community support.",
 
-const storyStages = [
+            button: "Explore Food Distribution →"
 
-    {
-        type: "story",
-        story: 0
-    },
+        };
 
-    {
-        type: "story",
-        story: 1
-    },
+        const campaignMega = {
 
-    {
-        type: "story",
-        story: 2
-    },
+            image: "images/campaign.jpg",
 
-    {
-        type: "end"
-    }
+            eyebrow: "₹1 PER DAY CAMPAIGN",
 
-];
+            title: "Small Donations,<br>Big Impact",
 
-let megaTextOutTimer;
-let megaSwapTimer;
-let megaImageInTimer;
-let megaTextInTimer;
+            text: "Just ₹1 a day can collectively provide thousands of meals and keep our mission alive.",
 
-let currentMega = null;
+            button: "Join Campaign →"
 
+        };
 
+        const communityMega = {
 
-function updateMega(data){
+            image: "images/community.jpg",
 
+            eyebrow: "COMMUNITY SUPPORT",
 
-    if(currentMega === data) return;
+            title: "Together We<br>Stand Strong",
 
-    currentMega = data;
-    // Cancel any previous animation
-    clearTimeout(megaTextOutTimer);
-    clearTimeout(megaSwapTimer);
-    clearTimeout(megaImageInTimer);
-    clearTimeout(megaTextInTimer);
+            text: "Working with local communities to support families through food, care and compassion.",
 
-    // Start text animation
-    megaOverlay.style.opacity = "0";
-    megaOverlay.style.transform = "translateY(18px)";
+            button: "Explore Community →"
 
-    // Fade image shortly after
-    megaTextOutTimer = setTimeout(() => {
+        };
 
-        megaBg.style.opacity = "0";
+        const drivesMega = {
 
-    },80);
+            image: "images/drives.jpg",
 
-    // Swap content
-    megaSwapTimer = setTimeout(() => {
+            eyebrow: "SPECIAL DRIVES",
 
-        megaBg.style.backgroundImage = `url(${data.image})`;
+            title: "Helping When It<br>Matters Most",
 
-        megaEyebrow.innerHTML = data.eyebrow;
-        megaTitle.innerHTML   = data.title;
-        megaText.innerHTML    = data.text;
-        megaButton.innerHTML  = data.button;
+            text: "From disaster relief to festive food drives, we reach those who need us during critical moments.",
 
-    },250);
+            button: "View Drives →"
 
-    // Fade image back
-    megaImageInTimer = setTimeout(() => {
+        };
 
-        megaBg.style.opacity = "1";
+        const aboutDefault = {
 
-    },280);
+            image: "images/about.jpg",
 
-    // Fade text back
-    megaTextInTimer = setTimeout(() => {
+            eyebrow: "ABOUT US",
 
-        megaOverlay.style.opacity = "1";
-        megaOverlay.style.transform = "translateY(0)";
+            title: "Serving Society,<br>Since 2014",
 
-    },360);
+            text: "Learn about our journey, mission and the volunteers behind every meal we serve.",
 
-}
+            button: "Explore About →"
 
-function loadMenu(menuName){
+        };
 
-    currentMenu = menuName;
+        const storyMega = {
 
-    const menu = menus[menuName];
+            image: "images/story.jpg",
 
-    const links = megaLeft.querySelectorAll("a");
+            eyebrow: "OUR STORY",
 
-    links.forEach((link,index)=>{
+            title: "A Journey of<br>Compassion",
 
-        const item = menu.items[index];
+            text: "Discover how a simple idea became a movement fighting hunger every day.",
 
-        link.querySelector(".mega-item-title").innerHTML = item.title;
+            button: "Read Story →"
 
-        link.querySelector(".mega-item-sub").innerHTML = item.subtitle;
+        };
 
-        link.onmouseenter = ()=>updateMega(item.data);
+        const missionMega = {
 
-    });
+            image: "images/mission.jpg",
 
-    currentMega = null;
-    updateMega(menu.defaultData);
+            eyebrow: "MISSION & VISION",
 
-}
+            title: "Hope Through<br>Action",
 
-function updateStory(index){
+            text: "Our mission is simple: ensure no one sleeps hungry while building stronger communities.",
 
-    const story = stories[index];
+            button: "Our Mission →"
 
-    clearTimeout(storyTextOutTimer);
-    clearTimeout(storySwapTimer);
-    clearTimeout(storyImageTimer);
+        };
 
-    storiesContent.style.opacity = "0";
-    storiesContent.style.transform = "translateY(30px)";
+        const teamMega = {
 
-    storyTextOutTimer = setTimeout(()=>{
+            image: "images/team.jpg",
 
-        const nextImage =
-            activeStoryImage === storyImgA
-            ? storyImgB
-            : storyImgA;
+            eyebrow: "OUR TEAM",
 
-        nextImage.style.backgroundImage =
-            `url(${story.image})`;
+            title: "People Behind<br>The Mission",
 
-        nextImage.classList.add("active");
+            text: "Meet the volunteers and supporters who make every food drive possible.",
 
-        activeStoryImage.classList.remove("active");
+            button: "Meet The Team →"
 
-        activeStoryImage = nextImage;
+        };
 
-        storyEyebrow.innerHTML = story.eyebrow;
+        const impactMega = {
 
-        storyTitle.innerHTML = story.title;
+            image: "images/about-impact.jpg",
 
-        storyText.innerHTML = story.text;
+            eyebrow: "OUR IMPACT",
 
-    },300);
+            title: "Thousands of<br>Lives Touched",
 
-    storyImageTimer = setTimeout(()=>{
+            text: "Every meal served is another step toward a hunger-free community.",
 
-        storiesContent.style.opacity="1";
+            button: "View Impact →"
 
-        storiesContent.style.transform="translateY(0)";
+        };
 
-    },500);
+        const workDefault = {
 
-}
+            image: "images/work.jpg",
 
-function showReadMore(){
+            eyebrow: "HOW WE MAKE AN IMPACT",
 
-    storiesContent.classList.add("hidden");
+            title: "Changing Lives,<br>Beyond Every Meal",
 
-    setTimeout(()=>{
+            text: "Our work goes beyond distributing food. We build resilient communities through compassion, collaboration and sustainable support.",
 
-        storyEnd.classList.add("active");
+            button: "See Our Impact →"
 
-    },350);
+        };
 
-}
+        const hungerMega = {
 
-function hideReadMore(){
+            image: "images/hunger.jpg",
 
-    storyEnd.classList.remove("active");
+            eyebrow: "HUNGER RELIEF",
 
-    storiesContent.classList.remove("hidden");
+            title: "Fighting Hunger,<br>Every Single Day",
 
-}
+            text: "Providing nutritious meals to individuals and families facing food insecurity.",
 
-updateStory(0);
-let currentStage = -1;
-function handleStoriesScroll() {
+            button: "Learn More →"
 
-  const rect = storiesSection.getBoundingClientRect();
+        };
 
-  const maxScroll = rect.height - window.innerHeight;
+        const youthMega = {
 
-  let progress = (-rect.top) / maxScroll;
+            image: "images/youth.jpg",
 
-  progress = Math.max(0, Math.min(progress, 1));
+            eyebrow: "YOUTH ENGAGEMENT",
 
-  updateJourney(progress);
+            title: "Empowering Youth,<br>Inspiring Change",
 
-  let stageIndex = Math.floor(progress * storyStages.length);
+            text: "Through initiatives like the Uttarakhand Youth Festival and other youth-focused programs, we encourage leadership, creativity, community participation and social responsibility.",
 
-if(stageIndex >= storyStages.length){
+            button: "Explore Youth Festival →"
 
-    stageIndex = storyStages.length - 1;
+        };
 
-}
+        const crisisMega = {
 
-if(stageIndex === currentStage){
+            image: "images/crisis.jpg",
 
-    return;
+            eyebrow: "CRISIS RESPONSE",
 
-}
+            title: "Helping When<br>It Matters Most",
 
-currentStage = stageIndex;
+            text: "Rapid assistance during disasters, emergencies and unexpected hardships.",
 
-const stage = storyStages[stageIndex];
+            button: "View Relief Work →"
 
-switch(stage.type){
+        };
 
-    case "story":
+        const sustainableMega = {
 
-        hideReadMore();
+            image: "images/sustainable.jpg",
 
-        updateStory(stage.story);
+            eyebrow: "SUSTAINABLE GIVING",
 
-        break;
+            title: "Creating Change,<br>For The Future",
 
-    case "end":
+            text: "Encouraging long-term support through awareness, partnerships and community engagement.",
 
-        showReadMore();
+            button: "Discover More →"
 
-        break;
+        };
 
-}
+        const involvedDefault = {
 
-}
+            image: "images/getinvolved.jpg",
 
-window.addEventListener("scroll", handleStoriesScroll);
+            eyebrow: "GET INVOLVED",
 
-handleStoriesScroll();
+            title: "Every Helping Hand<br>Makes a Difference",
 
-function updateJourney(progress){
+            text: "Whether you volunteer, donate or partner with us, your support directly helps us fight hunger and spread hope.",
 
-    const length =
-        journeyTrack.getTotalLength();
+            button: "Join Our Mission →"
 
-    journeyProgress.style.strokeDasharray =
-        length;
+        };
 
-    journeyProgress.style.strokeDashoffset =
-        length * (1-progress);
+        const volunteerMega = {
 
-    const point =
-        journeyTrack.getPointAtLength(
+            image: "images/volunteer.jpg",
 
-            length * progress
+            eyebrow: "VOLUNTEER",
 
-        );
+            title: "Be The Change,<br>One Meal At A Time",
 
-    journeyDot.setAttribute("cx",point.x);
+            text: "Join our dedicated volunteers and make a real difference in your community.",
 
-    journeyDot.setAttribute("cy",point.y);
+            button: "Become A Volunteer →"
 
-    const checks =
-document.querySelectorAll(".journey-check");
+        };
 
-checks.forEach((check,index)=>{
+        const donateMega = {
 
-    const checkpointProgress =
-        index / (storyStages.length - 1);
+            image: "images/donate.jpg",
 
-    if(progress >= checkpointProgress + 0.01){
+            eyebrow: "DONATE",
 
-        check.classList.add("active");
+            title: "Your Gift,<br>Their Hope",
 
-    }
-    else{
+            text: "Every donation helps us prepare and distribute fresh meals to those in need.",
 
-        check.classList.remove("active");
+            button: "Donate Now →"
 
-    }
+        };
 
-});
+        const partnerMega = {
 
-}
+            image: "images/partner.jpg",
 
-function createJourneyCheckpoints(){
+            eyebrow: "PARTNER WITH US",
 
-    const length =
-        journeyTrack.getTotalLength();
+            title: "Together We<br>Create Bigger Impact",
 
-    journeyCheckpoints.innerHTML = "";
+            text: "Collaborate with us through CSR initiatives, sponsorships and community partnerships.",
 
-    for(let i=0;i<storyStages.length;i++){
+            button: "Partner With Us →"
 
-        const progress =
-            i/(storyStages.length-1);
+        };
 
-        const point =
-            journeyTrack.getPointAtLength(
-                length * progress
-            );
+        const awarenessMega = {
 
-        const circle =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle"
-            );
+            image: "images/awareness.jpg",
 
-        circle.setAttribute("cx",point.x);
-        circle.setAttribute("cy",point.y);
-        circle.setAttribute("r",8);
+            eyebrow: "SPREAD AWARENESS",
 
-        circle.classList.add("journey-check");
+            title: "Inspire Others<br>To Join",
 
-        journeyCheckpoints.appendChild(circle);
+            text: "Share our mission, encourage others and help us reach more communities.",
 
-    }
+            button: "Share Our Story →"
 
-}
+        };
 
-createJourneyCheckpoints();
+        let currentMenu = "initiatives";
 
-/*=====================================================
+        const menus = {
 
-7. GALLERY
+            initiatives: {
 
-=====================================================*/
+                defaultData: defaultMega,
 
-const galleryCards =
-document.querySelectorAll(".gallery-card");
+                items: [
 
-const lightbox =
-document.querySelector(".lightbox");
+                    {
+                        title: "🍱 Food Distribution",
+                        subtitle: "Daily meal distribution",
+                        data: foodMega
+                    },
 
-const lightboxImg =
-document.getElementById("lightbox-img");
+                    {
+                        title: "❤️ ₹1 Per Day Campaign",
+                        subtitle: "Every rupee creates impact",
+                        data: campaignMega
+                    },
 
-const lightboxTitle =
-document.getElementById("lightbox-title");
+                    {
+                        title: "🤝 Community Support",
+                        subtitle: "Helping families together",
+                        data: communityMega
+                    },
 
-const lightboxText =
-document.getElementById("lightbox-text");
+                    {
+                        title: "🎉 Special Drives",
+                        subtitle: "Emergency & festive relief",
+                        data: drivesMega
+                    }
 
-const closeBtn =
-document.querySelector(".lightbox-close");
+                ]
 
-const prevBtn =
-document.querySelector(".lightbox-prev");
+            },
 
-const nextBtn =
-document.querySelector(".lightbox-next");
+            about: {
 
-const counter =
-document.querySelector(".lightbox-counter");
+                defaultData: aboutDefault,
 
+                items: [
 
-galleryCards.forEach(card=>{
+                    {
+                        title: "👥 Our Story",
+                        subtitle: "Discover how our journey began.",
+                        data: storyMega
+                    },
 
-    card.addEventListener("click",()=>{
+                    {
+                        title: "🎯 Mission & Vision",
+                        subtitle: "What drives every meal we serve.",
+                        data: missionMega
+                    },
 
-        openLightbox(card);
+                    {
+                        title: "❤️ Meet Our Team",
+                        subtitle: "The volunteers behind the mission.",
+                        data: teamMega
+                    },
 
-    });
+                    {
+                        title: "📈 Our Impact",
+                        subtitle: "The change we've created together.",
+                        data: impactMega
+                    }
 
-});
+                ]
 
-function openLightbox(card){
+            },
 
-    currentCard = card;
+            work: {
 
-    currentIndex = [...galleryCards].indexOf(card);
+                defaultData: workDefault,
 
-    loadImage(currentIndex);
+                items: [
 
-    showLightbox();
+                    {
 
-}
+                        title: "🥣 Hunger Relief",
 
-function closeLightbox(){
+                        subtitle: "Combating food insecurity.",
 
-    lightbox.classList.remove("active");
+                        data: hungerMega
 
-    document.body.style.overflow = "";
+                    },
 
-    currentCard = null;
+                    {
 
-}
+                        title: "🎤 Youth Engagement",
 
-function showLightbox(){
+                        subtitle: "Empowering the next generation.",
 
-    document.body.style.overflow = "hidden";
+                        data: youthMega
 
-    lightbox.classList.add("active");
+                    },
 
-}
+                    {
 
-function loadImage(index){
+                        title: "🚨 Crisis Response",
 
-    currentIndex = index;
+                        subtitle: "Supporting people during emergencies.",
 
-    const card = galleryCards[currentIndex];
+                        data: crisisMega
 
-    const img =
-        card.querySelector("img");
+                    },
 
-    lightboxImg.style.opacity = "0";
+                    {
 
-    setTimeout(()=>{
+                        title: "🌱 Sustainable Giving",
 
-        lightboxImg.src = img.src;
+                        subtitle: "Creating long-term impact.",
 
-        lightboxImg.style.opacity = "1";
+                        data: sustainableMega
 
-    },180);
+                    }
 
-    const caption =
-    document.querySelector(".lightbox-caption");
+                ]
 
-    caption.style.opacity = "0";
+            },
 
-    caption.style.transform = "translateY(10px)";
+            involved: {
 
-    setTimeout(()=>{
+                defaultData: involvedDefault,
 
-        lightboxTitle.textContent =
-            card.querySelector("h3").textContent;
+                items: [
 
-        lightboxText.textContent =
-            card.querySelector("p").textContent;
+                    {
 
-        caption.style.opacity = "1";
+                        title: "🙋 Become a Volunteer",
 
-        caption.style.transform = "translateY(0)";
+                        subtitle: "Join our family of changemakers.",
 
-    },180);
+                        data: volunteerMega
 
-    counter.textContent =
-    `${String(currentIndex + 1).padStart(2,"0")} / ${String(galleryCards.length).padStart(2,"0")}`;
+                    },
 
-}
+                    {
 
-nextBtn.addEventListener("click",()=>{
+                        title: "❤️ Donate",
 
-    currentIndex++;
+                        subtitle: "Every contribution provides hope.",
 
-    if(currentIndex >= galleryCards.length){
+                        data: donateMega
 
-        currentIndex = 0;
+                    },
 
-    }
+                    {
 
-    loadImage(currentIndex);
+                        title: "🤝 Partner With Us",
 
-});
+                        subtitle: "CSR & NGO collaborations.",
 
-prevBtn.addEventListener("click",()=>{
+                        data: partnerMega
 
-    currentIndex--;
+                    },
 
-    if(currentIndex < 0){
+                    {
 
-        currentIndex =
-        galleryCards.length - 1;
+                        title: "📢 Spread Awareness",
 
-    }
+                        subtitle: "Help our mission reach more people.",
 
-    loadImage(currentIndex);
+                        data: awarenessMega
 
-});
+                    }
 
-closeBtn.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click",(e)=>{
+                ]
 
-    if(e.target === lightbox){
+            },
 
-        closeLightbox();
 
-    }
+        };
 
-});
+        const stories = [
 
-document.addEventListener("keydown",(e)=>{
+            {
 
-    if(e.key === "Escape"){
+                image: "images/story1.jpg",
 
-    closeLightbox();
+                eyebrow: "STORIES OF HOPE",
 
-}
+                title: "Changing Lives,<br>One Meal At A Time",
 
-if(e.key === "ArrowRight"){
+                text: "Every day our volunteers prepare and distribute freshly cooked meals to those who need them most, restoring hope one meal at a time."
 
-    nextBtn.click();
+            },
 
-}
+            {
 
-if(e.key === "ArrowLeft"){
+                image: "images/story2.jpg",
 
-    prevBtn.click();
+                eyebrow: "YOUTH ENGAGEMENT",
 
-}
+                title: "Empowering<br>The Next Generation",
 
-});
+                text: "Through the Uttarakhand Youth Festival and other initiatives, we inspire young minds to become changemakers."
 
-</script>
+            },
+
+            {
+
+                image: "images/story3.jpg",
+
+                eyebrow: "COMMUNITY SUPPORT",
+
+                title: "Standing Together<br>In Every Season",
+
+                text: "Whether during festivals, emergencies or difficult times, we stand beside families with compassion and dignity."
+
+            }
+
+        ];
+
+        const storyStages = [
+
+            {
+                type: "story",
+                story: 0
+            },
+
+            {
+                type: "story",
+                story: 1
+            },
+
+            {
+                type: "story",
+                story: 2
+            },
+
+            {
+                type: "end"
+            }
+
+        ];
+
+        let megaTextOutTimer;
+        let megaSwapTimer;
+        let megaImageInTimer;
+        let megaTextInTimer;
+
+        let currentMega = null;
+
+
+
+        function updateMega(data) {
+
+
+            if (currentMega === data) return;
+
+            currentMega = data;
+            // Cancel any previous animation
+            clearTimeout(megaTextOutTimer);
+            clearTimeout(megaSwapTimer);
+            clearTimeout(megaImageInTimer);
+            clearTimeout(megaTextInTimer);
+
+            // Start text animation
+            megaOverlay.style.opacity = "0";
+            megaOverlay.style.transform = "translateY(18px)";
+
+            // Fade image shortly after
+            megaTextOutTimer = setTimeout(() => {
+
+                megaBg.style.opacity = "0";
+
+            }, 80);
+
+            // Swap content
+            megaSwapTimer = setTimeout(() => {
+
+                megaBg.style.backgroundImage = `url(${data.image})`;
+
+                megaEyebrow.innerHTML = data.eyebrow;
+                megaTitle.innerHTML = data.title;
+                megaText.innerHTML = data.text;
+                megaButton.innerHTML = data.button;
+
+            }, 250);
+
+            // Fade image back
+            megaImageInTimer = setTimeout(() => {
+
+                megaBg.style.opacity = "1";
+
+            }, 280);
+
+            // Fade text back
+            megaTextInTimer = setTimeout(() => {
+
+                megaOverlay.style.opacity = "1";
+                megaOverlay.style.transform = "translateY(0)";
+
+            }, 360);
+
+        }
+
+        function loadMenu(menuName) {
+
+            currentMenu = menuName;
+
+            const menu = menus[menuName];
+
+            const links = megaLeft.querySelectorAll("a");
+
+            links.forEach((link, index) => {
+
+                const item = menu.items[index];
+
+                link.querySelector(".mega-item-title").innerHTML = item.title;
+
+                link.querySelector(".mega-item-sub").innerHTML = item.subtitle;
+
+                link.onmouseenter = () => updateMega(item.data);
+
+            });
+
+            currentMega = null;
+            updateMega(menu.defaultData);
+
+        }
+
+        function updateStory(index) {
+
+            const story = stories[index];
+
+            clearTimeout(storyTextOutTimer);
+            clearTimeout(storySwapTimer);
+            clearTimeout(storyImageTimer);
+
+            storiesContent.style.opacity = "0";
+            storiesContent.style.transform = "translateY(30px)";
+
+            storyTextOutTimer = setTimeout(() => {
+
+                const nextImage =
+                    activeStoryImage === storyImgA
+                        ? storyImgB
+                        : storyImgA;
+
+                nextImage.style.backgroundImage =
+                    `url(${story.image})`;
+
+                nextImage.classList.add("active");
+
+                activeStoryImage.classList.remove("active");
+
+                activeStoryImage = nextImage;
+
+                storyEyebrow.innerHTML = story.eyebrow;
+
+                storyTitle.innerHTML = story.title;
+
+                storyText.innerHTML = story.text;
+
+            }, 300);
+
+            storyImageTimer = setTimeout(() => {
+
+                storiesContent.style.opacity = "1";
+
+                storiesContent.style.transform = "translateY(0)";
+
+            }, 500);
+
+        }
+
+        function showReadMore() {
+
+            storiesContent.classList.add("hidden");
+
+            setTimeout(() => {
+
+                storyEnd.classList.add("active");
+
+            }, 350);
+
+        }
+
+        function hideReadMore() {
+
+            storyEnd.classList.remove("active");
+
+            storiesContent.classList.remove("hidden");
+
+        }
+
+        updateStory(0);
+        let currentStage = -1;
+        function handleStoriesScroll() {
+
+            const rect = storiesSection.getBoundingClientRect();
+
+            const maxScroll = rect.height - window.innerHeight;
+
+            let progress = (-rect.top) / maxScroll;
+
+            progress = Math.max(0, Math.min(progress, 1));
+
+            updateJourney(progress);
+
+            let stageIndex = Math.floor(progress * storyStages.length);
+
+            if (stageIndex >= storyStages.length) {
+
+                stageIndex = storyStages.length - 1;
+
+            }
+
+            if (stageIndex === currentStage) {
+
+                return;
+
+            }
+
+            currentStage = stageIndex;
+
+            const stage = storyStages[stageIndex];
+
+            switch (stage.type) {
+
+                case "story":
+
+                    hideReadMore();
+
+                    updateStory(stage.story);
+
+                    break;
+
+                case "end":
+
+                    showReadMore();
+
+                    break;
+
+            }
+
+        }
+
+        window.addEventListener("scroll", handleStoriesScroll);
+
+        handleStoriesScroll();
+
+        function updateJourney(progress) {
+
+            const length =
+                journeyTrack.getTotalLength();
+
+            journeyProgress.style.strokeDasharray =
+                length;
+
+            journeyProgress.style.strokeDashoffset =
+                length * (1 - progress);
+
+            const point =
+                journeyTrack.getPointAtLength(
+
+                    length * progress
+
+                );
+
+            journeyDot.setAttribute("cx", point.x);
+
+            journeyDot.setAttribute("cy", point.y);
+
+            const checks =
+                document.querySelectorAll(".journey-check");
+
+            checks.forEach((check, index) => {
+
+                const checkpointProgress =
+                    index / (storyStages.length - 1);
+
+                if (progress >= checkpointProgress + 0.01) {
+
+                    check.classList.add("active");
+
+                }
+                else {
+
+                    check.classList.remove("active");
+
+                }
+
+            });
+
+        }
+
+        function createJourneyCheckpoints() {
+
+            const length =
+                journeyTrack.getTotalLength();
+
+            journeyCheckpoints.innerHTML = "";
+
+            for (let i = 0; i < storyStages.length; i++) {
+
+                const progress =
+                    i / (storyStages.length - 1);
+
+                const point =
+                    journeyTrack.getPointAtLength(
+                        length * progress
+                    );
+
+                const circle =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle"
+                    );
+
+                circle.setAttribute("cx", point.x);
+                circle.setAttribute("cy", point.y);
+                circle.setAttribute("r", 8);
+
+                circle.classList.add("journey-check");
+
+                journeyCheckpoints.appendChild(circle);
+
+            }
+
+        }
+
+        createJourneyCheckpoints();
+
+        /*=====================================================
+        
+        7. GALLERY
+        
+        =====================================================*/
+
+        const galleryCards =
+            document.querySelectorAll(".gallery-card");
+
+        const lightbox =
+            document.querySelector(".lightbox");
+
+        const lightboxImg =
+            document.getElementById("lightbox-img");
+
+        const lightboxTitle =
+            document.getElementById("lightbox-title");
+
+        const lightboxText =
+            document.getElementById("lightbox-text");
+
+        const closeBtn =
+            document.querySelector(".lightbox-close");
+
+        const prevBtn =
+            document.querySelector(".lightbox-prev");
+
+        const nextBtn =
+            document.querySelector(".lightbox-next");
+
+        const counter =
+            document.querySelector(".lightbox-counter");
+
+        const galleryPrevBtn =
+            document.querySelector(".gallery-prev");
+
+        const galleryNextBtn =
+            document.querySelector(".gallery-next");
+
+        const galleryTrack =
+            document.querySelector(".gallery-track");
+
+        const galleryViewport =
+            document.querySelector(".gallery-viewport");
+
+        console.log(galleryViewport);
+
+
+        galleryCards.forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                openLightbox(card);
+
+            });
+
+        });
+
+        function getScrollAmount() {
+
+            const firstCard = galleryCards[0];
+
+            const gap = 24;
+
+            return firstCard.getBoundingClientRect().width + gap;
+
+        }
+
+        function openLightbox(card) {
+
+            currentCard = card;
+
+            currentIndex = [...galleryCards].indexOf(card);
+
+            loadImage(currentIndex);
+
+            showLightbox();
+
+        }
+
+        function closeLightbox() {
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+            currentCard = null;
+
+        }
+
+        function showLightbox() {
+
+            document.body.style.overflow = "hidden";
+
+            lightbox.classList.add("active");
+
+        }
+
+        function loadImage(index) {
+
+            currentIndex = index;
+
+            const card = galleryCards[currentIndex];
+
+            const img =
+                card.querySelector("img");
+
+            lightboxImg.style.opacity = "0";
+
+            setTimeout(() => {
+
+                lightboxImg.src = img.src;
+
+                lightboxImg.style.opacity = "1";
+
+            }, 180);
+
+            const caption =
+                document.querySelector(".lightbox-caption");
+
+            caption.style.opacity = "0";
+
+            caption.style.transform = "translateY(10px)";
+
+            setTimeout(() => {
+
+                lightboxTitle.textContent =
+                    card.querySelector("h3").textContent;
+
+                lightboxText.textContent =
+                    card.querySelector("p").textContent;
+
+                caption.style.opacity = "1";
+
+                caption.style.transform = "translateY(0)";
+
+            }, 180);
+
+            counter.textContent =
+                `${String(currentIndex + 1).padStart(2, "0")} / ${String(galleryCards.length).padStart(2, "0")}`;
+
+        }
+
+        nextBtn.addEventListener("click", () => {
+
+            currentIndex++;
+
+            if (currentIndex >= galleryCards.length) {
+
+                currentIndex = 0;
+
+            }
+
+            loadImage(currentIndex);
+
+        });
+
+        prevBtn.addEventListener("click", () => {
+
+            currentIndex--;
+
+            if (currentIndex < 0) {
+
+                currentIndex =
+                    galleryCards.length - 1;
+
+            }
+
+            loadImage(currentIndex);
+
+        });
+
+        closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (e) => {
+
+            if (!lightbox.classList.contains("active")) return;
+
+            if (e.target === lightbox) {
+
+                closeLightbox();
+
+            }
+
+        });
+
+        document.addEventListener("keydown", (e) => {
+
+            if (e.key === "Escape") {
+
+                closeLightbox();
+
+            }
+
+            if (e.key === "ArrowRight") {
+
+                nextBtn.click();
+
+            }
+
+            if (e.key === "ArrowLeft") {
+
+                prevBtn.click();
+
+            }
+
+        });
+
+        const scrollAmount = 344;
+
+        galleryNextBtn.addEventListener("click", () => {
+
+            console.log("Next clicked");
+
+            galleryViewport.scrollBy({
+
+                left: getScrollAmount(),
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+        galleryPrevBtn.addEventListener("click", () => {
+
+            console.log("Previous clicked");
+
+            galleryViewport.scrollBy({
+
+                left: -getScrollAmount(),
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+        galleryNextBtn.addEventListener("click", () => {
+
+            galleryViewport.scrollBy({
+
+                left: galleryScrollAmount,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+        galleryPrevBtn.addEventListener("click", () => {
+
+            galleryViewport.scrollBy({
+
+                left: -galleryScrollAmount,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+    </script>
 
 </body>
+
 </html>
