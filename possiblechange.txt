@@ -370,3 +370,9 @@ We've come a long way from a basic homepage. It's starting to feel like a crafte
 ⏳ Mobile responsiveness
 ⏳ Performance optimization
 ⏳ Final polish (animations, spacing, accessibility)
+
+📍 Lucide icons (Map, Mail, Phone)
+🌐 Social media icons with hover
+🔗 Actual navigation links
+📱 Responsive stacking
+✨ A subtle orange accent line at the very top of the footer
