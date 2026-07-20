@@ -352,6 +352,29 @@
             padding: 14px 0;
         }
 
+        .menu-toggle {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--nav-text);
+            transition: .35s;
+            border-radius: 10px;
+        }
+
         /* Logo */
         .logo {
             display: flex;
@@ -2509,9 +2532,311 @@
             }
         }
 
+        .mobile-menu {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: #FAF7F2;
+
+            color: var(--ink);
+
+            backdrop-filter: blur(18px);
+
+            -webkit-backdrop-filter: blur(18px);
+
+            z-index: 9999;
+
+            display: flex;
+
+            flex-direction: column;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(-20px);
+
+            transition: .45s cubic-bezier(.22, 1, .36, 1);
+
+            overflow: hidden;
+
+            width:100vw;
+
+            height:100vh;
+
+        }
+
+        .mobile-menu.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+
+        }
+
+        .mobile-menu-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 28px;
+
+        }
+
+        .mobile-menu-header img {
+
+            height: 52px;
+
+        }
+
+        .mobile-panel-title {
+
+            font-size: .8rem;
+
+            letter-spacing: .16em;
+
+            color: #888;
+
+            text-transform: uppercase;
+
+            margin-bottom: 30px;
+
+        }
+
+        .mobile-nav-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+        .mobile-link {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            width: 100%;
+
+            padding: 22px 0;
+
+            border: none;
+
+            background: none;
+
+            border-bottom: 1px solid rgba(0, 0, 0, .08);
+
+            font-size: 1.25rem;
+
+            font-weight: 500;
+
+            color: var(--ink);
+
+            cursor: pointer;
+
+            transition: .25s;
+
+        }
+
+        .mobile-link:hover {
+
+            padding-left: 10px;
+
+            color: var(--orange);
+
+        }
+
+        .mobile-link i {
+
+            font-size: 1.5rem;
+
+            transition: .25s;
+
+        }
+
+        .mobile-link:hover i {
+
+            transform: translateX(6px);
+
+        }
+
+        .home-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+        .mobile-footer-links{
+
+    margin-top:auto;
+
+    padding-top:40px;
+}
+
+        .mobile-donate {
+
+            display: block;
+
+            text-align: center;
+
+            padding: 16px;
+
+            border-radius: 999px;
+
+            background: var(--orange);
+
+            color: white;
+
+            font-weight: 700;
+
+            margin-bottom: 28px;
+
+        }
+
+        .mobile-bottom-links {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 28px;
+
+        }
+
+        .mobile-bottom-links a {
+
+            color: #777;
+
+            font-size: .95rem;
+
+        }
+
+        .menu-close {
+
+            width: 46px;
+
+            height: 46px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: white;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 1.3rem;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+        }
+
+        .menu-close:hover {
+
+            transform: rotate(90deg);
+
+        }
+
+        .mobile-panels{
+
+            display:flex;
+
+            flex:1;
+
+            height:100%;
+
+            transition:transform .45s cubic-bezier(.22,1,.36,1);
+
+        }
+
+        .mobile-panel{
+
+    flex:0 0 100%;
+
+    height:100%;
+
+    overflow-y:auto;
+
+    padding:24px 24px 40px;
+}
+
+        .mobile-back {
+
+            margin-bottom: 34px;
+
+        }
+
+        .back-button {
+
+            border: none;
+
+            background: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            color: var(--ink);
+
+        }
+
+        .mobile-submenu-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+        .mobile-submenu-list a {
+
+            padding: 20px 0;
+
+            border-bottom: 1px solid rgba(0, 0, 0, .08);
+
+            color: var(--ink);
+
+            font-size: 1.15rem;
+
+        }
+
         @media (max-width: 700px) {
-            .nav-inner {
-                grid-template-columns: 1fr auto;
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             .nav-links {
@@ -2525,6 +2850,33 @@
             section {
                 padding: 70px 0;
             }
+
+            .top-bar{
+    height:auto;
+    padding:6px 0;
+}
+
+.top-bar-inner{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.top-left{
+
+    flex-direction:column;
+    gap:2px;
+    align-items:center;
+
+}
+
+.top-right{
+
+    display:none;
+
+}
         }
 
         .lightbox {
@@ -3079,6 +3431,11 @@
                     </div>
 
                     <a href="donate.html" class="nav-cta">Donate Now</a>
+                    <button class="menu-toggle" aria-label="Open Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
 
                 </div><!-- /nav-inner -->
 
@@ -3187,6 +3544,109 @@
 
             </div><!-- /nav-wrapper -->
         </nav>
+        <div class="mobile-menu">
+
+            <div class="mobile-menu-header">
+
+                <img src="images/logo.png" alt="">
+
+                <button class="menu-close">
+                    <i class="ri-close-line"></i>
+                </button>
+
+            </div>
+
+            <div class="mobile-panels">
+
+                <div class="mobile-panel home-panel" data-index="0">
+
+                    <div class="mobile-panel-title">
+                        Navigation
+                    </div>
+
+                    <div class="mobile-nav-list">
+
+                        <button class="mobile-link" data-panel="initiatives">
+                            <span>Initiatives</span>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </button>
+
+                        <button class="mobile-link" data-panel="about">
+                            <span>About</span>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </button>
+
+                        <button class="mobile-link" data-panel="involved">
+                            <span>Get Involved</span>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </button>
+
+                        <button class="mobile-link" data-panel="work">
+                            <span>Our Work</span>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="mobile-footer-links">
+
+                        <a href="donate.html" class="mobile-donate">
+                            Donate Now
+                        </a>
+
+                        <div class="mobile-bottom-links">
+
+                            <a href="#">Instagram</a>
+
+                            <a href="#">Contact</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mobile-panel initiatives-panel" data-index="1">
+                    <div class="mobile-back">
+
+                        <button class="back-button">
+
+                            <i class="ri-arrow-left-line"></i>
+
+                            Initiatives
+
+                        </button>
+
+                    </div>
+
+                    <div class="mobile-submenu-list">
+
+                        <a href="#">Food Distribution</a>
+
+                        <a href="#">₹1 Campaign</a>
+
+                        <a href="#">Community Kitchen</a>
+
+                        <a href="#">Emergency Relief</a>
+
+                    </div>
+                </div>
+
+                <div class="mobile-panel about-panel" data-index="2">
+
+                </div>
+
+                <div class="mobile-panel involved-panel" data-index="3">
+
+                </div>
+
+                <div class="mobile-panel work-panel" data-index="4">
+
+                </div>
+
+            </div>
+
+        </div>
     </header>
 
     <!-- ═══ HERO ═══ -->
@@ -3754,6 +4214,9 @@
         const journeyProgress = document.getElementById("journeyProgress");
         const journeyDot = document.getElementById("journeyDot");
         const journeyCheckpoints = document.getElementById("journeyCheckpoints");
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        const menuClose = document.querySelector(".menu-close");
 
 
         let storyTextOutTimer;
@@ -3846,6 +4309,54 @@
             }
 
         }, { passive: true });
+
+        menuToggle.addEventListener("click", () => {
+
+            mobileMenu.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+        });
+
+        menuClose.addEventListener("click", () => {
+
+            mobileMenu.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        });
+
+        const mobilePanels = document.querySelector(".mobile-panels");
+
+        const panelMap = {
+            initiatives: 1,
+            about: 2,
+            involved: 3,
+            work: 4
+        };
+
+        document.querySelectorAll(".mobile-link").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                const panel = panelMap[link.dataset.panel];
+
+                mobilePanels.style.transform =
+`translateX(-${panel*100}%)`;
+
+            });
+
+        });
+
+        document.querySelectorAll(".back-button").forEach(btn => {
+
+            btn.addEventListener("click", () => {
+
+                mobilePanels.style.transform = "translateX(0)";
+
+            });
+
+        });
 
         // Drawer open/close
         function openDrawer(menu) {
